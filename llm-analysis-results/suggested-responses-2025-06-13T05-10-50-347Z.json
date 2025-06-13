@@ -1,0 +1,36 @@
+{
+  "generated_at": "13/06/2025, 10:40:50",
+  "total_responses": 6,
+  "responses": [
+    {
+      "to": "DSU Implementation",
+      "msg": "I’ve filled all columns in the sheet as requested. Please let me know if anything else is needed.",
+      "time_generated": "13/06/2025, 10:38:07"
+    },
+    {
+      "to": "Jennifer Immanuale",
+      "msg": "Understood. I’ll use DSU CDOE Helpdesk instead of ‘admin’.",
+      "time_generated": "13/06/2025, 10:38:27"
+    },
+    {
+      "to": "Shruthi M G",
+      "msg": "Hi Shruthi, could you please review the Jira tickets I shared and let me know if we should re-trigger the process when the DEB id is updated? Thanks.",
+      "time_generated": "13/06/2025, 10:38:34"
+    },
+    {
+      "to": "Rubina Atwal",
+      "msg": "Sure. When would you like to schedule the call?",
+      "time_generated": "13/06/2025, 10:38:49"
+    },
+    {
+      "to": "Shiva Raghavendra Nandigam",
+      "msg": "Hi Shiva, any update on when we can connect about the Placement product?",
+      "time_generated": "13/06/2025, 10:38:58"
+    },
+    {
+      "to": "Malini T L",
+      "msg": "Unit tests are small automated tests that verify individual pieces of code work as intended before integration. They help catch bugs early and make future changes safer.",
+      "time_generated": "13/06/2025, 10:39:16"
+    }
+  ]
+}

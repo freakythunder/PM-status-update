@@ -132,6 +132,7 @@ async function checkDependencies() {
     }
 }
 
+
 async function testSupabaseConnection() {
     header('Testing Supabase Connection...');
     

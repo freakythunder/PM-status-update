@@ -1,0 +1,26 @@
+{
+  "generated_at": "13/06/2025, 10:05:25",
+  "total_responses": 4,
+  "responses": [
+    {
+      "to": "Shruthi M G",
+      "msg": "Hi Shruthi, just following up on the Jira tickets I shared on 10 June—could you please review them and share your feedback? Also, I’m still looking for your input on the DEB id missing scenario: if the super admin updates the DEB id, should we re-trigger the entire process? Thanks!",
+      "time_generated": "13/06/2025, 10:03:15"
+    },
+    {
+      "to": "Rubina Atwal",
+      "msg": "Hi Rubina, apologies for the delay. Yes, let’s schedule a call—what time works for you today?",
+      "time_generated": "13/06/2025, 10:03:31"
+    },
+    {
+      "to": "Malini T L",
+      "msg": "Hi Malini – sorry for the late reply! Unit tests are small, automated tests written to verify that individual pieces of code (functions or classes) work as expected. We write them before or alongside development to catch bugs early and ensure our code remains reliable as we make changes.",
+      "time_generated": "13/06/2025, 10:03:48"
+    },
+    {
+      "to": "Sanchith Reddy",
+      "msg": "Hi Sanchith, just following up—are you available for a call to discuss the DSU program pathway data setup? Let me know a time that works for you.",
+      "time_generated": "13/06/2025, 10:04:51"
+    }
+  ]
+}

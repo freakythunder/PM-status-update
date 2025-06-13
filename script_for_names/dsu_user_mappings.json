@@ -1,0 +1,120 @@
+{
+  "metadata": {
+    "source": "DSU Implementation Space",
+    "generatedAt": "2025-06-02T06:39:48.442Z",
+    "totalMappings": 22,
+    "extractionMethod": "user_mentions_analysis"
+  },
+  "userMappings": {
+    "users/113575822941363461421": {
+      "name": "Rubina Atwal",
+      "discoveredAt": "2025-06-02T06:39:48.442Z",
+      "source": "DSU_MENTIONS"
+    },
+    "users/101286981485964419984": {
+      "name": "Mahadeva Prasad",
+      "discoveredAt": "2025-06-02T06:39:48.442Z",
+      "source": "DSU_MENTIONS"
+    },
+    "users/109758457923784903533": {
+      "name": "Siddhesh Patil",
+      "discoveredAt": "2025-06-02T06:39:48.442Z",
+      "source": "DSU_MENTIONS"
+    },
+    "users/107588995264346019374": {
+      "name": "Varshini R",
+      "discoveredAt": "2025-06-02T06:39:48.442Z",
+      "source": "DSU_MENTIONS"
+    },
+    "users/100911973780580666251": {
+      "name": "Gokul Sundar",
+      "discoveredAt": "2025-06-02T06:39:48.442Z",
+      "source": "DSU_MENTIONS"
+    },
+    "users/103123595046904974914": {
+      "name": "Sundar Anbu",
+      "discoveredAt": "2025-06-02T06:39:48.442Z",
+      "source": "DSU_MENTIONS"
+    },
+    "users/109028641482966656654": {
+      "name": "Vikraam S",
+      "discoveredAt": "2025-06-02T06:39:48.442Z",
+      "source": "DSU_MENTIONS"
+    },
+    "users/108940699106717792041": {
+      "name": "Garima Srivastava",
+      "discoveredAt": "2025-06-02T06:39:48.442Z",
+      "source": "DSU_MENTIONS"
+    },
+    "users/110032422441008075705": {
+      "name": "pratibha.g",
+      "discoveredAt": "2025-06-02T06:39:48.442Z",
+      "source": "DSU_MENTIONS"
+    },
+    "users/110416166877226495164": {
+      "name": "Yukeshwaran C",
+      "discoveredAt": "2025-06-02T06:39:48.442Z",
+      "source": "DSU_MENTIONS"
+    },
+    "users/107347842448157981691": {
+      "name": "Uday Kumar",
+      "discoveredAt": "2025-06-02T06:39:48.442Z",
+      "source": "DSU_MENTIONS"
+    },
+    "users/108633503513518046520": {
+      "name": "Rubina Atwal",
+      "discoveredAt": "2025-06-02T06:39:48.442Z",
+      "source": "DSU_MENTIONS"
+    },
+    "users/113749545206877799433": {
+      "name": "Nisanth B",
+      "discoveredAt": "2025-06-02T06:39:48.442Z",
+      "source": "DSU_MENTIONS"
+    },
+    "users/113893874397773578592": {
+      "name": "Aditi Nair",
+      "discoveredAt": "2025-06-02T06:39:48.442Z",
+      "source": "DSU_MENTIONS"
+    },
+    "users/113561235280964649816": {
+      "name": "Adithya Urs M R",
+      "discoveredAt": "2025-06-02T06:39:48.442Z",
+      "source": "DSU_MENTIONS"
+    },
+    "users/101467457003118417934": {
+      "name": "sundereshver T",
+      "discoveredAt": "2025-06-02T06:39:48.442Z",
+      "source": "DSU_MENTIONS"
+    },
+    "users/114888412431427232522": {
+      "name": "Vikraam S",
+      "discoveredAt": "2025-06-02T06:39:48.442Z",
+      "source": "DSU_MENTIONS"
+    },
+    "users/101605470730010583452": {
+      "name": "Kishore Rajendra",
+      "discoveredAt": "2025-06-02T06:39:48.442Z",
+      "source": "DSU_MENTIONS"
+    },
+    "users/117215225762870639912": {
+      "name": "Raktim Bharatee",
+      "discoveredAt": "2025-06-02T06:39:48.442Z",
+      "source": "DSU_MENTIONS"
+    },
+    "users/113775957794276212398": {
+      "name": "Krishan Agarwal",
+      "discoveredAt": "2025-06-02T06:39:48.442Z",
+      "source": "DSU_MENTIONS"
+    },
+    "users/117876434139478404019": {
+      "name": "Swathi S",
+      "discoveredAt": "2025-06-02T06:39:48.442Z",
+      "source": "DSU_MENTIONS"
+    },
+    "users/109133378830848739428": {
+      "name": "Deepika R",
+      "discoveredAt": "2025-06-02T06:39:48.442Z",
+      "source": "DSU_MENTIONS"
+    }
+  }
+}

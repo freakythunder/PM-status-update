@@ -7,7 +7,7 @@ const winston = require('winston');
 const fs = require('fs');
 const path = require('path');
 
-const supabase = require('./utils/supabase');
+const supabase = require('./utils/mongodb');
 
 // Configure logger
 const logger = winston.createLogger({
@@ -66,7 +66,7 @@ app.get('/dashboard', async (req, res) => {
 // API endpoint for system-wide statistics
 app.get('/api/system-stats', async (req, res) => {
   try {
-    const systemStats = await supabase.getSystemStats();
+    const systemStats = await supabase.getDashboardStats();
     const activeUsers = await supabase.getAllActiveUsers();
     
     res.json({
@@ -77,7 +77,7 @@ app.get('/api/system-stats', async (req, res) => {
         id: user.id,
         email: user.email,
         created_at: user.created_at,
-        last_sync: user.last_sync
+        last_sync: user.last_chat_sync || user.last_gmail_sync
       })),
       timestamp: new Date().toISOString(),
       server_uptime: process.uptime()
@@ -106,7 +106,7 @@ app.get('/api/dashboard-data', async (req, res) => {
           id: user.id,
           email: user.email,
           created_at: user.created_at,
-          last_sync: user.last_sync,
+          last_sync: user.last_chat_sync || user.last_gmail_sync,
           stats: userStats,
           recent_sync_logs: recentLogs
         };
@@ -130,19 +130,23 @@ app.get('/api/dashboard-data', async (req, res) => {
 app.get('/api/user/:userId/sample-data', async (req, res) => {
   try {
     const { userId } = req.params;
-    const chatLimit = parseInt(req.query.chatLimit) || 50;
-    const syncLimit = parseInt(req.query.syncLimit) || 20;
+    const chatLimit = parseInt(req.query.chatLimit) || 100;
+    const gmailLimit = parseInt(req.query.gmailLimit) || 100;
 
     const [chatMessages, gmailMessages, syncLogs] = await Promise.all([
       supabase.getChatMessagesByUser(userId, chatLimit),
-      supabase.getRecentGmailMessages(userId), // Fetch recent 50 Gmail messages for dashboard
-      supabase.getRecentSyncLogs(userId, syncLimit)
+      supabase.getRecentGmailMessages(userId, gmailLimit),
+      supabase.getRecentSyncLogs(userId, 20)
     ]);
+
+    // Sort messages by message_time (newest first)
+    const sortedChatMessages = chatMessages.sort((a, b) => new Date(b.message_time) - new Date(a.message_time));
+    const sortedGmailMessages = gmailMessages.sort((a, b) => new Date(b.message_time) - new Date(a.message_time));
 
     res.json({
       user_id: userId,
-      chat_messages: chatMessages,
-      gmail_messages: gmailMessages,
+      chat_messages: sortedChatMessages,
+      gmail_messages: sortedGmailMessages,
       sync_logs: syncLogs,
       timestamp: new Date().toISOString()
     });

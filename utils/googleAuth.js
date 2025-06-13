@@ -33,9 +33,13 @@ class GoogleAuthManager {
       'https://www.googleapis.com/auth/chat.spaces.readonly',
       'https://www.googleapis.com/auth/chat.messages.readonly',
       'https://www.googleapis.com/auth/chat.memberships.readonly',
+      'https://www.googleapis.com/auth/chat.admin.spaces.readonly',
       'https://www.googleapis.com/auth/gmail.readonly',
+      'https://www.googleapis.com/auth/chat.admin.memberships.readonly',
       'https://www.googleapis.com/auth/userinfo.email',
-      'https://www.googleapis.com/auth/userinfo.profile'
+      'https://www.googleapis.com/auth/userinfo.profile',
+      'https://www.googleapis.com/auth/directory.readonly',
+      'https://www.googleapis.com/auth/contacts'
     ];
 
     logger.info('Google Auth Manager initialized successfully');
@@ -102,38 +106,118 @@ class GoogleAuthManager {
     oauth2Client.setCredentials(tokens);
     return oauth2Client;
   }
-
   // Refresh access token if needed
   async refreshTokenIfNeeded(tokens) {
     try {
       const oauth2Client = this.createAuthenticatedClient(tokens);
       
-      // Check if token is expired or about to expire (within 5 minutes)
-      const now = Date.now();
-      const expiryTime = tokens.expiry_date || 0;
-      const fiveMinutes = 5 * 60 * 1000;
-
-      if (expiryTime - now < fiveMinutes) {
-        logger.info('Refreshing expired access token');
+      // Use Google's built-in token management - getAccessToken() automatically refreshes if needed
+      try {
+        const { token } = await oauth2Client.getAccessToken();
+        
+        // Get the updated credentials after potential refresh
+        const updatedCredentials = oauth2Client.credentials;
+        
+        logger.info('Token validation and refresh completed successfully');
+        return updatedCredentials;
+      } catch (refreshError) {
+        // If automatic refresh fails, try manual refresh
+        logger.info('Attempting manual token refresh');
         const { credentials } = await oauth2Client.refreshAccessToken();
         return credentials;
       }
-
-      return tokens;
     } catch (error) {
       logger.error('Error refreshing token:', error);
       throw error;
     }
-  }  // Create Google Chat API client
+  }// Create Google Chat API client
   createChatClient(tokens) {
     const auth = this.createAuthenticatedClient(tokens);
     return google.chat({ version: 'v1', auth });
   }
-
   // Create Google Gmail API client
   createGmailClient(tokens) {
     const auth = this.createAuthenticatedClient(tokens);
     return google.gmail({ version: 'v1', auth });
+  }
+
+  // Create Google People API client
+  createPeopleClient(tokens) {
+    const auth = this.createAuthenticatedClient(tokens);
+    return google.people({ version: 'v1', auth });
+  }
+  // Create Google Admin Directory API client
+  createDirectoryClient(tokens) {
+    const auth = this.createAuthenticatedClient(tokens);
+    return google.admin({ version: 'directory_v1', auth });
+  }
+
+  // Fetch user details by user ID using People API
+  async fetchUserDetails(tokens, userId) {
+    try {
+      const peopleClient = this.createPeopleClient(tokens);
+      
+      // Extract the numeric ID from the full user resource name
+      const numericId = userId.replace('users/', '');
+      
+      const response = await peopleClient.people.get({
+        resourceName: `people/${numericId}`,
+        personFields: 'names,emailAddresses,photos,organizations,phoneNumbers'
+      });
+      
+      return response.data;
+    } catch (error) {
+      logger.error(`Error fetching user details for ${userId}:`, error.message);
+      throw error;
+    }
+  }
+  // Check if current user has admin privileges
+  async checkAdminPrivileges(tokens) {
+    try {
+      const directoryClient = this.createDirectoryClient(tokens);
+      
+      // Try to get current user's admin info
+      const oauth2Client = this.createAuthenticatedClient(tokens);
+      const oauth2 = google.oauth2({ version: 'v2', auth: oauth2Client });
+      const { data: userInfo } = await oauth2.userinfo.get();
+      
+      // Try to get user details from directory to check admin status
+      const userResponse = await directoryClient.users.get({
+        userKey: userInfo.email
+      });
+      
+      return {
+        hasAdminAccess: true,
+        isAdmin: userResponse.data.isAdmin || false,
+        isDelegatedAdmin: userResponse.data.isDelegatedAdmin || false,
+        email: userInfo.email,
+        adminRoles: userResponse.data.customSchemas || {}
+      };
+    } catch (error) {
+      return {
+        hasAdminAccess: false,
+        error: error.message,
+        code: error.code
+      };
+    }
+  }
+
+  // Fetch organization directory data
+  async fetchOrganizationDirectory(tokens, maxResults = 50) {
+    try {
+      const directoryClient = this.createDirectoryClient(tokens);
+      
+      const response = await directoryClient.users.list({
+        domain: 'iitkgp.ac.in', // Your organization domain
+        maxResults: maxResults,
+        orderBy: 'email'
+      });
+      
+      return response.data;
+    } catch (error) {
+      logger.error('Error fetching organization directory:', error.message);
+      throw error;
+    }
   }
 
   // Validate token and get user info

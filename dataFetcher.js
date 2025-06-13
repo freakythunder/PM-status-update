@@ -1,26 +1,82 @@
 require('dotenv').config();
 const cron = require('node-cron');
 const winston = require('winston');
+const fs = require('fs');
+const path = require('path');
 
 const GoogleAuthManager = require('./utils/googleAuth');
-const supabase = require('./utils/supabase');
+const LLMAnalyzer = require('./llmAnalyzer');
+const {
+  connectToMongoDB,
+  User,
+  GmailMessage,
+  ChatMessage,
+  getAllActiveUsers,
+  updateUserTokens,
+  insertGmailMessages,
+  hasExistingGmailMessages,
+  getLastGmailSyncTime,
+  getLatestGmailMessageTime,
+  insertChatMessages,
+  hasExistingChatMessages,
+  getLastChatSyncTime,
+  getLatestChatMessageTime,
+  getChatMessagesBySpace,
+  hasExistingChatMessagesInSpace, // Added
+  getLatestChatMessageCreateTimeForSpace, // Added
+  createSyncLog
+} = require('./utils/mongodb');
+
+// Load user name mapping
+let userNameMapping = {};
+try {
+  const mappingFilePath = path.join(__dirname, 'user_name_mapping_simple.json');
+  userNameMapping = JSON.parse(fs.readFileSync(mappingFilePath, 'utf8'));
+  logger.info(`Loaded user name mapping with ${Object.keys(userNameMapping).length} entries`);
+} catch (error) {
+  console.warn(`Failed to load user name mapping file: ${error.message}`);
+  // Continue with empty mapping
+}
 
 // Configure logger
 const logger = winston.createLogger({
-  level: process.env.LOG_LEVEL || 'info',
+  level: process.env.LOG_LEVEL || 'info', // Default to 'info'
   format: winston.format.combine(
-    winston.format.timestamp(),
+    winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }), // More readable timestamp
     winston.format.errors({ stack: true }),
-    winston.format.json()
+    winston.format.printf(({ timestamp, level, message, ...meta }) => { // Custom format for console
+      let log = `${timestamp} [${level.toUpperCase()}]: ${message}`;
+      if (meta && Object.keys(meta).length && !(meta.stack && Object.keys(meta).length === 1)) {
+        // Avoid printing stack trace if it's the only meta, as errors({stack:true}) handles it.
+        try {
+          log += ` ${JSON.stringify(meta)}`;
+        } catch (e) {
+          // Fallback for circular structures or other stringify errors
+          log += " (unable to stringify metadata)";
+        }
+      }
+      return log;
+    })
   ),
   transports: [
     new winston.transports.Console({
       format: winston.format.combine(
-        winston.format.colorize(),
-        winston.format.simple()
+        winston.format.colorize(), // Colorize console output
+        winston.format.printf(({ timestamp, level, message, ...meta }) => {
+          let log = `${timestamp} [${level.toUpperCase()}]: ${message}`;
+          // Simplified meta stringification for console to avoid excessive output
+          if (meta && Object.keys(meta).length && !(meta.stack && Object.keys(meta).length === 1)) {
+            const metaString = Object.entries(meta)
+              .filter(([key]) => key !== 'stack') // Stack is already handled by errors({stack:true})
+              .map(([key, value]) => `${key}=${value}`)
+              .join(', ');
+            if (metaString) log += ` (${metaString})`;
+          }
+          return log;
+        })
       )
     }),
-    new winston.transports.File({ 
+    new winston.transports.File({
       filename: 'data-fetcher.log',
       format: winston.format.json()
     })
@@ -30,6 +86,7 @@ const logger = winston.createLogger({
 class DataFetcher {
   constructor() {
     this.googleAuth = new GoogleAuthManager();
+    this.llmAnalyzer = new LLMAnalyzer();
     this.isRunning = false;
     this.lastRunTime = null;
     this.stats = {
@@ -38,6 +95,46 @@ class DataFetcher {
       failedRuns: 0,
       lastError: null
     };
+    this.spacesFilePath = path.join(__dirname, 'spaces_with_latest_messages.json');
+  }
+
+  // Utility functions for managing spaces JSON file
+  loadSpacesFromJSON() {
+    try {
+      const spacesData = JSON.parse(fs.readFileSync(this.spacesFilePath, 'utf8'));
+      return spacesData;
+    } catch (error) {
+      logger.error(`Failed to load spaces JSON file: ${error.message}`);
+      throw error;
+    }
+  }
+
+  saveSpacesToJSON(spacesData) {
+    try {
+      fs.writeFileSync(this.spacesFilePath, JSON.stringify(spacesData, null, 2), 'utf8');
+      logger.info(`Updated spaces JSON file with latest message times`);
+    } catch (error) {
+      logger.error(`Failed to save spaces JSON file: ${error.message}`);
+      throw error;
+    }
+  }
+
+  updateSpaceInJSON(spaceId, latestMessageTime, hasNewMsg = true) {
+    try {
+      const spacesData = this.loadSpacesFromJSON();
+      const spaceIndex = spacesData.findIndex(space => space.space_id === spaceId);
+      
+      if (spaceIndex !== -1) {
+        spacesData[spaceIndex].latest_message_time = latestMessageTime;
+        spacesData[spaceIndex].has_new_msg = hasNewMsg;
+        this.saveSpacesToJSON(spacesData);
+        logger.info(`Updated space ${spaceId} with new message time: ${latestMessageTime}`);
+      } else {
+        logger.warn(`Space ${spaceId} not found in JSON file`);
+      }
+    } catch (error) {
+      logger.error(`Failed to update space ${spaceId} in JSON: ${error.message}`);
+    }
   }
 
   // Main data collection method
@@ -54,7 +151,7 @@ class DataFetcher {
     logger.info('🚀 Starting data collection cycle');
 
     try {
-      const activeUsers = await supabase.getAllActiveUsers();
+      const activeUsers = await getAllActiveUsers();
       logger.info(`Found ${activeUsers.length} active users for data collection`);
 
       if (activeUsers.length === 0) {
@@ -71,10 +168,18 @@ class DataFetcher {
           logger.error(`Failed to collect data for user ${user.email}:`, error);
           // Continue with other users even if one fails
         }
-      }
-
-      this.stats.successfulRuns++;
+      }      this.stats.successfulRuns++;
       logger.info('✅ Data collection cycle completed successfully');
+
+      // Trigger LLM analysis after successful data collection
+      try {
+        logger.info('🤖 Starting LLM analysis for response prediction');
+        await this.llmAnalyzer.analyzeMessagesForResponsePrediction();
+        logger.info('✅ LLM analysis completed successfully');
+      } catch (error) {
+        logger.error('❌ LLM analysis failed (data collection still successful):', error);
+        // Don't fail the entire data collection cycle if LLM analysis fails
+      }
 
     } catch (error) {
       this.stats.failedRuns++;
@@ -87,325 +192,365 @@ class DataFetcher {
 
   // Collect data for a specific user
   async collectUserData(user) {
-    logger.info(`📊 Collecting data for user: ${user.email}`);
-
+    logger.info(`Processing user: ${user.email}`); // Simplified log
     try {
       // Refresh tokens if needed
       const refreshedTokens = await this.googleAuth.refreshTokenIfNeeded(user.google_tokens);
-      
-      if (JSON.stringify(refreshedTokens) !== JSON.stringify(user.google_tokens)) {
-        await supabase.updateUserTokens(user.id, refreshedTokens);
-        user.google_tokens = refreshedTokens;
-        logger.info(`Updated tokens for user ${user.email}`);      }
+
+      // Check if tokens were updated and save them if so
+      if (refreshedTokens && (
+        refreshedTokens.access_token !== user.google_tokens.access_token ||
+        refreshedTokens.expiry_date !== user.google_tokens.expiry_date
+      )) {
+        await updateUserTokens(user.id, refreshedTokens);
+        user.google_tokens = {
+          ...user.google_tokens,
+          ...refreshedTokens
+        };
+        logger.info(`Refreshed tokens for ${user.email}`); // Simplified log
+      }
 
       // Collect Chat data (continue if fails)
       try {
         await this.collectChatData(user);
       } catch (error) {
-        logger.error(`Chat collection failed for ${user.email}, continuing with Gmail:`, error);
+        // Error is already logged in collectChatData and createSyncLog
+        logger.error(`Chat data collection failed for ${user.email}. See details in sync log.`);
       }
 
       // Collect Gmail data (continue if fails) 
       try {
         await this.collectGmailData(user);
       } catch (error) {
-        logger.error(`Gmail collection failed for ${user.email}:`, error);
+        // Error is already logged in collectGmailData and createSyncLog
+        logger.error(`Gmail data collection failed for ${user.email}. See details in sync log.`);
       }
 
-      // Update user's last sync time
-      await supabase.updateUserTokens(user.id, user.google_tokens);
+      // No need to call updateUserTokens here again as last_sync times are updated in createSyncLog
+      // and token refreshes are saved when they happen.
 
     } catch (error) {
-      logger.error(`Error collecting data for user ${user.email}:`, error);
-      throw error;
+      logger.error(`Overall data collection failed for user ${user.email}: ${error.message}`, { stack: error.stack });
+      // Optionally, create a general failure sync log if needed, though specific ones are preferred.
     }
   }  // Collect Google Chat data
   async collectChatData(user) {
     try {
-      logger.info(`💬 Collecting Chat data for ${user.email}`);
-      
+      logger.info(`Collecting Chat data for ${user.email}`);
+
       const chatClient = this.googleAuth.createChatClient(user.google_tokens);
-      let totalMessages = 0;
+      let totalMessagesFetchedAndStored = 0;
+      let spacesProcessed = 0;
 
-      // With the available scopes, we can:
-      // 1. List spaces (chat.spaces.readonly)
-      // 2. Read memberships (chat.memberships.readonly) 
-      // 3. Read messages (chat.messages.readonly)
+      // Load spaces from JSON file
+      const spacesData = this.loadSpacesFromJSON();
+      
+      // Transform JSON data to match expected space structure
+      const spaces = spacesData.map(spaceData => ({
+        name: spaceData.space_id,
+        displayName: spaceData.space_name,
+        space_id: spaceData.space_id,
+        space_name: spaceData.space_name,
+        latest_message_time: spaceData.latest_message_time,
+        has_new_msg: spaceData.has_new_msg || false,
+        spaceType: spaceData.spaceType // Default to UNKNOWN if not specified
+      }));
+      
+      logger.info(`Loaded ${spaces.length} Chat spaces from JSON file for ${user.email}`);
 
-      // Get spaces the user has access to
-      const spacesResponse = await this.googleAuth.executeWithRetry(async () => {
-        return await chatClient.spaces.list({
-          pageSize: 100
-        });
-      });
-
-      const spaces = spacesResponse.data.spaces || [];
-      logger.info(`Found ${spaces.length} Chat spaces for ${user.email}`);
-
-      const chatMessages = [];
+      const allChatMessagesToStore = [];
+      let hasAnyNewMessages = false;
 
       // Process each space
       for (const space of spaces) {
+        spacesProcessed++;
+        let messagesInThisSpaceProcessed = 0;
+        let latestMessageTimeInThisSpace = null;
+        
         try {
-          logger.debug(`Processing space: ${space.name} (${space.displayName || space.type})`);
+          logger.info(`Processing space: ${space.space_name}`);
 
-          // Get messages from this space (last 30 days)
-          const messagesResponse = await this.googleAuth.executeWithRetry(async () => {
-            return await chatClient.spaces.messages.list({
-              parent: space.name,
-              pageSize: 100,
-              orderBy: 'createTime desc'
-            });
-          });
-
-          const messages = messagesResponse.data.messages || [];
-          logger.debug(`Found ${messages.length} messages in space ${space.name}`);
-          
-          // Filter messages from last 30 days
-          const thirtyDaysAgo = new Date();
-          thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-          
-          // Process each message in this space
-          for (const message of messages) {
-            try {
-              const messageDate = new Date(message.createTime);
-              if (messageDate < thirtyDaysAgo) {
-                continue; // Skip messages older than 30 days
-              }
-
-              const chatMessage = {
-                user_id: user.id,
-                message_id: message.name,
-                space_id: space.name,
-                space_name: space.displayName || space.type || 'Unknown Space',
-                space_type: space.type || 'UNKNOWN',
-                sender_name: message.sender?.displayName || 'Unknown',
-                sender_email: message.sender?.name || '',
-                text: message.text || '',
-                timestamp: message.createTime,
-                thread_id: message.thread?.name || null,
-                raw_data: message
-              };
-
-              chatMessages.push(chatMessage);
-              totalMessages++;
-
-              // Rate limiting
-              await this.googleAuth.sleep(50);
-
-            } catch (messageError) {
-              logger.warn(`Error processing Chat message ${message.name}:`, messageError.message);
-            }
+          // Use JSON file as source of truth for latest message time
+          let filterOption = {};
+          if (space.latest_message_time) {
+            const bufferTime = new Date(new Date(space.latest_message_time).getTime() + 1);
+            const filterTimestamp = bufferTime.toISOString();
+            filterOption.filter = `createTime > "${filterTimestamp}"`;
+            logger.info(`Incremental fetch for space ${space.space_name}: messages after ${filterTimestamp}`);
+          } else {
+            logger.info(`Initial fetch for space ${space.space_name}: fetching all (up to pageSize)`);
           }
 
-          // Rate limiting between spaces
-          await this.googleAuth.sleep(200);
+          let nextPageToken = null;
+          const spaceMessagesToStore = [];
+
+          do {
+            const messagesResponse = await this.googleAuth.executeWithRetry(async () => {
+              return await chatClient.spaces.messages.list({
+                parent: space.name,
+                pageSize: 100,
+                orderBy: 'createTime asc',
+                filter: filterOption.filter,
+                pageToken: nextPageToken,
+              });
+            });
+
+            const messages = messagesResponse.data.messages || [];
+            logger.info(`Fetched ${messages.length} messages from space ${space.space_name} (page ${nextPageToken || '1'})`);
+
+            if (messages.length === 0 && !nextPageToken) {
+              // No messages found with the filter or in an empty space
+              break;
+            }            for (const message of messages) {
+              try {
+                const messageTime = new Date(message.createTime);
+                
+                // Track the latest message time in this space
+                if (!latestMessageTimeInThisSpace || messageTime > latestMessageTimeInThisSpace) {
+                  latestMessageTimeInThisSpace = messageTime;
+                }
+                
+                const chatMessage = {
+                  user_id: user.id,
+                  message_id: message.name,
+                  space_id: space.space_id,
+                  space_name: space.space_name,
+                  space_type: space.spaceType ,
+                  sender_id: message.sender?.name,
+                  sender_name: userNameMapping[message.sender?.name] || message.sender?.displayName || 'Unknown',
+                  sender_email: message.sender?.email || '',
+                  content: message.text || message.formattedText || '',
+                  message_time: messageTime,
+                  thread_id: message.thread?.name || null,
+                  is_threaded: !!message.thread?.name,
+                  raw_data: message
+                };
+                spaceMessagesToStore.push(chatMessage);
+                messagesInThisSpaceProcessed++;
+              } catch (messageError) {
+                logger.warn(`Error processing Chat message ${message.name} in space ${space.space_name}: ${messageError.message}`);
+              }
+            }
+            nextPageToken = messagesResponse.data.nextPageToken;
+            if (nextPageToken) await this.googleAuth.sleep(200); // Be nice to the API if paginating
+
+          } while (nextPageToken);
+
+          // Update JSON file if new messages were found
+          if (messagesInThisSpaceProcessed > 0 && latestMessageTimeInThisSpace) {
+            this.updateSpaceInJSON(space.space_id, latestMessageTimeInThisSpace.toISOString(), true);
+            hasAnyNewMessages = true;
+          } else if (messagesInThisSpaceProcessed === 0) {
+            // Reset has_new_msg to false if no new messages
+            this.updateSpaceInJSON(space.space_id, space.latest_message_time, false);
+          }
+
+          if (spaceMessagesToStore.length > 0) {
+            allChatMessagesToStore.push(...spaceMessagesToStore);
+          }
+          logger.info(`Finished processing space ${space.space_name}, ${messagesInThisSpaceProcessed} new messages found`);
 
         } catch (spaceError) {
-          logger.warn(`Error processing Chat space ${space.name}:`, spaceError.message);
+          logger.error(`Error processing Chat space ${space.space_name} for ${user.email}: ${spaceError.message}`, { stack: spaceError.stack });
         }
       }
 
-      // Save to database
-      if (chatMessages.length > 0) {
-        await supabase.insertChatMessages(chatMessages);
+      // Save all collected messages to database
+      if (allChatMessagesToStore.length > 0) {
+        const insertResult = await insertChatMessages(allChatMessagesToStore);
+        totalMessagesFetchedAndStored = insertResult.insertedCount || 0;
+        logger.info(`Stored ${totalMessagesFetchedAndStored} chat messages for ${user.email}`);
+      } else {
+        logger.info(`No new chat messages to store for ${user.email}`);
       }
 
-      // Log sync result
-      await supabase.createSyncLog(
+      await createSyncLog(
         user.id,
         'chat',
         'success',
-        `Collected ${totalMessages} Chat messages from ${spaces.length} spaces`,
-        totalMessages
+        `Collected from ${spacesProcessed} spaces. ${hasAnyNewMessages ? 'New messages found.' : 'No new messages.'}`,
+        totalMessagesFetchedAndStored
       );
 
-      logger.info(`✅ Chat data collection completed for ${user.email}: ${totalMessages} messages from ${spaces.length} spaces`);
+      logger.info(`Chat data collection completed for ${user.email}: ${totalMessagesFetchedAndStored} messages from ${spacesProcessed} spaces`);
 
     } catch (error) {
-      await supabase.createSyncLog(
+      await createSyncLog(
         user.id,
         'chat',
         'error',
-        `Failed to collect chat data: ${error.message}`,
-        0,
-        { error: error.message, stack: error.stack }
+        { message: `Failed to collect chat data: ${error.message}`, stack: error.stack },
+        0
       );
-      
-      logger.error(`❌ Chat data processing failed for ${user.email}:`, error);
-      throw error;
+
+      logger.error(`Chat data processing failed for ${user.email}: ${error.message}`, { stack: error.stack });
     }
   }  // Collect Gmail data with smart incremental updates
   async collectGmailData(user) {
     try {
-      logger.info(`📧 Collecting Gmail data for ${user.email}`);
-      
+      logger.info(`Collecting Gmail data for ${user.email}`); // Simplified log
       const gmailClient = this.googleAuth.createGmailClient(user.google_tokens);
-      let totalMessages = 0;
+      let totalMessagesStored = 0;
 
       // Check if this is initial collection or incremental update
-      const hasExistingMessages = await supabase.hasExistingGmailMessages(user.id);
-      const lastSyncTime = await supabase.getLastGmailSyncTime(user.id);
-      
+      const hasExistingMessages = await hasExistingGmailMessages(user.id);
+      const lastSyncTime = await getLastGmailSyncTime(user.id); // This is from User.last_gmail_sync
+
       let searchQuery = '';
-      let maxResults = 100; // Default for initial collection
-      
+      let maxResultsToList = 100; // Max messages to list from API for initial sync
+      const GMAIL_PAGE_SIZE = 100; // How many messages to fetch details for in one go (if needed, though we fetch one by one)
+
       if (!hasExistingMessages) {
-        // Initial collection: Get last 100 messages
-        logger.info(`📥 Initial Gmail collection for ${user.email} - fetching last 100 messages`);
-        searchQuery = 'newer_than:30d'; // Last 30 days but limit to 100
-        maxResults = 100;
+        logger.info(`Initial Gmail collection for ${user.email} - fetching up to ${maxResultsToList} recent messages.`);
+        // No specific query, rely on default ordering (usually newest first) and maxResultsToList
+        // Gmail API q parameter can take 'newer_than:30d' but for initial, let's get most recent X.
+        // If you want *all* messages, this strategy needs to change significantly due to pagination and API limits.
+        // For now, "at most 100 mails" for initial sync.
       } else {
-        // Incremental update: Only get new messages since last sync
-        logger.info(`🔄 Incremental Gmail update for ${user.email}`);
+        logger.info(`Incremental Gmail update for ${user.email}.`);
         if (lastSyncTime) {
           const lastSyncDate = new Date(lastSyncTime);
-          const searchDate = Math.floor(lastSyncDate.getTime() / 1000);
-          searchQuery = `after:${searchDate}`;
-          maxResults = 50; // Limit incremental updates
+          // Gmail API query for 'after' expects a Unix timestamp in seconds.
+          const searchTimestamp = Math.floor(lastSyncDate.getTime() / 1000);
+          searchQuery = `after:${searchTimestamp}`;
+          maxResultsToList = 500; // For incremental, can be larger if many emails are expected.
+          logger.info(`Fetching Gmail messages after ${lastSyncDate.toISOString()} (timestamp: ${searchTimestamp})`);
         } else {
-          // Fallback: get recent messages
-          searchQuery = 'newer_than:1d';
-          maxResults = 50;
+          // Fallback if lastSyncTime is somehow not set despite hasExistingMessages being true
+          logger.warn(`Last sync time not found for ${user.email} during incremental update. Fetching recent messages (last 7 days).`);
+          searchQuery = 'newer_than:7d';
+          maxResultsToList = 100;
         }
       }
 
-      // Get messages based on strategy
-      const messagesResponse = await this.googleAuth.executeWithRetry(async () => {
-        return await gmailClient.users.messages.list({
-          userId: 'me',
-          maxResults: maxResults,
-          q: searchQuery
-        });
-      });
+      const gmailMessagesToStore = [];
+      let nextPageToken = null;
+      let listedMessagesCount = 0;
 
-      const messageIds = messagesResponse.data.messages || [];
-      logger.info(`Found ${messageIds.length} Gmail messages for ${user.email} (${hasExistingMessages ? 'incremental' : 'initial'})`);
-
-      if (messageIds.length === 0) {
-        logger.info(`✅ No new Gmail messages for ${user.email}`);
-        
-        // Still log a successful sync even if no messages
-        await supabase.createSyncLog(
-          user.id,
-          'gmail',
-          'success',
-          'No new Gmail messages found',
-          0
-        );
-        return;
-      }
-
-      const gmailMessages = [];
-
-      // Process each message
-      for (const messageRef of messageIds) {
-        try {
-          const messageResponse = await this.googleAuth.executeWithRetry(async () => {
-            return await gmailClient.users.messages.get({
-              userId: 'me',
-              id: messageRef.id,
-              format: 'full'
-            });
+      do {
+        const messagesResponse = await this.googleAuth.executeWithRetry(async () => {
+          return await gmailClient.users.messages.list({
+            userId: 'me',
+            maxResults: Math.min(GMAIL_PAGE_SIZE, maxResultsToList - listedMessagesCount), // Fetch in pages, up to maxResultsToList
+            q: searchQuery,
+            pageToken: nextPageToken,
           });
+        });
 
-          const message = messageResponse.data;
-          const headers = message.payload?.headers || [];
-          
-          const getHeader = (name) => headers.find(h => h.name === name)?.value || '';
-
-          // Parse sender information from "From" header
-          const fromHeader = getHeader('From');
-          let senderName = '';
-          let senderEmail = '';
-          
-          if (fromHeader) {
-            // Pattern: "Name <email@domain.com>" or just "email@domain.com"
-            const emailMatch = fromHeader.match(/<(.+@.+)>/);
-            if (emailMatch) {
-              senderEmail = emailMatch[1];
-              senderName = fromHeader.replace(/<.+>/, '').trim();
-              // Clean up sender name by removing quotes
-              senderName = senderName.replace(/^["']|["']$/g, '').trim();
-            } else if (fromHeader.includes('@')) {
-              senderEmail = fromHeader.trim();
-              senderName = fromHeader.split('@')[0];
-            } else {
-              senderName = fromHeader;
-            }
-          }
-
-          // Extract and properly format date from Date header (more accurate than internalDate)
-          const dateHeader = getHeader('Date');
-          let dateReceived;
-          
-          if (dateHeader) {
-            // Parse RFC 2822 date format from Date header
-            const parsedDate = new Date(dateHeader);
-            if (!isNaN(parsedDate.getTime())) {
-              dateReceived = parsedDate.toISOString();
-            } else {
-              // Fallback to internalDate if Date header is invalid
-              dateReceived = new Date(parseInt(message.internalDate)).toISOString();
-            }
-          } else {
-            // Fallback to internalDate if Date header is missing
-            dateReceived = new Date(parseInt(message.internalDate)).toISOString();
-          }
-
-          const gmailMessage = {
-            user_id: user.id,
-            message_id: message.id,
-            thread_id: message.threadId,
-            sender_name: senderName || 'Unknown',
-            sender_email: senderEmail || '',
-            subject: getHeader('Subject') || 'No Subject',
-            body: message.snippet || '',
-            date_received: dateReceived
-          };
-
-          gmailMessages.push(gmailMessage);
-          totalMessages++;
-
-          // Rate limiting
-          await this.googleAuth.sleep(50);
-
-        } catch (error) {
-          logger.warn(`Error processing Gmail message ${messageRef.id}:`, error.message);
+        const messageMetadatas = messagesResponse.data.messages || [];
+        if (messageMetadatas.length === 0) {
+          logger.info(`No (more) Gmail messages found for query: '${searchQuery}' for ${user.email}.`);
+          break;
         }
+
+        listedMessagesCount += messageMetadatas.length;
+        logger.info(`Fetched ${messageMetadatas.length} Gmail message IDs for ${user.email}. (${listedMessagesCount}/${maxResultsToList} for this run)`);
+
+        for (const messageRef of messageMetadatas) {
+          try {
+            // Fetch full message details
+            const fullMessageResponse = await this.googleAuth.executeWithRetry(async () => {
+              return await gmailClient.users.messages.get({
+                userId: 'me',
+                id: messageRef.id,
+                format: 'full'
+              });
+            });
+            const fullMessage = fullMessageResponse.data;
+
+            const headers = fullMessage.payload?.headers || [];
+            const getHeader = (name) => headers.find(h => h.name.toLowerCase() === name.toLowerCase())?.value || '';
+
+            const fromHeader = getHeader('From');
+            let senderName = '';
+            let senderEmail = '';
+            if (fromHeader) {
+              const emailMatch = fromHeader.match(/<(.+@.+)>/);
+              if (emailMatch) {
+                senderEmail = emailMatch[1];
+                senderName = fromHeader.replace(/<.+>/, '').replace(/["']/g, '').trim();
+              } else if (fromHeader.includes('@')) {
+                senderEmail = fromHeader.trim();
+                senderName = senderEmail.split('@')[0];
+              } else {
+                senderName = fromHeader.trim();
+              }
+            }
+
+            const dateHeader = getHeader('Date');
+            let dateReceived;
+            if (dateHeader) {
+              const parsedDate = new Date(dateHeader);
+              dateReceived = !isNaN(parsedDate.getTime()) ? parsedDate : new Date(parseInt(fullMessage.internalDate));
+            } else {
+              dateReceived = new Date(parseInt(fullMessage.internalDate));
+            }
+
+            const gmailMessage = {
+              user_id: user.id,
+              message_id: fullMessage.id,
+              thread_id: fullMessage.threadId,
+              subject: getHeader('Subject') || 'No Subject',
+              sender: fromHeader, // Store full From header as 'sender'
+              recipient: getHeader('To'), // Store full To header as 'recipient'
+              message_time: dateReceived, // Store as Date
+              content: fullMessage.snippet || '', // Snippet is usually enough
+              labels: fullMessage.labelIds || [],
+              raw_data: fullMessage // Store the full message object
+            };
+
+            gmailMessagesToStore.push(gmailMessage);
+
+            // Rate limiting per message fetch
+            await this.googleAuth.sleep(100); // Increased sleep due to 'full' fetch
+
+          } catch (error) {
+            logger.warn(`Error processing Gmail message ID ${messageRef.id} for ${user.email}: ${error.message}`);
+          }
+        } // end for messageRef
+
+        nextPageToken = messagesResponse.data.nextPageToken;
+        if (nextPageToken && listedMessagesCount < maxResultsToList) {
+          logger.info("Fetching next page of Gmail messages...");
+          await this.googleAuth.sleep(200); // Sleep before next page list
+        } else {
+          nextPageToken = null; // Stop if maxResultsToList reached or no more pages
+        }
+
+      } while (nextPageToken);
+
+
+      if (gmailMessagesToStore.length > 0) {
+        gmailMessagesToStore.sort((a, b) => b.message_time - a.message_time);
+
+        const insertResult = await insertGmailMessages(gmailMessagesToStore);
+        totalMessagesStored = insertResult.insertedCount || 0;
+        logger.info(`Stored ${totalMessagesStored} Gmail messages for ${user.email}.`);
+      } else {
+        logger.info(`No new Gmail messages to store for ${user.email}.`);
       }
 
-      // Sort messages by date_received in descending order (newest first) before saving
-      gmailMessages.sort((a, b) => new Date(b.date_received) - new Date(a.date_received));
-
-      // Save to database
-      if (gmailMessages.length > 0) {
-        await supabase.insertGmailMessages(gmailMessages);
-      }
-
-      // Log sync result
-      await supabase.createSyncLog(
+      await createSyncLog(
         user.id,
         'gmail',
         'success',
-        `Collected ${totalMessages} Gmail messages (${hasExistingMessages ? 'incremental' : 'initial'})`,
-        totalMessages
+        `Collected messages. Query: '${searchQuery || 'initial_fetch'}', Listed: ${listedMessagesCount}`,
+        totalMessagesStored // Pass the count of messages actually stored
       );
 
-      logger.info(`✅ Gmail data collection completed for ${user.email}: ${totalMessages} messages (${hasExistingMessages ? 'incremental' : 'initial'})`);
+      logger.info(`Gmail data collection completed for ${user.email}: ${totalMessagesStored} messages stored (${hasExistingMessages ? 'incremental' : 'initial'}).`);
 
     } catch (error) {
-      await supabase.createSyncLog(
+      await createSyncLog(
         user.id,
         'gmail',
         'error',
-        'Failed to collect gmail data',
-        0,
-        { error: error.message, stack: error.stack }
+        { message: `Failed to collect Gmail data: ${error.message}`, stack: error.stack }, // Pass error object
+        0 // No items processed in case of a full failure
       );
 
-      logger.error(`❌ Gmail data collection failed for ${user.email}:`, error);
-      throw error;
+      logger.error(`Gmail data collection failed for ${user.email}: ${error.message}`, { stack: error.stack });
+      // Do not re-throw, as per user request for independent operation
     }
   }
 
@@ -423,7 +568,7 @@ class DataFetcher {
   // Calculate next run time (for display purposes)
   getNextRunTime() {
     if (!this.lastRunTime) return 'Pending first run';
-    
+
     const intervalMinutes = parseInt(process.env.FETCH_INTERVAL_MINUTES) || 10;
     const nextRun = new Date(this.lastRunTime.getTime() + (intervalMinutes * 60 * 1000));
     return nextRun;
@@ -476,9 +621,9 @@ class DataFetcher {
 // If this file is run directly, start the data fetcher
 if (require.main === module) {
   const fetcher = new DataFetcher();
-  
+
   fetcher.start();
-  
+
   logger.info('🤖 PM Assistant Data Fetcher is running');
   logger.info(`📊 Status endpoint would be available if running with web server`);
   logger.info(`🔄 Data collection interval: ${process.env.FETCH_INTERVAL_MINUTES || 10} minutes`);

@@ -1,0 +1,600 @@
+[
+  {
+    "space_id": "spaces/AAAA_c9OGqI",
+    "space_name": "DSU Implementation",
+    "total_members": 25,
+    "latest_message_time": "2025-06-10T10:57:41.746Z",
+    "has_new_msg": false,
+    "members": [
+      {
+        "id": "users/116970957764455874293",
+        "name": "Shruthi M G"
+      },
+      {
+        "id": "users/111786524540327125771",
+        "name": "Govardhana Kemmathiruman"
+      },
+      {
+        "id": "users/112121134383694473146",
+        "name": "Jaffrina Joseph"
+      },
+      {
+        "id": "users/116152071271346193304",
+        "name": "Aditya Ramteke"
+      },
+      {
+        "id": "users/113077111033975805167",
+        "name": "Vimalganth D"
+      },
+      {
+        "id": "users/102277217478220266137",
+        "name": "Pavithran L.M"
+      },
+      {
+        "id": "users/102179543027124791633",
+        "name": "Sandeep H.T"
+      },
+      {
+        "id": "users/101264342520983707507",
+        "name": "FILL_NAME_HERE"
+      },
+      {
+        "id": "users/106305243777743239038",
+        "name": "Rajkumar D"
+      },
+      {
+        "id": "users/100801998779771682098",
+        "name": "FILL_NAME_HERE"
+      },
+      {
+        "id": "users/104111374269153113819",
+        "name": "Sajin Abishek"
+      },
+      {
+        "id": "users/103174798806940819161",
+        "name": "FILL_NAME_HERE"
+      },
+      {
+        "id": "users/108404773613117140396",
+        "name": "Jennifer Immanuale"
+      },
+      {
+        "id": "users/111313304845189648525",
+        "name": "Shiva Raghavendra Nandigam"
+      },
+      {
+        "id": "users/109348619561666708358",
+        "name": "Saravanakumar D"
+      },
+      {
+        "id": "users/116377278143195751817",
+        "name": "FILL_NAME_HERE"
+      },
+      {
+        "id": "users/109745214332961290895",
+        "name": "Sanjay Kalyanasundaram"
+      },
+      {
+        "id": "users/116696459549761091791",
+        "name": "Malini T L"
+      },
+      {
+        "id": "users/109028641482966656654",
+        "name": "Vikraam S"
+      },
+      {
+        "id": "users/113575822941363461421",
+        "name": "Rubina Atwal"
+      },
+      {
+        "id": "users/102307044255916693030",
+        "name": "Sanchith Reddy"
+      },
+      {
+        "id": "users/110923955647610244841",
+        "name": "FILL_NAME_HERE"
+      },
+      {
+        "id": "users/101467457003118417934",
+        "name": "sundereshver T"
+      },
+      {
+        "id": "users/106028021191865786893",
+        "name": "Varunprasad S"
+      },
+      {
+        "id": "users/108633503513518046520",
+        "name": "Rubina Atwal"
+      }
+    ],
+    "spaceType": "SPACE"
+  },
+  {
+    "space_id": "spaces/j-WbN8AAAAE",
+    "space_name": "Sajin Abishek",
+    "total_members": 2,
+    "latest_message_time": "2025-06-02T12:46:28.584Z",
+    "has_new_msg": false,
+    "members": [
+      {
+        "id": "users/116152071271346193304",
+        "name": "Aditya Ramteke"
+      },
+      {
+        "id": "users/104111374269153113819",
+        "name": "Sajin Abishek"
+      }
+    ],
+    "spaceType": "DIRECT_MESSAGE"
+  },
+  {
+    "space_id": "spaces/0C9xt8AAAAE",
+    "space_name": "Jennifer Immanuale",
+    "total_members": 2,
+    "latest_message_time": "2025-06-09T11:04:11.095Z",
+    "has_new_msg": false,
+    "members": [
+      {
+        "id": "users/116152071271346193304",
+        "name": "Aditya Ramteke"
+      },
+      {
+        "id": "users/108404773613117140396",
+        "name": "Jennifer Immanuale"
+      }
+    ],
+    "spaceType": "DIRECT_MESSAGE"
+  },
+  {
+    "space_id": "spaces/nUSCd8AAAAE",
+    "space_name": "Shruthi M G",
+    "total_members": 2,
+    "latest_message_time": "2025-06-04T11:47:08.389Z",
+    "has_new_msg": false,
+    "members": [
+      {
+        "id": "users/116152071271346193304",
+        "name": "Aditya Ramteke"
+      },
+      {
+        "id": "users/116970957764455874293",
+        "name": "Shruthi M G"
+      }
+    ],
+    "spaceType": "DIRECT_MESSAGE"
+  },
+  {
+    "space_id": "spaces/hJWSd8AAAAE",
+    "space_name": "Sharanya",
+    "total_members": 2,
+    "latest_message_time": "2025-06-02T09:28:18.677Z",
+    "has_new_msg": false,
+    "members": [
+      {
+        "id": "users/117714601648103214497",
+        "name": "Sharanya"
+      },
+      {
+        "id": "users/116152071271346193304",
+        "name": "Aditya Ramteke"
+      }
+    ],
+    "spaceType": "DIRECT_MESSAGE"
+  },
+  {
+    "space_id": "spaces/kHt0N8AAAAE",
+    "space_name": "Rubina Atwal",
+    "total_members": 2,
+    "latest_message_time": "2025-06-06T07:08:23.233Z",
+    "has_new_msg": false,
+    "members": [
+      {
+        "id": "users/116152071271346193304",
+        "name": "Aditya Ramteke"
+      },
+      {
+        "id": "users/108633503513518046520",
+        "name": "Rubina Atwal"
+      }
+    ],
+    "spaceType": "DIRECT_MESSAGE"
+  },
+  {
+    "space_id": "spaces/nsovn8AAAAE",
+    "space_name": "Shiva Raghavendra Nandigam",
+    "total_members": 2,
+    "latest_message_time": "2025-06-10T10:48:51.648Z",
+    "has_new_msg": false,
+    "members": [
+      {
+        "id": "users/116152071271346193304",
+        "name": "Aditya Ramteke"
+      },
+      {
+        "id": "users/108245507857366122108",
+        "name": "Shiva Raghavendra Nandigam"
+      }
+    ],
+    "spaceType": "DIRECT_MESSAGE"
+  },
+  {
+    "space_id": "spaces/AAAA1zbyU00",
+    "space_name": "Climaty.ai",
+    "total_members": 24,
+    "latest_message_time": "2025-06-10T07:44:20.488Z",
+    "has_new_msg": false,
+    "members": [
+      {
+        "id": "users/100911973780580666251",
+        "name": "Gokul Sundar"
+      },
+      {
+        "id": "users/117876434139478404019",
+        "name": "Swathi S"
+      },
+      {
+        "id": "users/109758457923784903533",
+        "name": "Siddhesh Patil"
+      },
+      {
+        "id": "users/116152071271346193304",
+        "name": "Aditya Ramteke"
+      },
+      {
+        "id": "users/101264342520983707507",
+        "name": "FILL_NAME_HERE"
+      },
+      {
+        "id": "users/100801998779771682098",
+        "name": "FILL_NAME_HERE"
+      },
+      {
+        "id": "users/107588995264346019374",
+        "name": "Varshini R"
+      },
+      {
+        "id": "users/110416166877226495164",
+        "name": "Yukeshwaran C"
+      },
+      {
+        "id": "users/113775957794276212398",
+        "name": "Krishan Agarwal"
+      },
+      {
+        "id": "users/110032422441008075705",
+        "name": "pratibha.g"
+      },
+      {
+        "id": "users/110061618913611509932",
+        "name": "FILL_NAME_HERE"
+      },
+      {
+        "id": "users/101605470730010583452",
+        "name": "Kishore Rajendra"
+      },
+      {
+        "id": "users/109133378830848739428",
+        "name": "Deepika R"
+      },
+      {
+        "id": "users/113561235280964649816",
+        "name": "Adithya Urs M R"
+      },
+      {
+        "id": "users/113749545206877799433",
+        "name": "Nisanth B"
+      },
+      {
+        "id": "users/108940699106717792041",
+        "name": "Garima Srivastava"
+      },
+      {
+        "id": "users/109028641482966656654",
+        "name": "Vikraam S"
+      },
+      {
+        "id": "users/113575822941363461421",
+        "name": "Rubina Atwal"
+      },
+      {
+        "id": "users/101286981485964419984",
+        "name": "Mahadeva Prasad"
+      },
+      {
+        "id": "users/117215225762870639912",
+        "name": "Raktim Bharatee"
+      },
+      {
+        "id": "users/101467457003118417934",
+        "name": "sundereshver T"
+      },
+      {
+        "id": "users/108633503513518046520",
+        "name": "Rubina Atwal"
+      },
+      {
+        "id": "users/111660142706640776350",
+        "name": "FILL_NAME_HERE"
+      },
+      {
+        "id": "users/107347842448157981691",
+        "name": "Uday Kumar"
+      }
+    ],
+    "spaceType": "SPACE"
+  },
+  {
+    "space_id": "spaces/xSd1H8AAAAE",
+    "space_name": "Malini T L",
+    "total_members": 2,
+    "latest_message_time": "2025-06-06T07:23:01.292Z",
+    "has_new_msg": false,
+    "members": [
+      {
+        "id": "users/116152071271346193304",
+        "name": "Aditya Ramteke"
+      },
+      {
+        "id": "users/116696459549761091791",
+        "name": "Malini T L"
+      }
+    ],
+    "spaceType": "DIRECT_MESSAGE"
+  },
+  {
+    "space_id": "spaces/v59oD8AAAAE",
+    "space_name": "Govardhana Kemmathiruman",
+    "total_members": 2,
+    "latest_message_time": "2025-06-10T04:36:51.749Z",
+    "has_new_msg": false,
+    "members": [
+      {
+        "id": "users/116152071271346193304",
+        "name": "Aditya Ramteke"
+      },
+      {
+        "id": "users/111786524540327125771",
+        "name": "Govardhana Kemmathiruman"
+      }
+    ],
+    "spaceType": "DIRECT_MESSAGE"
+  },
+  {
+    "space_id": "spaces/7ZdKb8AAAAE",
+    "space_name": "Garima Srivastava",
+    "total_members": 2,
+    "latest_message_time": "2025-05-30T05:32:12.670Z",
+    "has_new_msg": false,
+    "members": [
+      {
+        "id": "users/116152071271346193304",
+        "name": "Aditya Ramteke"
+      },
+      {
+        "id": "users/108940699106717792041",
+        "name": "Garima Srivastava"
+      }
+    ],
+    "spaceType": "DIRECT_MESSAGE"
+  },
+  {
+    "space_id": "spaces/7kDoH8AAAAE",
+    "space_name": "Gokul Sundar",
+    "total_members": 2,
+    "latest_message_time": "2025-05-29T12:39:41.100Z",
+    "has_new_msg": false,
+    "members": [
+      {
+        "id": "users/116152071271346193304",
+        "name": "Aditya Ramteke"
+      },
+      {
+        "id": "users/102915318681538519314",
+        "name": "Gokul Sundar"
+      }
+    ],
+    "spaceType": "DIRECT_MESSAGE"
+  },
+  {
+    "space_id": "spaces/8Z7Bn8AAAAE",
+    "space_name": "Varunprasad S",
+    "total_members": 2,
+    "latest_message_time": "2025-06-04T12:16:16.413Z",
+    "has_new_msg": false,
+    "members": [
+      {
+        "id": "users/116152071271346193304",
+        "name": "Aditya Ramteke"
+      },
+      {
+        "id": "users/106028021191865786893",
+        "name": "Varunprasad S"
+      }
+    ],
+    "spaceType": "DIRECT_MESSAGE"
+  },
+  {
+    "space_id": "spaces/__TsN8AAAAE",
+    "space_name": "Jayanti Kumari",
+    "total_members": 2,
+    "latest_message_time": "2025-05-28T08:01:33.595Z",
+    "has_new_msg": false,
+    "members": [
+      {
+        "id": "users/116152071271346193304",
+        "name": "Aditya Ramteke"
+      },
+      {
+        "id": "users/110854580487257520649",
+        "name": "Jayanti Kumari"
+      }
+    ],
+    "spaceType": "DIRECT_MESSAGE"
+  },
+  {
+    "space_id": "spaces/4TINH8AAAAE",
+    "space_name": "Jahnavi Jainwal",
+    "total_members": 2,
+    "latest_message_time": "2025-06-04T07:52:58.509Z",
+    "has_new_msg": false,
+    "members": [
+      {
+        "id": "users/116152071271346193304",
+        "name": "Aditya Ramteke"
+      },
+      {
+        "id": "users/102974955488321157021",
+        "name": "Jahnavi Jainwal"
+      }
+    ],
+    "spaceType": "DIRECT_MESSAGE"
+  },
+  {
+    "space_id": "spaces/u4sSH8AAAAE",
+    "space_name": "Sanchith Reddy",
+    "total_members": 2,
+    "latest_message_time": "2025-05-26T11:13:07.919Z",
+    "has_new_msg": false,
+    "members": [
+      {
+        "id": "users/116152071271346193304",
+        "name": "Aditya Ramteke"
+      },
+      {
+        "id": "users/102307044255916693030",
+        "name": "Sanchith Reddy"
+      }
+    ],
+    "spaceType": "DIRECT_MESSAGE"
+  },
+  {
+    "space_id": "spaces/wfSab8AAAAE",
+    "space_name": "Krishan Agarwal",
+    "total_members": 2,
+    "latest_message_time": "2025-05-26T06:53:28.880Z",
+    "has_new_msg": false,
+    "members": [
+      {
+        "id": "users/116152071271346193304",
+        "name": "Aditya Ramteke"
+      },
+      {
+        "id": "users/113775957794276212398",
+        "name": "Krishan Agarwal"
+      }
+    ],
+    "spaceType": "DIRECT_MESSAGE"
+  },
+  {
+    "space_id": "spaces/gsJ3b8AAAAE",
+    "space_name": "Kishore Rajendra",
+    "total_members": 2,
+    "latest_message_time": "2025-05-23T10:57:51.911Z",
+    "has_new_msg": false,
+    "members": [
+      {
+        "id": "users/116152071271346193304",
+        "name": "Aditya Ramteke"
+      },
+      {
+        "id": "users/101605470730010583452",
+        "name": "Kishore Rajendra"
+      }
+    ],
+    "spaceType": "DIRECT_MESSAGE"
+  },
+  {
+    "space_id": "spaces/tapfb8AAAAE",
+    "space_name": "Gokul D M",
+    "total_members": 2,
+    "latest_message_time": "2025-05-22T10:41:41.951Z",
+    "has_new_msg": false,
+    "members": [
+      {
+        "id": "users/116152071271346193304",
+        "name": "Aditya Ramteke"
+      },
+      {
+        "id": "users/112306042892967437125",
+        "name": "Gokul D M"
+      }
+    ],
+    "spaceType": "DIRECT_MESSAGE"
+  },
+  {
+    "space_id": "spaces/_Odnb8AAAAE",
+    "space_name": "Siddhesh Patil",
+    "total_members": 2,
+    "latest_message_time": "2025-05-22T07:46:01.996Z",
+    "has_new_msg": false,
+    "members": [
+      {
+        "id": "users/109758457923784903533",
+        "name": "Siddhesh Patil"
+      },
+      {
+        "id": "users/116152071271346193304",
+        "name": "Aditya Ramteke"
+      }
+    ],
+    "spaceType": "DIRECT_MESSAGE"
+  },
+  {
+    "space_id": "spaces/AAQAErUzKLU",
+    "space_name": "Group Chat",
+    "total_members": 3,
+    "latest_message_time": "2025-05-09T05:44:44.640Z",
+    "has_new_msg": false,
+    "members": [
+      {
+        "id": "users/116152071271346193304",
+        "name": "Aditya Ramteke"
+      },
+      {
+        "id": "users/104111374269153113819",
+        "name": "Sajin Abishek"
+      },
+      {
+        "id": "users/108633503513518046520",
+        "name": "Rubina Atwal"
+      }
+    ],
+    "spaceType": "GROUP_CHAT"
+  },
+  {
+    "space_id": "spaces/3nL3d8AAAAE",
+    "space_name": "Tom Antony",
+    "total_members": 2,
+    "latest_message_time": "2025-05-08T11:44:45.119Z",
+    "has_new_msg": false,
+    "members": [
+      {
+        "id": "users/116152071271346193304",
+        "name": "Aditya Ramteke"
+      },
+      {
+        "id": "users/104520950671220669172",
+        "name": "Tom Antony"
+      }
+    ],
+    "spaceType": "DIRECT_MESSAGE"
+  },
+  {
+    "space_id": "spaces/6IEcN8AAAAE",
+    "space_name": "Jaffrina Joseph",
+    "total_members": 2,
+    "latest_message_time": "2025-05-02T11:01:31.570Z",
+    "has_new_msg": false,
+    "members": [
+      {
+        "id": "users/112121134383694473146",
+        "name": "Jaffrina Joseph"
+      },
+      {
+        "id": "users/116152071271346193304",
+        "name": "Aditya Ramteke"
+      }
+    ],
+    "spaceType": "DIRECT_MESSAGE"
+  }
+]

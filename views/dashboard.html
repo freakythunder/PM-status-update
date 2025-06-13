@@ -138,7 +138,10 @@
         }
 
         .table-container {
+            max-height: 400px;
+            overflow-y: auto;
             overflow-x: auto;
+            border: 1px solid #ecf0f1;
         }
 
         table {
@@ -159,6 +162,9 @@
             font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
         }
 
         tr:hover {
@@ -202,6 +208,30 @@
 
         .hidden {
             display: none;
+        }
+
+        .space-type-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .space-type-DIRECT_MESSAGE {
+            background: #e8f5e8;
+            color: #2e7d2e;
+        }
+
+        .space-type-GROUP_CHAT {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .space-type-SPACE {
+            background: #d1ecf1;
+            color: #0c5460;
         }
     </style>
 </head>
@@ -275,12 +305,13 @@
                             <tr>
                                 <th>Date</th>
                                 <th>Space</th>
+                                <th>Type</th>
                                 <th>From</th>
                                 <th>Message</th>
                             </tr>
                         </thead>
                         <tbody id="chatTable">
-                            <tr><td colspan="4" class="loading">Select a user to view Chat data</td></tr>
+                            <tr><td colspan="5" class="loading">Select a user to view Chat data</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -383,10 +414,12 @@
             document.getElementById('userDataSection').classList.remove('hidden');
 
             // Show loading states
-            ['gmailTable', 'chatTable', 'syncTable'].forEach(tableId => {
-                document.getElementById(tableId).innerHTML = 
-                    `<tr><td colspan="4" class="loading">Loading data...</td></tr>`;
-            });
+            document.getElementById('gmailTable').innerHTML = 
+                `<tr><td colspan="4" class="loading">Loading Gmail data...</td></tr>`;
+            document.getElementById('chatTable').innerHTML = 
+                `<tr><td colspan="5" class="loading">Loading Chat data...</td></tr>`;
+            document.getElementById('syncTable').innerHTML = 
+                `<tr><td colspan="5" class="loading">Loading Sync logs...</td></tr>`;
 
             try {
                 console.log(`Loading data for user: ${userId}`);
@@ -412,11 +445,33 @@
 
             } catch (error) {
                 console.error('Error loading user data:', error);
-                ['gmailTable', 'chatTable', 'syncTable'].forEach(tableId => {
-                    document.getElementById(tableId).innerHTML = 
-                        `<tr><td colspan="4" class="error">Error loading data: ${error.message}</td></tr>`;
-                });
+                document.getElementById('gmailTable').innerHTML = 
+                    `<tr><td colspan="4" class="error">Error loading Gmail data: ${error.message}</td></tr>`;
+                document.getElementById('chatTable').innerHTML = 
+                    `<tr><td colspan="5" class="error">Error loading Chat data: ${error.message}</td></tr>`;
+                document.getElementById('syncTable').innerHTML = 
+                    `<tr><td colspan="5" class="error">Error loading Sync data: ${error.message}</td></tr>`;
             }
+        }
+
+        function parseSender(senderString) {
+            if (!senderString) return { name: 'Unknown', email: '' };
+            
+            // Handle format: "Name <email@domain.com>"
+            const emailMatch = senderString.match(/<(.+@.+)>/);
+            if (emailMatch) {
+                const email = emailMatch[1];
+                const name = senderString.replace(/<.+>/, '').replace(/["']/g, '').trim();
+                return { name: name || email.split('@')[0], email };
+            }
+            
+            // Handle format: "email@domain.com"
+            if (senderString.includes('@')) {
+                return { name: senderString.split('@')[0], email: senderString.trim() };
+            }
+            
+            // Fallback for other formats
+            return { name: senderString.trim(), email: '' };
         }
 
         function updateGmailTable(messages) {
@@ -427,33 +482,37 @@
                 return;
             }
 
-            table.innerHTML = messages.map(msg => `
-                <tr>
-                    <td>${formatDate(msg.date_received)}</td>
-                    <td>
-                        <strong>${msg.sender_name || 'Unknown'}</strong><br>
-                        <small style="color: #7f8c8d;">${msg.sender_email || ''}</small>
-                    </td>
-                    <td><strong>${msg.subject || 'No Subject'}</strong></td>
-                    <td style="max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-                        ${msg.body || ''}
-                    </td>
-                </tr>
-            `).join('');
+            table.innerHTML = messages.map(msg => {
+                const sender = parseSender(msg.sender);
+                return `
+                    <tr>
+                        <td>${formatDate(msg.message_time)}</td>
+                        <td>
+                            <strong>${sender.name}</strong><br>
+                            <small style="color: #7f8c8d;">${sender.email}</small>
+                        </td>
+                        <td><strong>${msg.subject || 'No Subject'}</strong></td>
+                        <td style="max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                            ${msg.content || ''}
+                        </td>
+                    </tr>
+                `;
+            }).join('');
         }
 
         function updateChatTable(messages) {
             const table = document.getElementById('chatTable');
             
             if (messages.length === 0) {
-                table.innerHTML = '<tr><td colspan="4" class="empty-state">💬 No Chat messages found</td></tr>';
+                table.innerHTML = '<tr><td colspan="5" class="empty-state">💬 No Chat messages found</td></tr>';
                 return;
             }
 
             table.innerHTML = messages.map(msg => `
                 <tr>
-                    <td>${formatDate(msg.timestamp)}</td>
+                    <td>${formatDate(msg.message_time)}</td>
                     <td>${msg.space_name || 'Unknown Space'}</td>
+                    <td><span class="space-type-badge space-type-${msg.space_type || 'UNKNOWN'}">${msg.space_type || 'UNKNOWN'}</span></td>
                     <td>
                         <strong>${msg.sender_name || 'Unknown'}</strong><br>
                         <small style="color: #7f8c8d;">${msg.sender_email || ''}</small>
@@ -484,7 +543,9 @@
                     </td>
                 </tr>
             `).join('');
-        }        function formatDate(dateString) {
+        }
+
+        function formatDate(dateString) {
             if (!dateString) return 'N/A';
             
             try {

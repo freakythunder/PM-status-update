@@ -1,0 +1,26 @@
+{
+  "generated_at": "13/06/2025, 10:25:24",
+  "total_responses": 4,
+  "responses": [
+    {
+      "to": "DSU Implementation",
+      "msg": "I'll update the sheet and fill all columns for each record as requested.",
+      "time_generated": "13/06/2025, 10:22:29"
+    },
+    {
+      "to": "Rubina Atwal",
+      "msg": "Sure—when are you available for a call?",
+      "time_generated": "13/06/2025, 10:23:11"
+    },
+    {
+      "to": "Malini T L",
+      "msg": "Unit tests are automated tests for individual code units to verify they work correctly before integration. Let me know if you need more details.",
+      "time_generated": "13/06/2025, 10:23:27"
+    },
+    {
+      "to": "Sanchith Reddy",
+      "msg": "Hi Sanchith, are you free to discuss the sample data file? Please let me know a suitable time for a call.",
+      "time_generated": "13/06/2025, 10:24:45"
+    }
+  ]
+}

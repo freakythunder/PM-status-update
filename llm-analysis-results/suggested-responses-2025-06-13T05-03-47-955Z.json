@@ -1,0 +1,31 @@
+{
+  "generated_at": "13/06/2025, 10:33:47",
+  "total_responses": 5,
+  "responses": [
+    {
+      "to": "DSU Implementation",
+      "msg": "Sure, I’ll update the sheet and fill all columns going forward.",
+      "time_generated": "13/06/2025, 10:30:29"
+    },
+    {
+      "to": "Rubina Atwal",
+      "msg": "Hi Rubina, what time works for a call?",
+      "time_generated": "13/06/2025, 10:31:23"
+    },
+    {
+      "to": "Malini T L",
+      "msg": "Unit tests are small, automated checks developers write to verify individual components before integration. Let me know if you need more detail.",
+      "time_generated": "13/06/2025, 10:31:43"
+    },
+    {
+      "to": "Varunprasad S",
+      "msg": "Varun, please let me know when you can join the meeting.",
+      "time_generated": "13/06/2025, 10:32:23"
+    },
+    {
+      "to": "Sanchith Reddy",
+      "msg": "Sanchith, when are you available for a call to discuss the DSU sample data setup?",
+      "time_generated": "13/06/2025, 10:32:50"
+    }
+  ]
+}

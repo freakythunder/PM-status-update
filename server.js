@@ -4,9 +4,25 @@ const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const winston = require('winston');
+const fs = require('fs'); // Added for file system operations
+const path = require('path'); // Added for path manipulation
 
 const GoogleAuthManager = require('./utils/googleAuth');
-const supabase = require('./utils/supabase');
+const MessageRewriteService = require('./services/messageRewriteService');
+const { 
+  connectToMongoDB, 
+  User, 
+  GmailMessage, 
+  ChatMessage,
+  getAllActiveUsers,
+  updateUserTokens,
+  createOrUpdateUser,
+  getUserByEmail,
+  healthCheck,
+  getDashboardStats,
+  getUserStats,
+  getRecentSyncLogs
+} = require('./utils/mongodb');
 
 // Configure logger
 const logger = winston.createLogger({
@@ -43,14 +59,17 @@ try {
   process.exit(1);
 }
 
+// Initialize Message Rewrite Service
+let messageRewriteService;
+try {
+  messageRewriteService = new MessageRewriteService();
+} catch (error) {
+  logger.error('Failed to initialize Message Rewrite Service:', error);
+}
+
 // Middleware
 app.use(helmet());
-app.use(cors({
-  origin: process.env.NODE_ENV === 'production' 
-    ? ['https://your-domain.com'] 
-    : ['http://localhost:3000', 'http://localhost:4000'],
-  credentials: true
-}));
+app.use(cors()); // New CORS configuration: Allow all origins
 
 // Rate limiting
 const limiter = rateLimit({
@@ -68,12 +87,35 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 // Store auth states temporarily (in production, use Redis or database)
 const authStates = new Map();
 
+// Path to the JSON file
+const latestResponsesPath = path.join(__dirname, 'llm-analysis-results', 'latest-responses.json');
+
 // Routes
+
+// Endpoint to serve latest-responses.json
+app.get('/api/latest-responses', (req, res) => {
+  fs.readFile(latestResponsesPath, 'utf8', (err, data) => {
+    if (err) {
+      logger.error('Error reading latest-responses.json:', err);
+      if (err.code === 'ENOENT') {
+        return res.status(404).json({ error: 'File not found' });
+      }
+      return res.status(500).json({ error: 'Failed to read analysis results' });
+    }
+    try {
+      const jsonData = JSON.parse(data);
+      res.json(jsonData);
+    } catch (parseError) {
+      logger.error('Error parsing latest-responses.json:', parseError);
+      res.status(500).json({ error: 'Failed to parse analysis results' });
+    }
+  });
+});
 
 // Health check endpoint
 app.get('/health', async (req, res) => {
   try {
-    const dbHealth = await supabase.healthCheck();
+    const dbHealth = await healthCheck();
     res.json({
       status: 'healthy',
       timestamp: new Date().toISOString(),
@@ -265,7 +307,7 @@ app.get('/auth/callback', async (req, res) => {
     }
 
     // Store user and tokens in database
-    const user = await supabase.createOrUpdateUser(userInfo.email, tokens);
+    const user = await createOrUpdateUser(userInfo.email, tokens);
     
     // Clean up state
     if (state) {
@@ -353,9 +395,8 @@ app.get('/auth/callback', async (req, res) => {
 
 // System statistics endpoint
 app.get('/stats', async (req, res) => {
-  try {
-    const stats = await supabase.getDashboardStats();
-    const activeUsers = await supabase.getAllActiveUsers();
+  try {    const stats = await getDashboardStats();
+    const activeUsers = await getAllActiveUsers();
     
     res.json({
       timestamp: new Date().toISOString(),
@@ -374,15 +415,14 @@ app.get('/stats', async (req, res) => {
 // User-specific stats endpoint
 app.get('/user/:email/stats', async (req, res) => {
   try {
-    const { email } = req.params;
-    const user = await supabase.getUserByEmail(email);
+    const { email } = req.params;    const user = await getUserByEmail(email);
     
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
 
-    const stats = await supabase.getUserStats(user.id);
-    const recentLogs = await supabase.getRecentSyncLogs(user.id);
+    const stats = await getUserStats(user.id);
+    const recentLogs = await getRecentSyncLogs(user.id);
     
     res.json({
       user: {
@@ -396,6 +436,48 @@ app.get('/user/:email/stats', async (req, res) => {
   } catch (error) {
     logger.error('Error fetching user stats:', error);
     res.status(500).json({ error: 'Failed to fetch user statistics' });
+  }
+});
+
+// Message rewrite endpoint
+app.post('/api/rewrite-message', async (req, res) => {
+  try {
+    const { sampleMessage, type } = req.body;
+
+    // Validate input
+    if (!sampleMessage || !type) {
+      return res.status(400).json({ 
+        error: 'Missing required fields',
+        message: 'Both sampleMessage and type are required'
+      });
+    }
+
+    if (typeof sampleMessage !== 'string' || typeof type !== 'string') {
+      return res.status(400).json({ 
+        error: 'Invalid data types',
+        message: 'Both sampleMessage and type must be strings'
+      });
+    }
+
+    logger.info(`Processing message rewrite request - Type: ${type}, Message length: ${sampleMessage.length}`);
+
+    // Process the message rewrite
+    const rewrittenMessage = await messageRewriteService.rewriteMessage(sampleMessage, type);
+
+    res.json({
+      success: true,
+      originalMessage: sampleMessage,
+      type: type,
+      rewrittenMessage: rewrittenMessage,
+      timestamp: new Date().toISOString()
+    });
+
+  } catch (error) {
+    logger.error('Error processing message rewrite:', error);
+    res.status(500).json({ 
+      error: 'Failed to rewrite message',
+      message: error.message
+    });
   }
 });
 
