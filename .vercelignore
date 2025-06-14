@@ -5,10 +5,12 @@ node_modules
 .env.production
 .env.development
 server.log
+data-fetcher.log
 *.log
 .DS_Store
 .vscode
 .git
-llm-analysis-results/
 script_for_names/
 localtunnel-setup.js
+test-*.js
+testChatAPI.js

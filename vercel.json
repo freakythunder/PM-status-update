@@ -3,12 +3,21 @@
   "functions": {
     "api/index.js": {
       "maxDuration": 60
+    },
+    "api/cron/data-fetch.js": {
+      "maxDuration": 300
     }
   },
   "routes": [
     {
       "src": "/(.*)",
       "dest": "/api/index.js"
+    }
+  ],
+  "crons": [
+    {
+      "path": "/api/cron/data-fetch",
+      "schedule": "*/10 * * * *"
     }
   ],
   "env": {

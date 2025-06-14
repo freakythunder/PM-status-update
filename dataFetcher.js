@@ -27,14 +27,18 @@ const {
   createSyncLog
 } = require('./utils/mongodb');
 
-// Load user name mapping
+// Load user name mapping with serverless compatibility
 let userNameMapping = {};
 try {
   const mappingFilePath = path.join(__dirname, 'user_name_mapping_simple.json');
-  userNameMapping = JSON.parse(fs.readFileSync(mappingFilePath, 'utf8'));
-  logger.info(`Loaded user name mapping with ${Object.keys(userNameMapping).length} entries`);
+  if (fs.existsSync(mappingFilePath)) {
+    userNameMapping = JSON.parse(fs.readFileSync(mappingFilePath, 'utf8'));
+    logger.info(`Loaded user name mapping with ${Object.keys(userNameMapping).length} entries`);
+  } else {
+    logger.warn('User name mapping file not found, continuing with empty mapping');
+  }
 } catch (error) {
-  console.warn(`Failed to load user name mapping file: ${error.message}`);
+  logger.warn(`Failed to load user name mapping file: ${error.message}`);
   // Continue with empty mapping
 }
 
@@ -92,8 +96,7 @@ class DataFetcher {
     this.stats = {
       totalRuns: 0,
       successfulRuns: 0,
-      failedRuns: 0,
-      lastError: null
+      failedRuns: 0,      lastError: null
     };
     this.spacesFilePath = path.join(__dirname, 'spaces_with_latest_messages.json');
   }
@@ -101,21 +104,39 @@ class DataFetcher {
   // Utility functions for managing spaces JSON file
   loadSpacesFromJSON() {
     try {
+      if (!fs.existsSync(this.spacesFilePath)) {
+        logger.warn(`Spaces JSON file not found at ${this.spacesFilePath}, returning empty array`);
+        return [];
+      }
       const spacesData = JSON.parse(fs.readFileSync(this.spacesFilePath, 'utf8'));
       return spacesData;
     } catch (error) {
       logger.error(`Failed to load spaces JSON file: ${error.message}`);
-      throw error;
+      return []; // Return empty array instead of throwing error
     }
   }
 
   saveSpacesToJSON(spacesData) {
     try {
-      fs.writeFileSync(this.spacesFilePath, JSON.stringify(spacesData, null, 2), 'utf8');
-      logger.info(`Updated spaces JSON file with latest message times`);
+      // In serverless environment, try to write to /tmp directory
+      const isServerless = process.env.VERCEL === '1';
+      let targetPath = this.spacesFilePath;
+      
+      if (isServerless) {
+        // Use /tmp directory in serverless environment
+        const fileName = path.basename(this.spacesFilePath);
+        targetPath = path.join('/tmp', fileName);
+        logger.info(`Serverless detected, writing to ${targetPath}`);
+      }
+      
+      fs.writeFileSync(targetPath, JSON.stringify(spacesData, null, 2), 'utf8');
+      logger.info(`Updated spaces JSON file with latest message times at ${targetPath}`);
     } catch (error) {
       logger.error(`Failed to save spaces JSON file: ${error.message}`);
-      throw error;
+      // Don't throw error in serverless environment, just log it
+      if (process.env.VERCEL !== '1') {
+        throw error;
+      }
     }
   }
 
