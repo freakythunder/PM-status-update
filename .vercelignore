@@ -1,0 +1,14 @@
+# Vercel ignore file
+node_modules
+.env
+.env.local
+.env.production
+.env.development
+server.log
+*.log
+.DS_Store
+.vscode
+.git
+llm-analysis-results/
+script_for_names/
+localtunnel-setup.js

@@ -512,27 +512,29 @@ process.on('SIGINT', () => {
   });
 });
 
-// Start server
-const server = app.listen(port, () => {
-  logger.info(`🚀 PM Assistant OAuth Server running on http://localhost:${port}`);
-  logger.info(`📊 Dashboard will be available on http://localhost:${process.env.DASHBOARD_PORT || 4000}/dashboard`);
-  logger.info(`🔒 OAuth flow: http://localhost:${port}/auth`);
-  logger.info(`📈 Stats: http://localhost:${port}/stats`);
-  
-  // Start the data fetcher in a separate process
-  if (process.env.NODE_ENV !== 'test') {
-    const { spawn } = require('child_process');
-    const fetcherProcess = spawn('node', ['dataFetcher.js'], {
-      stdio: 'inherit',
-      cwd: __dirname
-    });
+// Start server only if not in Vercel serverless environment
+if (process.env.VERCEL !== '1') {
+  const server = app.listen(port, () => {
+    logger.info(`🚀 PM Assistant OAuth Server running on http://localhost:${port}`);
+    logger.info(`📊 Dashboard will be available on http://localhost:${process.env.DASHBOARD_PORT || 4000}/dashboard`);
+    logger.info(`🔒 OAuth flow: http://localhost:${port}/auth`);
+    logger.info(`📈 Stats: http://localhost:${port}/stats`);
     
-    fetcherProcess.on('error', (error) => {
-      logger.error('Failed to start data fetcher:', error);
-    });
-    
-    logger.info('🤖 Data fetcher started in background');
-  }
-});
+    // Start the data fetcher in a separate process
+    if (process.env.NODE_ENV !== 'test') {
+      const { spawn } = require('child_process');
+      const fetcherProcess = spawn('node', ['dataFetcher.js'], {
+        stdio: 'inherit',
+        cwd: __dirname
+      });
+      
+      fetcherProcess.on('error', (error) => {
+        logger.error('Failed to start data fetcher:', error);
+      });
+      
+      logger.info('🤖 Data fetcher started in background');
+    }
+  });
+}
 
 module.exports = app;
