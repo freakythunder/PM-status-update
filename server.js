@@ -4,8 +4,6 @@ const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const winston = require('winston');
-const fs = require('fs'); // Added for file system operations
-const path = require('path'); // Added for path manipulation
 
 const GoogleAuthManager = require('./utils/googleAuth');
 const MessageRewriteService = require('./services/messageRewriteService');
@@ -21,7 +19,9 @@ const {
   healthCheck,
   getDashboardStats,
   getUserStats,
-  getRecentSyncLogs
+  getRecentSyncLogs,
+  getLatestLLMAnalysisResults,
+  getAllLLMAnalysisResults
 } = require('./utils/mongodb');
 
 // Configure logger
@@ -87,29 +87,54 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 // Store auth states temporarily (in production, use Redis or database)
 const authStates = new Map();
 
-// Path to the JSON file
-const latestResponsesPath = path.join(__dirname, 'llm-analysis-results', 'latest-responses.json');
-
 // Routes
 
-// Endpoint to serve latest-responses.json
-app.get('/api/latest-responses', (req, res) => {
-  fs.readFile(latestResponsesPath, 'utf8', (err, data) => {
-    if (err) {
-      logger.error('Error reading latest-responses.json:', err);
-      if (err.code === 'ENOENT') {
-        return res.status(404).json({ error: 'File not found' });
-      }
-      return res.status(500).json({ error: 'Failed to read analysis results' });
+// Endpoint to serve latest LLM analysis responses from MongoDB
+app.get('/api/latest-responses', async (req, res) => {
+  try {
+    const latestResults = await getLatestLLMAnalysisResults();
+    
+    if (!latestResults) {
+      return res.status(404).json({ 
+        error: 'No analysis results found',
+        generated_at: new Date().toLocaleString('en-IN', {
+          timeZone: 'Asia/Kolkata',
+          day: '2-digit',
+          month: '2-digit', 
+          year: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: false
+        }).replace(/(\d{2})\/(\d{2})\/(\d{4}), (\d{2}):(\d{2}):(\d{2})/, '$1/$2/$3, $4:$5:$6'),
+        total_responses: 0,
+        responses: []
+      });
     }
-    try {
-      const jsonData = JSON.parse(data);
-      res.json(jsonData);
-    } catch (parseError) {
-      logger.error('Error parsing latest-responses.json:', parseError);
-      res.status(500).json({ error: 'Failed to parse analysis results' });
-    }
-  });
+    
+    res.json(latestResults);
+    
+  } catch (error) {
+    logger.error('Error fetching latest LLM analysis results from MongoDB:', error);
+    res.status(500).json({ error: 'Failed to fetch analysis results from database' });
+  }
+});
+
+// New endpoint to get all analysis results with pagination
+app.get('/api/analysis-history', async (req, res) => {
+  try {
+    const limit = parseInt(req.query.limit) || 20;
+    const results = await getAllLLMAnalysisResults(limit);
+    
+    res.json({
+      total_results: results.length,
+      results: results
+    });
+    
+  } catch (error) {
+    logger.error('Error fetching LLM analysis history from MongoDB:', error);
+    res.status(500).json({ error: 'Failed to fetch analysis history from database' });
+  }
 });
 
 // Health check endpoint

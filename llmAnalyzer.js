@@ -8,7 +8,9 @@ const {
   connectToMongoDB,
   getAllActiveUsers,
   getChatMessagesBySpace,
-  ChatMessage
+  ChatMessage,
+  saveLLMAnalysisResults,
+  getLatestLLMAnalysisResults
 } = require('./utils/mongodb');
 
 // Configure logger
@@ -297,30 +299,51 @@ ${messagesJson}
   "suggested_response": "write a brief, to-the-point message that follows Aditya's communication style if response_needed is true, otherwise leave empty"
 }`;
   }
-
-  // Save single file with all suggested responses
+  // Save results to MongoDB instead of local files
   async saveSuggestedResponsesFile(suggestedResponses) {
     try {
-      const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-      const filename = `suggested-responses-${timestamp}.json`;
-      const filepath = path.join(this.outputDir, filename);
-
       const output = {
         generated_at: this.formatLocalTime(new Date()),
         total_responses: suggestedResponses.length,
         responses: suggestedResponses
       };
 
-      await fs.writeFile(filepath, JSON.stringify(output, null, 2));
-      logger.info(`${suggestedResponses.length} suggested responses saved to: ${filepath}`);
+      // Save to MongoDB
+      await saveLLMAnalysisResults(output);
+      logger.info(`✅ ${suggestedResponses.length} suggested responses saved to MongoDB`);
 
-      // Also save as latest-responses.json for easy access
-      const latestPath = path.join(this.outputDir, 'latest-responses.json');
-      await fs.writeFile(latestPath, JSON.stringify(output, null, 2));
-      logger.info(`Latest responses saved to: ${latestPath}`);
+      // Optionally keep a backup in local file for debugging
+      if (process.env.KEEP_LOCAL_BACKUP === 'true') {
+        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+        const filename = `suggested-responses-${timestamp}.json`;
+        const filepath = path.join(this.outputDir, filename);
+
+        await fs.writeFile(filepath, JSON.stringify(output, null, 2));
+        logger.info(`Backup saved locally: ${filepath}`);
+      }
 
     } catch (error) {
-      logger.error('Failed to save suggested responses:', error);
+      logger.error('❌ Failed to save suggested responses:', error);
+      
+      // Fallback to local file if MongoDB fails
+      try {
+        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+        const filename = `suggested-responses-${timestamp}.json`;
+        const filepath = path.join(this.outputDir, filename);
+
+        const output = {
+          generated_at: this.formatLocalTime(new Date()),
+          total_responses: suggestedResponses.length,
+          responses: suggestedResponses
+        };
+
+        await fs.writeFile(filepath, JSON.stringify(output, null, 2));
+        logger.warn(`⚠️ MongoDB save failed, saved locally as fallback: ${filepath}`);
+        
+      } catch (fallbackError) {
+        logger.error('❌ Both MongoDB and local file save failed:', fallbackError);
+        throw error;
+      }
     }
   }
 

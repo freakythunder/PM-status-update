@@ -98,15 +98,29 @@ const chatMessageSchema = new mongoose.Schema({
   created_at: { type: Date, default: getLocalDate }
 });
 
-// Create compound index for unique constraint and performance
-chatMessageSchema.index({ user_id: 1, message_id: 1 }, { unique: true });
-chatMessageSchema.index({ user_id: 1, space_id: 1, message_time: -1 });
-chatMessageSchema.index({ user_id: 1, message_time: -1 });
+// LLM Analysis Results Schema
+const llmAnalysisResultSchema = new mongoose.Schema({
+  generated_at: { type: Date, required: true, default: getLocalDate },
+  total_responses: { type: Number, required: true, default: 0 },
+  responses: [{
+    to: { type: String, required: true },
+    msg: { type: String, required: true },
+    time_generated: { type: String, required: true }
+  }],
+  is_latest: { type: Boolean, default: false }, // Flag to mark the latest analysis
+  analysis_version: { type: String, default: '1.0' },
+  created_at: { type: Date, default: getLocalDate }
+});
+
+// Index for performance
+llmAnalysisResultSchema.index({ generated_at: -1 });
+llmAnalysisResultSchema.index({ is_latest: 1 });
 
 // Create models
 const User = mongoose.model('User', userSchema);
 const GmailMessage = mongoose.model('GmailMessage', gmailMessageSchema);
 const ChatMessage = mongoose.model('ChatMessage', chatMessageSchema);
+const LLMAnalysisResult = mongoose.model('LLMAnalysisResult', llmAnalysisResultSchema);
 
 // Utility Functions
 
@@ -479,11 +493,116 @@ async function getRecentSyncLogs(userId, limit = 10) {
   return [];
 }
 
+// LLM Analysis Result functions
+async function saveLLMAnalysisResults(analysisData) {
+  await connectToMongoDB();
+  
+  try {
+    // First, mark all existing results as not latest
+    await LLMAnalysisResult.updateMany(
+      { is_latest: true },
+      { is_latest: false }
+    );
+    
+    // Create new analysis result
+    const analysisResult = new LLMAnalysisResult({
+      generated_at: new Date(analysisData.generated_at || new Date()),
+      total_responses: analysisData.total_responses || 0,
+      responses: analysisData.responses || [],
+      is_latest: true,
+      analysis_version: '1.0'
+    });
+    
+    await analysisResult.save();
+    
+    console.log(`✅ LLM analysis results saved to MongoDB with ${analysisData.total_responses} responses`);
+    return analysisResult;
+    
+  } catch (error) {
+    console.error('❌ Failed to save LLM analysis results to MongoDB:', error);
+    throw error;
+  }
+}
+
+async function getLatestLLMAnalysisResults() {
+  await connectToMongoDB();
+  
+  try {
+    const latestResult = await LLMAnalysisResult.findOne(
+      { is_latest: true },
+      null,
+      { sort: { generated_at: -1 } }
+    );
+    
+    if (!latestResult) {
+      return null;
+    }
+    
+    // Convert to the expected format
+    return {
+      generated_at: latestResult.generated_at.toLocaleString('en-IN', {
+        timeZone: 'Asia/Kolkata',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      }).replace(/(\d{4})-(\d{2})-(\d{2}), (\d{2}):(\d{2}):(\d{2})/, '$3/$2/$1, $4:$5:$6'),
+      total_responses: latestResult.total_responses,
+      responses: latestResult.responses
+    };
+    
+  } catch (error) {
+    console.error('❌ Failed to get latest LLM analysis results from MongoDB:', error);
+    throw error;
+  }
+}
+
+async function getAllLLMAnalysisResults(limit = 20) {
+  await connectToMongoDB();
+  
+  try {
+    const results = await LLMAnalysisResult.find(
+      {},
+      null,
+      { 
+        sort: { generated_at: -1 },
+        limit: limit
+      }
+    );
+    
+    return results.map(result => ({
+      id: result._id,
+      generated_at: result.generated_at.toLocaleString('en-IN', {
+        timeZone: 'Asia/Kolkata',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      }).replace(/(\d{4})-(\d{2})-(\d{2}), (\d{2}):(\d{2}):(\d{2})/, '$3/$2/$1, $4:$5:$6'),
+      total_responses: result.total_responses,
+      responses: result.responses,
+      is_latest: result.is_latest,
+      analysis_version: result.analysis_version
+    }));
+    
+  } catch (error) {
+    console.error('❌ Failed to get LLM analysis results from MongoDB:', error);
+    throw error;
+  }
+}
+
 module.exports = {
   connectToMongoDB,
   User,
   GmailMessage,
   ChatMessage,
+  LLMAnalysisResult,
   mongoose,
   getLocalDate,
   toLocalDate,
@@ -510,5 +629,9 @@ module.exports = {
   healthCheck,
   getDashboardStats,
   getUserStats,
-  getRecentSyncLogs
+  getRecentSyncLogs,
+  // LLM Analysis Result functions
+  saveLLMAnalysisResults,
+  getLatestLLMAnalysisResults,
+  getAllLLMAnalysisResults
 };
