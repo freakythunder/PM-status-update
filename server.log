@@ -1,0 +1,19 @@
+{"level":"info","message":"🚀 PM Assistant OAuth Server running on http://localhost:3000","timestamp":"2025-06-14T11:17:11.398Z"}
+{"level":"info","message":"📊 Dashboard will be available on http://localhost:4000/dashboard","timestamp":"2025-06-14T11:17:11.401Z"}
+{"level":"info","message":"🔒 OAuth flow: http://localhost:3000/auth","timestamp":"2025-06-14T11:17:11.402Z"}
+{"level":"info","message":"📈 Stats: http://localhost:3000/stats","timestamp":"2025-06-14T11:17:11.402Z"}
+{"level":"info","message":"🤖 Data fetcher started in background","timestamp":"2025-06-14T11:17:11.418Z"}
+{"level":"info","message":"Processing message rewrite request - Type: Make this more polite, Message length: 8","timestamp":"2025-06-14T11:18:02.404Z"}
+{"level":"info","message":"SIGINT received, shutting down gracefully","timestamp":"2025-06-14T11:22:50.007Z"}
+{"level":"info","message":"🚀 PM Assistant OAuth Server running on http://localhost:3000","timestamp":"2025-06-14T11:22:58.630Z"}
+{"level":"info","message":"📊 Dashboard will be available on http://localhost:4000/dashboard","timestamp":"2025-06-14T11:22:58.632Z"}
+{"level":"info","message":"🔒 OAuth flow: http://localhost:3000/auth","timestamp":"2025-06-14T11:22:58.632Z"}
+{"level":"info","message":"📈 Stats: http://localhost:3000/stats","timestamp":"2025-06-14T11:22:58.633Z"}
+{"level":"info","message":"🤖 Data fetcher started in background","timestamp":"2025-06-14T11:22:58.647Z"}
+{"level":"info","message":"SIGINT received, shutting down gracefully","timestamp":"2025-06-14T11:23:02.205Z"}
+{"level":"info","message":"🚀 PM Assistant OAuth Server running on http://localhost:3000","timestamp":"2025-06-14T11:23:13.629Z"}
+{"level":"info","message":"📊 Dashboard will be available on http://localhost:4000/dashboard","timestamp":"2025-06-14T11:23:13.631Z"}
+{"level":"info","message":"🔒 OAuth flow: http://localhost:3000/auth","timestamp":"2025-06-14T11:23:13.632Z"}
+{"level":"info","message":"📈 Stats: http://localhost:3000/stats","timestamp":"2025-06-14T11:23:13.632Z"}
+{"level":"info","message":"🤖 Data fetcher started in background","timestamp":"2025-06-14T11:23:13.648Z"}
+{"level":"info","message":"SIGINT received, shutting down gracefully","timestamp":"2025-06-14T11:26:28.700Z"}

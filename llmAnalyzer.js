@@ -298,12 +298,13 @@ ${messagesJson}
   "reason": "Specify which case applies (30min reminder or 3hr follow-up) and time elapsed, or why no response needed",
   "suggested_response": "write a brief, to-the-point message that follows Aditya's communication style if response_needed is true, otherwise leave empty"
 }`;
-  }
-  // Save results to MongoDB instead of local files
+  }  // Save results to MongoDB instead of local files
   async saveSuggestedResponsesFile(suggestedResponses) {
     try {
+      const currentDate = new Date();
       const output = {
-        generated_at: this.formatLocalTime(new Date()),
+        generated_at: currentDate, // Pass as Date object for MongoDB
+        generated_at_formatted: this.formatLocalTime(currentDate), // Keep formatted version for display
         total_responses: suggestedResponses.length,
         responses: suggestedResponses
       };
@@ -314,11 +315,18 @@ ${messagesJson}
 
       // Optionally keep a backup in local file for debugging
       if (process.env.KEEP_LOCAL_BACKUP === 'true') {
-        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+        const timestamp = currentDate.toISOString().replace(/[:.]/g, '-');
         const filename = `suggested-responses-${timestamp}.json`;
         const filepath = path.join(this.outputDir, filename);
 
-        await fs.writeFile(filepath, JSON.stringify(output, null, 2));
+        // For local file, use the formatted date string
+        const localOutput = {
+          generated_at: this.formatLocalTime(currentDate),
+          total_responses: suggestedResponses.length,
+          responses: suggestedResponses
+        };
+
+        await fs.writeFile(filepath, JSON.stringify(localOutput, null, 2));
         logger.info(`Backup saved locally: ${filepath}`);
       }
 
@@ -327,12 +335,13 @@ ${messagesJson}
       
       // Fallback to local file if MongoDB fails
       try {
-        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+        const currentDate = new Date();
+        const timestamp = currentDate.toISOString().replace(/[:.]/g, '-');
         const filename = `suggested-responses-${timestamp}.json`;
         const filepath = path.join(this.outputDir, filename);
 
         const output = {
-          generated_at: this.formatLocalTime(new Date()),
+          generated_at: this.formatLocalTime(currentDate),
           total_responses: suggestedResponses.length,
           responses: suggestedResponses
         };

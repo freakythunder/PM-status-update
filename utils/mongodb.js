@@ -504,9 +504,22 @@ async function saveLLMAnalysisResults(analysisData) {
       { is_latest: false }
     );
     
+    // Parse the generated_at date properly
+    let generatedAtDate;
+    if (analysisData.generated_at) {
+      // If it's a string, try to parse it or use current date
+      if (typeof analysisData.generated_at === 'string') {
+        generatedAtDate = new Date(); // Use current date as the string format might be locale-specific
+      } else {
+        generatedAtDate = new Date(analysisData.generated_at);
+      }
+    } else {
+      generatedAtDate = new Date();
+    }
+    
     // Create new analysis result
     const analysisResult = new LLMAnalysisResult({
-      generated_at: new Date(analysisData.generated_at || new Date()),
+      generated_at: generatedAtDate,
       total_responses: analysisData.total_responses || 0,
       responses: analysisData.responses || [],
       is_latest: true,
