@@ -5,7 +5,7 @@
       "maxDuration": 60
     },
     "api/cron/data-fetch.js": {
-      "maxDuration": 300
+      "maxDuration": 60
     }
   },
   "routes": [
