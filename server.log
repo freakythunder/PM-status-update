@@ -17,3 +17,31 @@
 {"level":"info","message":"📈 Stats: http://localhost:3000/stats","timestamp":"2025-06-14T11:23:13.632Z"}
 {"level":"info","message":"🤖 Data fetcher started in background","timestamp":"2025-06-14T11:23:13.648Z"}
 {"level":"info","message":"SIGINT received, shutting down gracefully","timestamp":"2025-06-14T11:26:28.700Z"}
+{"level":"info","message":"🚀 PM Assistant OAuth Server running on http://localhost:3000","timestamp":"2025-06-15T10:03:19.484Z"}
+{"level":"info","message":"📊 Dashboard will be available on http://localhost:4000/dashboard","timestamp":"2025-06-15T10:03:19.484Z"}
+{"level":"info","message":"🔒 OAuth flow: http://localhost:3000/auth","timestamp":"2025-06-15T10:03:19.485Z"}
+{"level":"info","message":"📈 Stats: http://localhost:3000/stats","timestamp":"2025-06-15T10:03:19.485Z"}
+{"level":"info","message":"🎯 Data fetcher will run on-demand via /api/latest-responses","timestamp":"2025-06-15T10:03:19.485Z"}
+{"level":"info","message":"SIGINT received, shutting down gracefully","timestamp":"2025-06-15T10:05:58.927Z"}
+{"level":"info","message":"🚀 PM Assistant OAuth Server running on http://localhost:3000","timestamp":"2025-06-15T10:06:09.441Z"}
+{"level":"info","message":"📊 Dashboard will be available on http://localhost:4000/dashboard","timestamp":"2025-06-15T10:06:09.443Z"}
+{"level":"info","message":"🔒 OAuth flow: http://localhost:3000/auth","timestamp":"2025-06-15T10:06:09.443Z"}
+{"level":"info","message":"📈 Stats: http://localhost:3000/stats","timestamp":"2025-06-15T10:06:09.443Z"}
+{"level":"info","message":"🎯 Data fetcher will run on-demand via /api/latest-responses","timestamp":"2025-06-15T10:06:09.444Z"}
+{"level":"info","message":"SIGINT received, shutting down gracefully","timestamp":"2025-06-15T10:09:16.456Z"}
+{"level":"info","message":"🚀 PM Assistant OAuth Server running on http://localhost:3000","timestamp":"2025-06-15T10:09:26.165Z"}
+{"level":"info","message":"📊 Dashboard will be available on http://localhost:4000/dashboard","timestamp":"2025-06-15T10:09:26.166Z"}
+{"level":"info","message":"🔒 OAuth flow: http://localhost:3000/auth","timestamp":"2025-06-15T10:09:26.166Z"}
+{"level":"info","message":"📈 Stats: http://localhost:3000/stats","timestamp":"2025-06-15T10:09:26.167Z"}
+{"level":"info","message":"🎯 Data fetcher will run on-demand via /api/latest-responses","timestamp":"2025-06-15T10:09:26.167Z"}
+{"level":"info","message":"🎯 API request received - starting data collection and analysis","timestamp":"2025-06-15T10:17:37.183Z"}
+{"level":"info","message":"🎯 API request received - starting data collection and analysis","timestamp":"2025-06-15T10:17:57.204Z"}
+{"level":"info","message":"SIGINT received, shutting down gracefully","timestamp":"2025-06-15T10:18:51.920Z"}
+{"level":"info","message":"🚀 PM Assistant OAuth Server running on http://localhost:3000","timestamp":"2025-06-15T10:19:04.784Z"}
+{"level":"info","message":"📊 Dashboard will be available on http://localhost:4000/dashboard","timestamp":"2025-06-15T10:19:04.785Z"}
+{"level":"info","message":"🔒 OAuth flow: http://localhost:3000/auth","timestamp":"2025-06-15T10:19:04.786Z"}
+{"level":"info","message":"📈 Stats: http://localhost:3000/stats","timestamp":"2025-06-15T10:19:04.786Z"}
+{"level":"info","message":"🎯 Data fetcher will run on-demand via /api/latest-responses","timestamp":"2025-06-15T10:19:04.786Z"}
+{"level":"info","message":"🎯 API request received - starting data collection and analysis","timestamp":"2025-06-15T10:19:09.001Z"}
+{"level":"info","message":"✅ Data collection and analysis completed successfully","timestamp":"2025-06-15T10:21:37.255Z"}
+{"level":"info","message":"SIGINT received, shutting down gracefully","timestamp":"2025-06-15T10:26:04.048Z"}

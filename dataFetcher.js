@@ -1,5 +1,4 @@
 require('dotenv').config();
-const cron = require('node-cron');
 const winston = require('winston');
 const fs = require('fs');
 const path = require('path');
@@ -573,60 +572,49 @@ class DataFetcher {
     const nextRun = new Date(this.lastRunTime.getTime() + (intervalMinutes * 60 * 1000));
     return nextRun;
   }
+  // Initialize the DataFetcher (replaces the old cron-based start method)
+  async initialize() {
+    try {
+      await connectToMongoDB();
+      logger.info('✅ DataFetcher initialized successfully');
+      return true;
+    } catch (error) {
+      logger.error('❌ Failed to initialize DataFetcher:', error);
+      throw error;
+    }
+  }
 
-  // Start the cron job
-  start() {
-    const intervalMinutes = parseInt(process.env.FETCH_INTERVAL_MINUTES) || 10;
-    const cronExpression = `*/${intervalMinutes} * * * *`;
-
-    logger.info(`🕐 Starting data fetcher with ${intervalMinutes}-minute intervals`);
-    logger.info(`📅 Cron expression: ${cronExpression}`);
-
-    // Schedule the cron job
-    const task = cron.schedule(cronExpression, async () => {
+  // Execute single data collection cycle (replaces cron-based execution)
+  async executeOnce() {
+    logger.info('🎯 Starting on-demand data collection and analysis');
+    
+    try {
       await this.collectAllData();
-    }, {
-      scheduled: false,
-      timezone: 'UTC'
-    });
-
-    // Start the cron job
-    task.start();
-
-    // Run initial collection after 30 seconds
-    setTimeout(async () => {
-      logger.info('🎯 Running initial data collection...');
-      await this.collectAllData();
-    }, 30000);
-
-    logger.info('✅ Data fetcher started successfully');
-
-    // Handle graceful shutdown
-    process.on('SIGTERM', () => {
-      logger.info('Received SIGTERM, shutting down data fetcher...');
-      task.stop();
-      process.exit(0);
-    });
-
-    process.on('SIGINT', () => {
-      logger.info('Received SIGINT, shutting down data fetcher...');
-      task.stop();
-      process.exit(0);
-    });
-
-    return task;
+      logger.info('✅ On-demand data collection and analysis completed successfully');
+      return this.getStatus();
+    } catch (error) {
+      logger.error('❌ On-demand data collection and analysis failed:', error);
+      throw error;
+    }
   }
 }
 
-// If this file is run directly, start the data fetcher
+// If this file is run directly, execute once and exit (for testing)
 if (require.main === module) {
   const fetcher = new DataFetcher();
 
-  fetcher.start();
-
-  logger.info('🤖 PM Assistant Data Fetcher is running');
-  logger.info(`📊 Status endpoint would be available if running with web server`);
-  logger.info(`🔄 Data collection interval: ${process.env.FETCH_INTERVAL_MINUTES || 10} minutes`);
+  (async () => {
+    try {
+      logger.info('🤖 Running PM Assistant Data Fetcher once...');
+      await fetcher.initialize();
+      await fetcher.executeOnce();
+      logger.info('✅ Data fetcher execution completed, exiting...');
+      process.exit(0);
+    } catch (error) {
+      logger.error('❌ Data fetcher execution failed:', error);
+      process.exit(1);
+    }
+  })();
 }
 
 module.exports = DataFetcher;

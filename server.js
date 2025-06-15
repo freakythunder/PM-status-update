@@ -89,14 +89,23 @@ const authStates = new Map();
 
 // Routes
 
-// Endpoint to serve latest LLM analysis responses from MongoDB
+// Endpoint to trigger data collection and serve latest LLM analysis responses
 app.get('/api/latest-responses', async (req, res) => {
   try {
+    logger.info('🎯 API request received - starting data collection and analysis');    // Import DataFetcher class
+    const DataFetcher = require('./dataFetcher');
+    const fetcher = new DataFetcher();
+    
+    // Initialize and run complete data collection and analysis process
+    await fetcher.initialize();
+    await fetcher.executeOnce();
+    
+    // Get the latest results after processing
     const latestResults = await getLatestLLMAnalysisResults();
     
     if (!latestResults) {
       return res.status(404).json({ 
-        error: 'No analysis results found',
+        error: 'No analysis results found after processing',
         generated_at: new Date().toLocaleString('en-IN', {
           timeZone: 'Asia/Kolkata',
           day: '2-digit',
@@ -112,11 +121,48 @@ app.get('/api/latest-responses', async (req, res) => {
       });
     }
     
+    logger.info('✅ Data collection and analysis completed successfully');
     res.json(latestResults);
     
   } catch (error) {
-    logger.error('Error fetching latest LLM analysis results from MongoDB:', error);
-    res.status(500).json({ error: 'Failed to fetch analysis results from database' });
+    logger.error('❌ Error during data collection and analysis:', error);
+    res.status(500).json({ 
+      error: 'Failed to complete data collection and analysis',
+      details: error.message 
+    });
+  }
+});
+
+// New endpoint to get latest responses from MongoDB using getAllLLMAnalysisResults
+app.get('/api/mongodb-latest-responses', async (req, res) => {
+  try {
+    const limit = parseInt(req.query.limit) || 20;
+    const results = await getAllLLMAnalysisResults(limit);
+    
+    if (!results || results.length === 0) {
+      return res.status(404).json({ 
+        error: 'No analysis results found in database',
+        total_results: 0,
+        results: []
+      });
+    }
+    
+    // Return the latest result (first one) as the main response with all results
+    const latestResult = results[0];
+    
+    res.json({
+      generated_at: latestResult.generated_at,
+      total_responses: latestResult.total_responses,
+      responses: latestResult.responses,
+      is_latest: latestResult.is_latest,
+      analysis_version: latestResult.analysis_version,
+      total_results: results.length,
+      all_results: results
+    });
+    
+  } catch (error) {
+    logger.error('Error fetching latest responses from MongoDB:', error);
+    res.status(500).json({ error: 'Failed to fetch latest responses from database' });
   }
 });
 
@@ -544,21 +590,7 @@ if (process.env.VERCEL !== '1') {
     logger.info(`📊 Dashboard will be available on http://localhost:${process.env.DASHBOARD_PORT || 4000}/dashboard`);
     logger.info(`🔒 OAuth flow: http://localhost:${port}/auth`);
     logger.info(`📈 Stats: http://localhost:${port}/stats`);
-    
-    // Start the data fetcher in a separate process
-    if (process.env.NODE_ENV !== 'test') {
-      const { spawn } = require('child_process');
-      const fetcherProcess = spawn('node', ['dataFetcher.js'], {
-        stdio: 'inherit',
-        cwd: __dirname
-      });
-      
-      fetcherProcess.on('error', (error) => {
-        logger.error('Failed to start data fetcher:', error);
-      });
-      
-      logger.info('🤖 Data fetcher started in background');
-    }
+    logger.info(`🎯 Data fetcher will run on-demand via /api/latest-responses`);
   });
 }
 
