@@ -21,9 +21,10 @@ const {
   getLastChatSyncTime,
   getLatestChatMessageTime,
   getChatMessagesBySpace,
-  hasExistingChatMessagesInSpace, // Added
-  getLatestChatMessageCreateTimeForSpace, // Added
-  createSyncLog
+  hasExistingChatMessagesInSpace,
+  getLatestChatMessageCreateTimeForSpace,
+  createSyncLog,
+  setDataFetcherRunning
 } = require('./utils/mongodb');
 
 // Load user name mapping
@@ -594,6 +595,10 @@ class DataFetcher {
       return this.getStatus();
     } catch (error) {
       logger.error('❌ On-demand data collection and analysis failed:', error);
+      // Ensure isRunning is set to false on error
+      this.isRunning = false;
+      // Also reset database state
+      await setDataFetcherRunning(false);
       throw error;
     }
   }

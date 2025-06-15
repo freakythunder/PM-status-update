@@ -610,6 +610,58 @@ async function getAllLLMAnalysisResults(limit = 20) {
   }
 }
 
+// Data Fetcher State Management
+async function setDataFetcherRunning(isRunning, startTime = null) {
+  try {
+    const state = {
+      isRunning,
+      startTime: startTime ? new Date(startTime) : null,
+      lastUpdated: new Date()
+    };
+    
+    await db.collection('system_state').updateOne(
+      { key: 'data_fetcher' },
+      { $set: state },
+      { upsert: true }
+    );
+    
+    return true;
+  } catch (error) {
+    console.error('Error setting data fetcher state:', error);
+    return false;
+  }
+}
+
+async function getDataFetcherState() {
+  try {
+    const state = await db.collection('system_state').findOne({ key: 'data_fetcher' });
+    
+    if (!state) {
+      return { isRunning: false, startTime: null };
+    }
+    
+    // Check for stale state (running for more than 30 minutes = likely crashed)
+    const now = new Date();
+    const maxRunTime = 30 * 60 * 1000; // 30 minutes
+    
+    if (state.isRunning && state.startTime && 
+        (now - new Date(state.startTime)) > maxRunTime) {
+      // Reset stale state
+      await setDataFetcherRunning(false);
+      return { isRunning: false, startTime: null };
+    }
+    
+    return {
+      isRunning: state.isRunning,
+      startTime: state.startTime,
+      lastUpdated: state.lastUpdated
+    };
+  } catch (error) {
+    console.error('Error getting data fetcher state:', error);
+    return { isRunning: false, startTime: null };
+  }
+}
+
 module.exports = {
   connectToMongoDB,
   User,
@@ -646,5 +698,8 @@ module.exports = {
   // LLM Analysis Result functions
   saveLLMAnalysisResults,
   getLatestLLMAnalysisResults,
-  getAllLLMAnalysisResults
+  getAllLLMAnalysisResults,
+  // Data Fetcher State Management
+  setDataFetcherRunning,
+  getDataFetcherState
 };

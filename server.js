@@ -21,7 +21,9 @@ const {
   getUserStats,
   getRecentSyncLogs,
   getLatestLLMAnalysisResults,
-  getAllLLMAnalysisResults
+  getAllLLMAnalysisResults,
+  setDataFetcherRunning,
+  getDataFetcherState
 } = require('./utils/mongodb');
 
 // Configure logger
@@ -92,39 +94,72 @@ const authStates = new Map();
 // Endpoint to trigger data collection and serve latest LLM analysis responses
 app.get('/api/latest-responses', async (req, res) => {
   try {
-    logger.info('🎯 API request received - starting data collection and analysis');    // Import DataFetcher class
-    const DataFetcher = require('./dataFetcher');
-    const fetcher = new DataFetcher();
+    // Check if data fetcher is already running using database
+    const fetcherState = await getDataFetcherState();
     
-    // Initialize and run complete data collection and analysis process
-    await fetcher.initialize();
-    await fetcher.executeOnce();
-    
-    // Get the latest results after processing
-    const latestResults = await getLatestLLMAnalysisResults();
-    
-    if (!latestResults) {
-      return res.status(404).json({ 
-        error: 'No analysis results found after processing',
-        generated_at: new Date().toLocaleString('en-IN', {
-          timeZone: 'Asia/Kolkata',
-          day: '2-digit',
-          month: '2-digit', 
-          year: 'numeric',
-          hour: '2-digit',
-          minute: '2-digit',
-          second: '2-digit',
-          hour12: false
-        }).replace(/(\d{2})\/(\d{2})\/(\d{4}), (\d{2}):(\d{2}):(\d{2})/, '$1/$2/$3, $4:$5:$6'),
-        total_responses: 0,
-        responses: []
+    if (fetcherState.isRunning) {
+      const runningDuration = fetcherState.startTime ? 
+        Math.round((Date.now() - new Date(fetcherState.startTime).getTime()) / 1000) : 0;
+      
+      logger.info(`🔄 API request ignored - data collection already in progress (running for ${runningDuration}s)`);
+      
+      return res.status(202).json({
+        message: 'Data collection is already in progress',
+        status: 'processing',
+        started_at: fetcherState.startTime ? new Date(fetcherState.startTime).toISOString() : null,
+        running_duration_seconds: runningDuration,
+        suggestion: 'Please wait for the current process to complete or use /api/mongodb-latest-responses for cached results'
       });
     }
+
+    // Set running state in database
+    const startTime = Date.now();
+    await setDataFetcherRunning(true, startTime);
     
-    logger.info('✅ Data collection and analysis completed successfully');
-    res.json(latestResults);
+    logger.info('🎯 API request received - starting data collection and analysis');
+
+    try {
+      // Import DataFetcher class
+      const DataFetcher = require('./dataFetcher');
+      const fetcher = new DataFetcher();
+      
+      // Initialize and run complete data collection and analysis process
+      await fetcher.initialize();
+      await fetcher.executeOnce();
+      
+      // Get the latest results after processing
+      const latestResults = await getLatestLLMAnalysisResults();
+      
+      if (!latestResults) {
+        return res.status(404).json({ 
+          error: 'No analysis results found after processing',
+          generated_at: new Date().toLocaleString('en-IN', {
+            timeZone: 'Asia/Kolkata',
+            day: '2-digit',
+            month: '2-digit', 
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false
+          }).replace(/(\d{2})\/(\d{2})\/(\d{4}), (\d{2}):(\d{2}):(\d{2})/, '$1/$2/$3, $4:$5:$6'),
+          total_responses: 0,
+          responses: []
+        });
+      }
+      
+      logger.info('✅ Data collection and analysis completed successfully');
+      res.json(latestResults);
+      
+    } finally {
+      // Always reset running state in database
+      await setDataFetcherRunning(false);
+    }
     
   } catch (error) {
+    // Reset running state on error
+    await setDataFetcherRunning(false);
+    
     logger.error('❌ Error during data collection and analysis:', error);
     res.status(500).json({ 
       error: 'Failed to complete data collection and analysis',
