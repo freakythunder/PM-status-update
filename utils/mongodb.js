@@ -610,8 +610,20 @@ async function getAllLLMAnalysisResults(limit = 20) {
   }
 }
 
+// System State Schema for data fetcher tracking
+const systemStateSchema = new mongoose.Schema({
+  key: { type: String, required: true, unique: true },
+  isRunning: { type: Boolean, default: false },
+  startTime: { type: Date },
+  lastUpdated: { type: Date, default: Date.now }
+});
+
+const SystemState = mongoose.model('SystemState', systemStateSchema);
+
 // Data Fetcher State Management
 async function setDataFetcherRunning(isRunning, startTime = null) {
+  await connectToMongoDB();
+  
   try {
     const state = {
       isRunning,
@@ -619,7 +631,7 @@ async function setDataFetcherRunning(isRunning, startTime = null) {
       lastUpdated: new Date()
     };
     
-    await db.collection('system_state').updateOne(
+    await SystemState.updateOne(
       { key: 'data_fetcher' },
       { $set: state },
       { upsert: true }
@@ -633,8 +645,10 @@ async function setDataFetcherRunning(isRunning, startTime = null) {
 }
 
 async function getDataFetcherState() {
+  await connectToMongoDB();
+  
   try {
-    const state = await db.collection('system_state').findOne({ key: 'data_fetcher' });
+    const state = await SystemState.findOne({ key: 'data_fetcher' });
     
     if (!state) {
       return { isRunning: false, startTime: null };
@@ -662,12 +676,12 @@ async function getDataFetcherState() {
   }
 }
 
-module.exports = {
-  connectToMongoDB,
+module.exports = {  connectToMongoDB,
   User,
   GmailMessage,
   ChatMessage,
   LLMAnalysisResult,
+  SystemState,
   mongoose,
   getLocalDate,
   toLocalDate,
