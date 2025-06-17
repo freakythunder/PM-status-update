@@ -167,3 +167,84 @@
 {"level":"info","message":"Analyzing space: Garima Srivastava (spaces/7ZdKb8AAAAE)","timestamp":"2025-06-16 12:51:05"}
 {"level":"info","message":"Analyzing space: Gokul Sundar (spaces/7kDoH8AAAAE)","timestamp":"2025-06-16 12:51:11"}
 {"level":"info","message":"Analyzing space: Varunprasad S (spaces/8Z7Bn8AAAAE)","timestamp":"2025-06-16 12:51:18"}
+{"level":"info","message":"🤖 Starting LLM analysis for response prediction","timestamp":"2025-06-17 09:58:56"}
+{"level":"info","message":"Found 23 spaces where Aditya participates","timestamp":"2025-06-17 09:58:56"}
+{"level":"info","message":"Analyzing space: DSU Implementation (spaces/AAAA_c9OGqI)","timestamp":"2025-06-17 09:58:56"}
+{"level":"info","message":"Analyzing space: Sajin Abishek (spaces/j-WbN8AAAAE)","timestamp":"2025-06-17 09:59:01"}
+{"level":"info","message":"Analyzing space: Jennifer Immanuale (spaces/0C9xt8AAAAE)","timestamp":"2025-06-17 09:59:08"}
+{"level":"info","message":"Analyzing space: Shruthi M G (spaces/nUSCd8AAAAE)","timestamp":"2025-06-17 09:59:14"}
+{"level":"info","message":"Analyzing space: Sharanya (spaces/hJWSd8AAAAE)","timestamp":"2025-06-17 09:59:21"}
+{"level":"info","message":"Analyzing space: Rubina Atwal (spaces/kHt0N8AAAAE)","timestamp":"2025-06-17 09:59:28"}
+{"level":"info","message":"Analyzing space: Shiva Raghavendra Nandigam (spaces/nsovn8AAAAE)","timestamp":"2025-06-17 09:59:36"}
+{"level":"info","message":"Analyzing space: Climaty.ai (spaces/AAAA1zbyU00)","timestamp":"2025-06-17 09:59:46"}
+{"level":"info","message":"Analyzing space: Malini T L (spaces/xSd1H8AAAAE)","timestamp":"2025-06-17 09:59:49"}
+{"level":"info","message":"Analyzing space: Govardhana Kemmathiruman (spaces/v59oD8AAAAE)","timestamp":"2025-06-17 09:59:57"}
+{"level":"info","message":"Analyzing space: Garima Srivastava (spaces/7ZdKb8AAAAE)","timestamp":"2025-06-17 10:00:05"}
+{"level":"info","message":"Analyzing space: Gokul Sundar (spaces/7kDoH8AAAAE)","timestamp":"2025-06-17 10:00:09"}
+{"level":"info","message":"Analyzing space: Varunprasad S (spaces/8Z7Bn8AAAAE)","timestamp":"2025-06-17 10:00:19"}
+{"level":"info","message":"Analyzing space: Jayanti Kumari (spaces/__TsN8AAAAE)","timestamp":"2025-06-17 10:00:24"}
+{"level":"info","message":"Analyzing space: Jahnavi Jainwal (spaces/4TINH8AAAAE)","timestamp":"2025-06-17 10:00:30"}
+{"level":"info","message":"Analyzing space: Sanchith Reddy (spaces/u4sSH8AAAAE)","timestamp":"2025-06-17 10:00:46"}
+{"level":"info","message":"Analyzing space: Krishan Agarwal (spaces/wfSab8AAAAE)","timestamp":"2025-06-17 10:00:55"}
+{"level":"info","message":"Analyzing space: Kishore Rajendra (spaces/gsJ3b8AAAAE)","timestamp":"2025-06-17 10:01:02"}
+{"level":"info","message":"Analyzing space: Gokul D M (spaces/tapfb8AAAAE)","timestamp":"2025-06-17 10:01:09"}
+{"level":"info","message":"Analyzing space: Siddhesh Patil (spaces/_Odnb8AAAAE)","timestamp":"2025-06-17 10:01:12"}
+{"level":"info","message":"Analyzing space: Group Chat (spaces/AAQAErUzKLU)","timestamp":"2025-06-17 10:01:17"}
+{"level":"info","message":"Analyzing space: Tom Antony (spaces/3nL3d8AAAAE)","timestamp":"2025-06-17 10:01:35"}
+{"level":"info","message":"Analyzing space: Jaffrina Joseph (spaces/6IEcN8AAAAE)","timestamp":"2025-06-17 10:01:56"}
+{"level":"info","message":"✅ 4 suggested responses saved to MongoDB","timestamp":"2025-06-17 10:02:06"}
+{"level":"info","message":"✅ LLM analysis completed successfully. Found 4 responses needed","timestamp":"2025-06-17 10:02:06"}
+{"level":"info","message":"🤖 Starting LLM analysis for response prediction","timestamp":"2025-06-17 10:30:37"}
+{"level":"info","message":"Found 23 spaces where Aditya participates","timestamp":"2025-06-17 10:30:37"}
+{"level":"info","message":"Analyzing space: DSU Implementation (spaces/AAAA_c9OGqI)","timestamp":"2025-06-17 10:30:37"}
+{"level":"info","message":"Analyzing space: Sajin Abishek (spaces/j-WbN8AAAAE)","timestamp":"2025-06-17 10:30:42"}
+{"level":"info","message":"Analyzing space: Jennifer Immanuale (spaces/0C9xt8AAAAE)","timestamp":"2025-06-17 10:30:46"}
+{"level":"info","message":"Analyzing space: Shruthi M G (spaces/nUSCd8AAAAE)","timestamp":"2025-06-17 10:30:56"}
+{"level":"info","message":"Analyzing space: Sharanya (spaces/hJWSd8AAAAE)","timestamp":"2025-06-17 10:31:02"}
+{"level":"info","message":"Analyzing space: Rubina Atwal (spaces/kHt0N8AAAAE)","timestamp":"2025-06-17 10:31:08"}
+{"level":"info","message":"Analyzing space: Shiva Raghavendra Nandigam (spaces/nsovn8AAAAE)","timestamp":"2025-06-17 10:31:21"}
+{"level":"info","message":"Analyzing space: Climaty.ai (spaces/AAAA1zbyU00)","timestamp":"2025-06-17 10:31:27"}
+{"level":"info","message":"Analyzing space: Malini T L (spaces/xSd1H8AAAAE)","timestamp":"2025-06-17 10:31:38"}
+{"level":"info","message":"Analyzing space: Govardhana Kemmathiruman (spaces/v59oD8AAAAE)","timestamp":"2025-06-17 10:31:45"}
+{"level":"info","message":"Analyzing space: Garima Srivastava (spaces/7ZdKb8AAAAE)","timestamp":"2025-06-17 10:31:48"}
+{"level":"info","message":"Analyzing space: Gokul Sundar (spaces/7kDoH8AAAAE)","timestamp":"2025-06-17 10:31:57"}
+{"level":"info","message":"Analyzing space: Varunprasad S (spaces/8Z7Bn8AAAAE)","timestamp":"2025-06-17 10:32:01"}
+{"level":"info","message":"Analyzing space: Jayanti Kumari (spaces/__TsN8AAAAE)","timestamp":"2025-06-17 10:32:08"}
+{"level":"info","message":"Analyzing space: Jahnavi Jainwal (spaces/4TINH8AAAAE)","timestamp":"2025-06-17 10:32:13"}
+{"level":"info","message":"Analyzing space: Sanchith Reddy (spaces/u4sSH8AAAAE)","timestamp":"2025-06-17 10:32:20"}
+{"level":"info","message":"Analyzing space: Krishan Agarwal (spaces/wfSab8AAAAE)","timestamp":"2025-06-17 10:32:28"}
+{"level":"info","message":"Analyzing space: Kishore Rajendra (spaces/gsJ3b8AAAAE)","timestamp":"2025-06-17 10:32:33"}
+{"level":"info","message":"Analyzing space: Gokul D M (spaces/tapfb8AAAAE)","timestamp":"2025-06-17 10:32:40"}
+{"level":"info","message":"Analyzing space: Siddhesh Patil (spaces/_Odnb8AAAAE)","timestamp":"2025-06-17 10:32:48"}
+{"level":"info","message":"Analyzing space: Group Chat (spaces/AAQAErUzKLU)","timestamp":"2025-06-17 10:32:51"}
+{"level":"info","message":"Analyzing space: Tom Antony (spaces/3nL3d8AAAAE)","timestamp":"2025-06-17 10:32:54"}
+{"level":"info","message":"Analyzing space: Jaffrina Joseph (spaces/6IEcN8AAAAE)","timestamp":"2025-06-17 10:32:58"}
+{"level":"info","message":"✅ 4 suggested responses saved to MongoDB","timestamp":"2025-06-17 10:33:04"}
+{"level":"info","message":"✅ LLM analysis completed successfully. Found 4 responses needed","timestamp":"2025-06-17 10:33:04"}
+{"level":"info","message":"🤖 Starting LLM analysis for response prediction","timestamp":"2025-06-17 10:44:39"}
+{"level":"info","message":"Found 23 spaces where Aditya participates","timestamp":"2025-06-17 10:44:39"}
+{"level":"info","message":"Analyzing space: DSU Implementation (spaces/AAAA_c9OGqI)","timestamp":"2025-06-17 10:44:39"}
+{"level":"info","message":"Analyzing space: Sajin Abishek (spaces/j-WbN8AAAAE)","timestamp":"2025-06-17 10:44:43"}
+{"level":"info","message":"Analyzing space: Jennifer Immanuale (spaces/0C9xt8AAAAE)","timestamp":"2025-06-17 10:44:51"}
+{"level":"info","message":"Analyzing space: Shruthi M G (spaces/nUSCd8AAAAE)","timestamp":"2025-06-17 10:44:59"}
+{"level":"info","message":"Analyzing space: Sharanya (spaces/hJWSd8AAAAE)","timestamp":"2025-06-17 10:45:07"}
+{"level":"info","message":"Analyzing space: Rubina Atwal (spaces/kHt0N8AAAAE)","timestamp":"2025-06-17 10:45:14"}
+{"level":"info","message":"Analyzing space: Shiva Raghavendra Nandigam (spaces/nsovn8AAAAE)","timestamp":"2025-06-17 10:45:22"}
+{"level":"info","message":"Analyzing space: Climaty.ai (spaces/AAAA1zbyU00)","timestamp":"2025-06-17 10:45:31"}
+{"level":"info","message":"Analyzing space: Malini T L (spaces/xSd1H8AAAAE)","timestamp":"2025-06-17 10:45:33"}
+{"level":"info","message":"Analyzing space: Govardhana Kemmathiruman (spaces/v59oD8AAAAE)","timestamp":"2025-06-17 10:45:44"}
+{"level":"info","message":"Analyzing space: Garima Srivastava (spaces/7ZdKb8AAAAE)","timestamp":"2025-06-17 10:45:47"}
+{"level":"info","message":"Analyzing space: Gokul Sundar (spaces/7kDoH8AAAAE)","timestamp":"2025-06-17 10:45:55"}
+{"level":"info","message":"Analyzing space: Varunprasad S (spaces/8Z7Bn8AAAAE)","timestamp":"2025-06-17 10:46:02"}
+{"level":"info","message":"Analyzing space: Jayanti Kumari (spaces/__TsN8AAAAE)","timestamp":"2025-06-17 10:46:17"}
+{"level":"info","message":"Analyzing space: Jahnavi Jainwal (spaces/4TINH8AAAAE)","timestamp":"2025-06-17 10:46:22"}
+{"level":"info","message":"Analyzing space: Sanchith Reddy (spaces/u4sSH8AAAAE)","timestamp":"2025-06-17 10:46:27"}
+{"level":"info","message":"Analyzing space: Krishan Agarwal (spaces/wfSab8AAAAE)","timestamp":"2025-06-17 10:46:35"}
+{"level":"info","message":"Analyzing space: Kishore Rajendra (spaces/gsJ3b8AAAAE)","timestamp":"2025-06-17 10:46:45"}
+{"level":"info","message":"Analyzing space: Gokul D M (spaces/tapfb8AAAAE)","timestamp":"2025-06-17 10:46:51"}
+{"level":"info","message":"Analyzing space: Siddhesh Patil (spaces/_Odnb8AAAAE)","timestamp":"2025-06-17 10:46:56"}
+{"level":"info","message":"Analyzing space: Group Chat (spaces/AAQAErUzKLU)","timestamp":"2025-06-17 10:46:59"}
+{"level":"info","message":"Analyzing space: Tom Antony (spaces/3nL3d8AAAAE)","timestamp":"2025-06-17 10:47:03"}
+{"level":"info","message":"Analyzing space: Jaffrina Joseph (spaces/6IEcN8AAAAE)","timestamp":"2025-06-17 10:47:12"}
+{"level":"info","message":"✅ 3 suggested responses saved to MongoDB","timestamp":"2025-06-17 10:47:22"}
+{"level":"info","message":"✅ LLM analysis completed successfully. Found 3 responses needed","timestamp":"2025-06-17 10:47:22"}

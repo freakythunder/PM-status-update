@@ -1261,3 +1261,477 @@
 {"level":"info","message":"Gmail data collection completed for aditya.r@turbostart.co: 0 messages stored (incremental).","timestamp":"2025-06-16 12:49:58"}
 {"level":"info","message":"✅ Data collection cycle completed successfully","timestamp":"2025-06-16 12:49:58"}
 {"level":"info","message":"🤖 Starting LLM analysis for response prediction","timestamp":"2025-06-16 12:49:58"}
+{"level":"info","message":"✅ DataFetcher initialized successfully","timestamp":"2025-06-17 09:58:39"}
+{"level":"info","message":"🎯 Starting on-demand data collection and analysis","timestamp":"2025-06-17 09:58:39"}
+{"level":"info","message":"🚀 Starting data collection cycle","timestamp":"2025-06-17 09:58:39"}
+{"level":"info","message":"Found 1 active users for data collection","timestamp":"2025-06-17 09:58:39"}
+{"level":"info","message":"Processing user: aditya.r@turbostart.co","timestamp":"2025-06-17 09:58:39"}
+{"level":"info","message":"Collecting Chat data for aditya.r@turbostart.co","timestamp":"2025-06-17 09:58:39"}
+{"level":"info","message":"Loaded 23 Chat spaces from JSON file for aditya.r@turbostart.co","timestamp":"2025-06-17 09:58:39"}
+{"level":"info","message":"Processing space: DSU Implementation","timestamp":"2025-06-17 09:58:39"}
+{"level":"info","message":"Incremental fetch for space DSU Implementation: messages after 2025-06-16T06:09:38.718Z","timestamp":"2025-06-17 09:58:39"}
+{"level":"info","message":"Fetched 15 messages from space DSU Implementation (page 1)","timestamp":"2025-06-17 09:58:40"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 09:58:40"}
+{"level":"info","message":"Updated space spaces/AAAA_c9OGqI with new message time: 2025-06-16T17:36:46.498Z","timestamp":"2025-06-17 09:58:40"}
+{"level":"info","message":"Finished processing space DSU Implementation, 15 new messages found","timestamp":"2025-06-17 09:58:40"}
+{"level":"info","message":"Processing space: Sajin Abishek","timestamp":"2025-06-17 09:58:40"}
+{"level":"info","message":"Incremental fetch for space Sajin Abishek: messages after 2025-06-11T07:41:00.684Z","timestamp":"2025-06-17 09:58:40"}
+{"level":"info","message":"Fetched 0 messages from space Sajin Abishek (page 1)","timestamp":"2025-06-17 09:58:41"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 09:58:41"}
+{"level":"info","message":"Updated space spaces/j-WbN8AAAAE with new message time: 2025-06-11T07:41:00.683Z","timestamp":"2025-06-17 09:58:41"}
+{"level":"info","message":"Finished processing space Sajin Abishek, 0 new messages found","timestamp":"2025-06-17 09:58:41"}
+{"level":"info","message":"Processing space: Jennifer Immanuale","timestamp":"2025-06-17 09:58:41"}
+{"level":"info","message":"Incremental fetch for space Jennifer Immanuale: messages after 2025-06-13T13:01:48.463Z","timestamp":"2025-06-17 09:58:41"}
+{"level":"info","message":"Fetched 0 messages from space Jennifer Immanuale (page 1)","timestamp":"2025-06-17 09:58:41"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 09:58:41"}
+{"level":"info","message":"Updated space spaces/0C9xt8AAAAE with new message time: 2025-06-13T13:01:48.462Z","timestamp":"2025-06-17 09:58:41"}
+{"level":"info","message":"Finished processing space Jennifer Immanuale, 0 new messages found","timestamp":"2025-06-17 09:58:41"}
+{"level":"info","message":"Processing space: Shruthi M G","timestamp":"2025-06-17 09:58:41"}
+{"level":"info","message":"Incremental fetch for space Shruthi M G: messages after 2025-06-16T04:52:24.824Z","timestamp":"2025-06-17 09:58:41"}
+{"level":"info","message":"Fetched 0 messages from space Shruthi M G (page 1)","timestamp":"2025-06-17 09:58:42"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 09:58:42"}
+{"level":"info","message":"Updated space spaces/nUSCd8AAAAE with new message time: 2025-06-16T04:52:24.823Z","timestamp":"2025-06-17 09:58:42"}
+{"level":"info","message":"Finished processing space Shruthi M G, 0 new messages found","timestamp":"2025-06-17 09:58:42"}
+{"level":"info","message":"Processing space: Sharanya","timestamp":"2025-06-17 09:58:42"}
+{"level":"info","message":"Incremental fetch for space Sharanya: messages after 2025-06-02T09:28:18.678Z","timestamp":"2025-06-17 09:58:42"}
+{"level":"info","message":"Fetched 0 messages from space Sharanya (page 1)","timestamp":"2025-06-17 09:58:42"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 09:58:42"}
+{"level":"info","message":"Updated space spaces/hJWSd8AAAAE with new message time: 2025-06-02T09:28:18.677Z","timestamp":"2025-06-17 09:58:42"}
+{"level":"info","message":"Finished processing space Sharanya, 0 new messages found","timestamp":"2025-06-17 09:58:42"}
+{"level":"info","message":"Processing space: Rubina Atwal","timestamp":"2025-06-17 09:58:42"}
+{"level":"info","message":"Incremental fetch for space Rubina Atwal: messages after 2025-06-16T05:04:20.982Z","timestamp":"2025-06-17 09:58:42"}
+{"level":"info","message":"Fetched 0 messages from space Rubina Atwal (page 1)","timestamp":"2025-06-17 09:58:43"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 09:58:43"}
+{"level":"info","message":"Updated space spaces/kHt0N8AAAAE with new message time: 2025-06-16T05:04:20.981Z","timestamp":"2025-06-17 09:58:43"}
+{"level":"info","message":"Finished processing space Rubina Atwal, 0 new messages found","timestamp":"2025-06-17 09:58:43"}
+{"level":"info","message":"Processing space: Shiva Raghavendra Nandigam","timestamp":"2025-06-17 09:58:43"}
+{"level":"info","message":"Incremental fetch for space Shiva Raghavendra Nandigam: messages after 2025-06-12T06:47:26.669Z","timestamp":"2025-06-17 09:58:43"}
+{"level":"info","message":"Fetched 0 messages from space Shiva Raghavendra Nandigam (page 1)","timestamp":"2025-06-17 09:58:44"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 09:58:44"}
+{"level":"info","message":"Updated space spaces/nsovn8AAAAE with new message time: 2025-06-12T06:47:26.668Z","timestamp":"2025-06-17 09:58:44"}
+{"level":"info","message":"Finished processing space Shiva Raghavendra Nandigam, 0 new messages found","timestamp":"2025-06-17 09:58:44"}
+{"level":"info","message":"Processing space: Climaty.ai","timestamp":"2025-06-17 09:58:44"}
+{"level":"info","message":"Incremental fetch for space Climaty.ai: messages after 2025-06-12T17:11:56.516Z","timestamp":"2025-06-17 09:58:44"}
+{"level":"info","message":"Fetched 1 messages from space Climaty.ai (page 1)","timestamp":"2025-06-17 09:58:44"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 09:58:44"}
+{"level":"info","message":"Updated space spaces/AAAA1zbyU00 with new message time: 2025-06-16T09:42:47.549Z","timestamp":"2025-06-17 09:58:44"}
+{"level":"info","message":"Finished processing space Climaty.ai, 1 new messages found","timestamp":"2025-06-17 09:58:44"}
+{"level":"info","message":"Processing space: Malini T L","timestamp":"2025-06-17 09:58:44"}
+{"level":"info","message":"Incremental fetch for space Malini T L: messages after 2025-06-06T07:23:01.293Z","timestamp":"2025-06-17 09:58:44"}
+{"level":"info","message":"Fetched 0 messages from space Malini T L (page 1)","timestamp":"2025-06-17 09:58:45"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 09:58:45"}
+{"level":"info","message":"Updated space spaces/xSd1H8AAAAE with new message time: 2025-06-06T07:23:01.292Z","timestamp":"2025-06-17 09:58:45"}
+{"level":"info","message":"Finished processing space Malini T L, 0 new messages found","timestamp":"2025-06-17 09:58:45"}
+{"level":"info","message":"Processing space: Govardhana Kemmathiruman","timestamp":"2025-06-17 09:58:45"}
+{"level":"info","message":"Incremental fetch for space Govardhana Kemmathiruman: messages after 2025-06-12T07:17:45.489Z","timestamp":"2025-06-17 09:58:45"}
+{"level":"info","message":"Fetched 0 messages from space Govardhana Kemmathiruman (page 1)","timestamp":"2025-06-17 09:58:45"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 09:58:45"}
+{"level":"info","message":"Updated space spaces/v59oD8AAAAE with new message time: 2025-06-12T07:17:45.488Z","timestamp":"2025-06-17 09:58:45"}
+{"level":"info","message":"Finished processing space Govardhana Kemmathiruman, 0 new messages found","timestamp":"2025-06-17 09:58:45"}
+{"level":"info","message":"Processing space: Garima Srivastava","timestamp":"2025-06-17 09:58:45"}
+{"level":"info","message":"Incremental fetch for space Garima Srivastava: messages after 2025-05-30T05:32:12.671Z","timestamp":"2025-06-17 09:58:45"}
+{"level":"info","message":"Fetched 0 messages from space Garima Srivastava (page 1)","timestamp":"2025-06-17 09:58:46"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 09:58:46"}
+{"level":"info","message":"Updated space spaces/7ZdKb8AAAAE with new message time: 2025-05-30T05:32:12.670Z","timestamp":"2025-06-17 09:58:46"}
+{"level":"info","message":"Finished processing space Garima Srivastava, 0 new messages found","timestamp":"2025-06-17 09:58:46"}
+{"level":"info","message":"Processing space: Gokul Sundar","timestamp":"2025-06-17 09:58:46"}
+{"level":"info","message":"Incremental fetch for space Gokul Sundar: messages after 2025-05-29T12:39:41.101Z","timestamp":"2025-06-17 09:58:46"}
+{"level":"info","message":"Fetched 0 messages from space Gokul Sundar (page 1)","timestamp":"2025-06-17 09:58:47"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 09:58:47"}
+{"level":"info","message":"Updated space spaces/7kDoH8AAAAE with new message time: 2025-05-29T12:39:41.100Z","timestamp":"2025-06-17 09:58:47"}
+{"level":"info","message":"Finished processing space Gokul Sundar, 0 new messages found","timestamp":"2025-06-17 09:58:47"}
+{"level":"info","message":"Processing space: Varunprasad S","timestamp":"2025-06-17 09:58:47"}
+{"level":"info","message":"Incremental fetch for space Varunprasad S: messages after 2025-06-11T14:33:10.118Z","timestamp":"2025-06-17 09:58:47"}
+{"level":"info","message":"Fetched 5 messages from space Varunprasad S (page 1)","timestamp":"2025-06-17 09:58:47"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 09:58:47"}
+{"level":"info","message":"Updated space spaces/8Z7Bn8AAAAE with new message time: 2025-06-16T09:20:01.044Z","timestamp":"2025-06-17 09:58:47"}
+{"level":"info","message":"Finished processing space Varunprasad S, 5 new messages found","timestamp":"2025-06-17 09:58:47"}
+{"level":"info","message":"Processing space: Jayanti Kumari","timestamp":"2025-06-17 09:58:47"}
+{"level":"info","message":"Incremental fetch for space Jayanti Kumari: messages after 2025-06-11T07:44:52.578Z","timestamp":"2025-06-17 09:58:47"}
+{"level":"info","message":"Fetched 0 messages from space Jayanti Kumari (page 1)","timestamp":"2025-06-17 09:58:48"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 09:58:48"}
+{"level":"info","message":"Updated space spaces/__TsN8AAAAE with new message time: 2025-06-11T07:44:52.577Z","timestamp":"2025-06-17 09:58:48"}
+{"level":"info","message":"Finished processing space Jayanti Kumari, 0 new messages found","timestamp":"2025-06-17 09:58:48"}
+{"level":"info","message":"Processing space: Jahnavi Jainwal","timestamp":"2025-06-17 09:58:48"}
+{"level":"info","message":"Incremental fetch for space Jahnavi Jainwal: messages after 2025-06-04T07:52:58.510Z","timestamp":"2025-06-17 09:58:48"}
+{"level":"info","message":"Fetched 0 messages from space Jahnavi Jainwal (page 1)","timestamp":"2025-06-17 09:58:48"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 09:58:48"}
+{"level":"info","message":"Updated space spaces/4TINH8AAAAE with new message time: 2025-06-04T07:52:58.509Z","timestamp":"2025-06-17 09:58:48"}
+{"level":"info","message":"Finished processing space Jahnavi Jainwal, 0 new messages found","timestamp":"2025-06-17 09:58:48"}
+{"level":"info","message":"Processing space: Sanchith Reddy","timestamp":"2025-06-17 09:58:48"}
+{"level":"info","message":"Incremental fetch for space Sanchith Reddy: messages after 2025-05-26T11:13:07.920Z","timestamp":"2025-06-17 09:58:48"}
+{"level":"info","message":"Fetched 0 messages from space Sanchith Reddy (page 1)","timestamp":"2025-06-17 09:58:49"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 09:58:49"}
+{"level":"info","message":"Updated space spaces/u4sSH8AAAAE with new message time: 2025-05-26T11:13:07.919Z","timestamp":"2025-06-17 09:58:49"}
+{"level":"info","message":"Finished processing space Sanchith Reddy, 0 new messages found","timestamp":"2025-06-17 09:58:49"}
+{"level":"info","message":"Processing space: Krishan Agarwal","timestamp":"2025-06-17 09:58:49"}
+{"level":"info","message":"Incremental fetch for space Krishan Agarwal: messages after 2025-05-26T06:53:28.881Z","timestamp":"2025-06-17 09:58:49"}
+{"level":"info","message":"Fetched 0 messages from space Krishan Agarwal (page 1)","timestamp":"2025-06-17 09:58:50"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 09:58:50"}
+{"level":"info","message":"Updated space spaces/wfSab8AAAAE with new message time: 2025-05-26T06:53:28.880Z","timestamp":"2025-06-17 09:58:50"}
+{"level":"info","message":"Finished processing space Krishan Agarwal, 0 new messages found","timestamp":"2025-06-17 09:58:50"}
+{"level":"info","message":"Processing space: Kishore Rajendra","timestamp":"2025-06-17 09:58:50"}
+{"level":"info","message":"Incremental fetch for space Kishore Rajendra: messages after 2025-05-23T10:57:51.912Z","timestamp":"2025-06-17 09:58:50"}
+{"level":"info","message":"Fetched 0 messages from space Kishore Rajendra (page 1)","timestamp":"2025-06-17 09:58:50"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 09:58:50"}
+{"level":"info","message":"Updated space spaces/gsJ3b8AAAAE with new message time: 2025-05-23T10:57:51.911Z","timestamp":"2025-06-17 09:58:50"}
+{"level":"info","message":"Finished processing space Kishore Rajendra, 0 new messages found","timestamp":"2025-06-17 09:58:50"}
+{"level":"info","message":"Processing space: Gokul D M","timestamp":"2025-06-17 09:58:50"}
+{"level":"info","message":"Incremental fetch for space Gokul D M: messages after 2025-05-22T10:41:41.952Z","timestamp":"2025-06-17 09:58:50"}
+{"level":"info","message":"Fetched 0 messages from space Gokul D M (page 1)","timestamp":"2025-06-17 09:58:51"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 09:58:51"}
+{"level":"info","message":"Updated space spaces/tapfb8AAAAE with new message time: 2025-05-22T10:41:41.951Z","timestamp":"2025-06-17 09:58:51"}
+{"level":"info","message":"Finished processing space Gokul D M, 0 new messages found","timestamp":"2025-06-17 09:58:51"}
+{"level":"info","message":"Processing space: Siddhesh Patil","timestamp":"2025-06-17 09:58:51"}
+{"level":"info","message":"Incremental fetch for space Siddhesh Patil: messages after 2025-05-22T07:46:01.997Z","timestamp":"2025-06-17 09:58:51"}
+{"level":"info","message":"Fetched 0 messages from space Siddhesh Patil (page 1)","timestamp":"2025-06-17 09:58:52"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 09:58:52"}
+{"level":"info","message":"Updated space spaces/_Odnb8AAAAE with new message time: 2025-05-22T07:46:01.996Z","timestamp":"2025-06-17 09:58:52"}
+{"level":"info","message":"Finished processing space Siddhesh Patil, 0 new messages found","timestamp":"2025-06-17 09:58:52"}
+{"level":"info","message":"Processing space: Group Chat","timestamp":"2025-06-17 09:58:52"}
+{"level":"info","message":"Incremental fetch for space Group Chat: messages after 2025-05-09T05:44:44.641Z","timestamp":"2025-06-17 09:58:52"}
+{"level":"info","message":"Fetched 0 messages from space Group Chat (page 1)","timestamp":"2025-06-17 09:58:52"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 09:58:52"}
+{"level":"info","message":"Updated space spaces/AAQAErUzKLU with new message time: 2025-05-09T05:44:44.640Z","timestamp":"2025-06-17 09:58:52"}
+{"level":"info","message":"Finished processing space Group Chat, 0 new messages found","timestamp":"2025-06-17 09:58:52"}
+{"level":"info","message":"Processing space: Tom Antony","timestamp":"2025-06-17 09:58:52"}
+{"level":"info","message":"Incremental fetch for space Tom Antony: messages after 2025-05-08T11:44:45.120Z","timestamp":"2025-06-17 09:58:52"}
+{"level":"info","message":"Fetched 0 messages from space Tom Antony (page 1)","timestamp":"2025-06-17 09:58:53"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 09:58:53"}
+{"level":"info","message":"Updated space spaces/3nL3d8AAAAE with new message time: 2025-05-08T11:44:45.119Z","timestamp":"2025-06-17 09:58:53"}
+{"level":"info","message":"Finished processing space Tom Antony, 0 new messages found","timestamp":"2025-06-17 09:58:53"}
+{"level":"info","message":"Processing space: Jaffrina Joseph","timestamp":"2025-06-17 09:58:53"}
+{"level":"info","message":"Incremental fetch for space Jaffrina Joseph: messages after 2025-06-13T08:20:10.234Z","timestamp":"2025-06-17 09:58:53"}
+{"level":"info","message":"Fetched 0 messages from space Jaffrina Joseph (page 1)","timestamp":"2025-06-17 09:58:54"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 09:58:54"}
+{"level":"info","message":"Updated space spaces/6IEcN8AAAAE with new message time: 2025-06-13T08:20:10.233Z","timestamp":"2025-06-17 09:58:54"}
+{"level":"info","message":"Finished processing space Jaffrina Joseph, 0 new messages found","timestamp":"2025-06-17 09:58:54"}
+{"level":"info","message":"Stored 0 chat messages for aditya.r@turbostart.co","timestamp":"2025-06-17 09:58:54"}
+{"level":"info","message":"Chat data collection completed for aditya.r@turbostart.co: 0 messages from 23 spaces","timestamp":"2025-06-17 09:58:54"}
+{"level":"info","message":"Collecting Gmail data for aditya.r@turbostart.co","timestamp":"2025-06-17 09:58:54"}
+{"level":"info","message":"Incremental Gmail update for aditya.r@turbostart.co.","timestamp":"2025-06-17 09:58:54"}
+{"level":"info","message":"Fetching Gmail messages after 2025-06-17T04:19:41.741Z (timestamp: 1750133981)","timestamp":"2025-06-17 09:58:54"}
+{"level":"info","message":"No (more) Gmail messages found for query: 'after:1750133981' for aditya.r@turbostart.co.","timestamp":"2025-06-17 09:58:56"}
+{"level":"info","message":"No new Gmail messages to store for aditya.r@turbostart.co.","timestamp":"2025-06-17 09:58:56"}
+{"level":"info","message":"Gmail data collection completed for aditya.r@turbostart.co: 0 messages stored (incremental).","timestamp":"2025-06-17 09:58:56"}
+{"level":"info","message":"✅ Data collection cycle completed successfully","timestamp":"2025-06-17 09:58:56"}
+{"level":"info","message":"🤖 Starting LLM analysis for response prediction","timestamp":"2025-06-17 09:58:56"}
+{"level":"info","message":"✅ LLM analysis completed successfully","timestamp":"2025-06-17 10:02:06"}
+{"level":"info","message":"🔄 Data fetcher state reset in database","timestamp":"2025-06-17 10:02:07"}
+{"level":"info","message":"✅ On-demand data collection and analysis completed successfully","timestamp":"2025-06-17 10:02:07"}
+{"level":"info","message":"✅ DataFetcher initialized successfully","timestamp":"2025-06-17 10:30:21"}
+{"level":"info","message":"🎯 Starting on-demand data collection and analysis","timestamp":"2025-06-17 10:30:21"}
+{"level":"info","message":"🚀 Starting data collection cycle","timestamp":"2025-06-17 10:30:21"}
+{"level":"info","message":"Found 1 active users for data collection","timestamp":"2025-06-17 10:30:21"}
+{"level":"info","message":"Processing user: aditya.r@turbostart.co","timestamp":"2025-06-17 10:30:21"}
+{"level":"info","message":"Collecting Chat data for aditya.r@turbostart.co","timestamp":"2025-06-17 10:30:21"}
+{"level":"info","message":"Loaded 23 Chat spaces from JSON file for aditya.r@turbostart.co","timestamp":"2025-06-17 10:30:21"}
+{"level":"info","message":"Processing space: DSU Implementation","timestamp":"2025-06-17 10:30:21"}
+{"level":"info","message":"Incremental fetch for space DSU Implementation: messages after 2025-06-16T17:36:46.499Z","timestamp":"2025-06-17 10:30:21"}
+{"level":"info","message":"Fetched 0 messages from space DSU Implementation (page 1)","timestamp":"2025-06-17 10:30:22"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:30:22"}
+{"level":"info","message":"Updated space spaces/AAAA_c9OGqI with new message time: 2025-06-16T17:36:46.498Z","timestamp":"2025-06-17 10:30:22"}
+{"level":"info","message":"Finished processing space DSU Implementation, 0 new messages found","timestamp":"2025-06-17 10:30:22"}
+{"level":"info","message":"Processing space: Sajin Abishek","timestamp":"2025-06-17 10:30:22"}
+{"level":"info","message":"Incremental fetch for space Sajin Abishek: messages after 2025-06-11T07:41:00.684Z","timestamp":"2025-06-17 10:30:22"}
+{"level":"info","message":"Fetched 0 messages from space Sajin Abishek (page 1)","timestamp":"2025-06-17 10:30:23"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:30:23"}
+{"level":"info","message":"Updated space spaces/j-WbN8AAAAE with new message time: 2025-06-11T07:41:00.683Z","timestamp":"2025-06-17 10:30:23"}
+{"level":"info","message":"Finished processing space Sajin Abishek, 0 new messages found","timestamp":"2025-06-17 10:30:23"}
+{"level":"info","message":"Processing space: Jennifer Immanuale","timestamp":"2025-06-17 10:30:23"}
+{"level":"info","message":"Incremental fetch for space Jennifer Immanuale: messages after 2025-06-13T13:01:48.463Z","timestamp":"2025-06-17 10:30:23"}
+{"level":"info","message":"Fetched 0 messages from space Jennifer Immanuale (page 1)","timestamp":"2025-06-17 10:30:24"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:30:24"}
+{"level":"info","message":"Updated space spaces/0C9xt8AAAAE with new message time: 2025-06-13T13:01:48.462Z","timestamp":"2025-06-17 10:30:24"}
+{"level":"info","message":"Finished processing space Jennifer Immanuale, 0 new messages found","timestamp":"2025-06-17 10:30:24"}
+{"level":"info","message":"Processing space: Shruthi M G","timestamp":"2025-06-17 10:30:24"}
+{"level":"info","message":"Incremental fetch for space Shruthi M G: messages after 2025-06-16T04:52:24.824Z","timestamp":"2025-06-17 10:30:24"}
+{"level":"info","message":"Fetched 0 messages from space Shruthi M G (page 1)","timestamp":"2025-06-17 10:30:24"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:30:24"}
+{"level":"info","message":"Updated space spaces/nUSCd8AAAAE with new message time: 2025-06-16T04:52:24.823Z","timestamp":"2025-06-17 10:30:24"}
+{"level":"info","message":"Finished processing space Shruthi M G, 0 new messages found","timestamp":"2025-06-17 10:30:24"}
+{"level":"info","message":"Processing space: Sharanya","timestamp":"2025-06-17 10:30:24"}
+{"level":"info","message":"Incremental fetch for space Sharanya: messages after 2025-06-02T09:28:18.678Z","timestamp":"2025-06-17 10:30:24"}
+{"level":"info","message":"Fetched 0 messages from space Sharanya (page 1)","timestamp":"2025-06-17 10:30:25"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:30:25"}
+{"level":"info","message":"Updated space spaces/hJWSd8AAAAE with new message time: 2025-06-02T09:28:18.677Z","timestamp":"2025-06-17 10:30:25"}
+{"level":"info","message":"Finished processing space Sharanya, 0 new messages found","timestamp":"2025-06-17 10:30:25"}
+{"level":"info","message":"Processing space: Rubina Atwal","timestamp":"2025-06-17 10:30:25"}
+{"level":"info","message":"Incremental fetch for space Rubina Atwal: messages after 2025-06-16T05:04:20.982Z","timestamp":"2025-06-17 10:30:25"}
+{"level":"info","message":"Fetched 0 messages from space Rubina Atwal (page 1)","timestamp":"2025-06-17 10:30:25"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:30:25"}
+{"level":"info","message":"Updated space spaces/kHt0N8AAAAE with new message time: 2025-06-16T05:04:20.981Z","timestamp":"2025-06-17 10:30:25"}
+{"level":"info","message":"Finished processing space Rubina Atwal, 0 new messages found","timestamp":"2025-06-17 10:30:25"}
+{"level":"info","message":"Processing space: Shiva Raghavendra Nandigam","timestamp":"2025-06-17 10:30:25"}
+{"level":"info","message":"Incremental fetch for space Shiva Raghavendra Nandigam: messages after 2025-06-12T06:47:26.669Z","timestamp":"2025-06-17 10:30:25"}
+{"level":"info","message":"Fetched 0 messages from space Shiva Raghavendra Nandigam (page 1)","timestamp":"2025-06-17 10:30:26"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:30:26"}
+{"level":"info","message":"Updated space spaces/nsovn8AAAAE with new message time: 2025-06-12T06:47:26.668Z","timestamp":"2025-06-17 10:30:26"}
+{"level":"info","message":"Finished processing space Shiva Raghavendra Nandigam, 0 new messages found","timestamp":"2025-06-17 10:30:26"}
+{"level":"info","message":"Processing space: Climaty.ai","timestamp":"2025-06-17 10:30:26"}
+{"level":"info","message":"Incremental fetch for space Climaty.ai: messages after 2025-06-16T09:42:47.550Z","timestamp":"2025-06-17 10:30:26"}
+{"level":"info","message":"Fetched 0 messages from space Climaty.ai (page 1)","timestamp":"2025-06-17 10:30:26"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:30:26"}
+{"level":"info","message":"Updated space spaces/AAAA1zbyU00 with new message time: 2025-06-16T09:42:47.549Z","timestamp":"2025-06-17 10:30:26"}
+{"level":"info","message":"Finished processing space Climaty.ai, 0 new messages found","timestamp":"2025-06-17 10:30:26"}
+{"level":"info","message":"Processing space: Malini T L","timestamp":"2025-06-17 10:30:26"}
+{"level":"info","message":"Incremental fetch for space Malini T L: messages after 2025-06-06T07:23:01.293Z","timestamp":"2025-06-17 10:30:26"}
+{"level":"info","message":"Fetched 0 messages from space Malini T L (page 1)","timestamp":"2025-06-17 10:30:27"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:30:27"}
+{"level":"info","message":"Updated space spaces/xSd1H8AAAAE with new message time: 2025-06-06T07:23:01.292Z","timestamp":"2025-06-17 10:30:27"}
+{"level":"info","message":"Finished processing space Malini T L, 0 new messages found","timestamp":"2025-06-17 10:30:27"}
+{"level":"info","message":"Processing space: Govardhana Kemmathiruman","timestamp":"2025-06-17 10:30:27"}
+{"level":"info","message":"Incremental fetch for space Govardhana Kemmathiruman: messages after 2025-06-12T07:17:45.489Z","timestamp":"2025-06-17 10:30:27"}
+{"level":"info","message":"Fetched 0 messages from space Govardhana Kemmathiruman (page 1)","timestamp":"2025-06-17 10:30:28"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:30:28"}
+{"level":"info","message":"Updated space spaces/v59oD8AAAAE with new message time: 2025-06-12T07:17:45.488Z","timestamp":"2025-06-17 10:30:28"}
+{"level":"info","message":"Finished processing space Govardhana Kemmathiruman, 0 new messages found","timestamp":"2025-06-17 10:30:28"}
+{"level":"info","message":"Processing space: Garima Srivastava","timestamp":"2025-06-17 10:30:28"}
+{"level":"info","message":"Incremental fetch for space Garima Srivastava: messages after 2025-05-30T05:32:12.671Z","timestamp":"2025-06-17 10:30:28"}
+{"level":"info","message":"Fetched 0 messages from space Garima Srivastava (page 1)","timestamp":"2025-06-17 10:30:28"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:30:28"}
+{"level":"info","message":"Updated space spaces/7ZdKb8AAAAE with new message time: 2025-05-30T05:32:12.670Z","timestamp":"2025-06-17 10:30:28"}
+{"level":"info","message":"Finished processing space Garima Srivastava, 0 new messages found","timestamp":"2025-06-17 10:30:29"}
+{"level":"info","message":"Processing space: Gokul Sundar","timestamp":"2025-06-17 10:30:29"}
+{"level":"info","message":"Incremental fetch for space Gokul Sundar: messages after 2025-05-29T12:39:41.101Z","timestamp":"2025-06-17 10:30:29"}
+{"level":"info","message":"Fetched 0 messages from space Gokul Sundar (page 1)","timestamp":"2025-06-17 10:30:29"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:30:29"}
+{"level":"info","message":"Updated space spaces/7kDoH8AAAAE with new message time: 2025-05-29T12:39:41.100Z","timestamp":"2025-06-17 10:30:29"}
+{"level":"info","message":"Finished processing space Gokul Sundar, 0 new messages found","timestamp":"2025-06-17 10:30:29"}
+{"level":"info","message":"Processing space: Varunprasad S","timestamp":"2025-06-17 10:30:29"}
+{"level":"info","message":"Incremental fetch for space Varunprasad S: messages after 2025-06-16T09:20:01.045Z","timestamp":"2025-06-17 10:30:29"}
+{"level":"info","message":"Fetched 0 messages from space Varunprasad S (page 1)","timestamp":"2025-06-17 10:30:30"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:30:30"}
+{"level":"info","message":"Updated space spaces/8Z7Bn8AAAAE with new message time: 2025-06-16T09:20:01.044Z","timestamp":"2025-06-17 10:30:30"}
+{"level":"info","message":"Finished processing space Varunprasad S, 0 new messages found","timestamp":"2025-06-17 10:30:30"}
+{"level":"info","message":"Processing space: Jayanti Kumari","timestamp":"2025-06-17 10:30:30"}
+{"level":"info","message":"Incremental fetch for space Jayanti Kumari: messages after 2025-06-11T07:44:52.578Z","timestamp":"2025-06-17 10:30:30"}
+{"level":"info","message":"Fetched 0 messages from space Jayanti Kumari (page 1)","timestamp":"2025-06-17 10:30:30"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:30:30"}
+{"level":"info","message":"Updated space spaces/__TsN8AAAAE with new message time: 2025-06-11T07:44:52.577Z","timestamp":"2025-06-17 10:30:30"}
+{"level":"info","message":"Finished processing space Jayanti Kumari, 0 new messages found","timestamp":"2025-06-17 10:30:30"}
+{"level":"info","message":"Processing space: Jahnavi Jainwal","timestamp":"2025-06-17 10:30:30"}
+{"level":"info","message":"Incremental fetch for space Jahnavi Jainwal: messages after 2025-06-04T07:52:58.510Z","timestamp":"2025-06-17 10:30:30"}
+{"level":"info","message":"Fetched 0 messages from space Jahnavi Jainwal (page 1)","timestamp":"2025-06-17 10:30:31"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:30:31"}
+{"level":"info","message":"Updated space spaces/4TINH8AAAAE with new message time: 2025-06-04T07:52:58.509Z","timestamp":"2025-06-17 10:30:31"}
+{"level":"info","message":"Finished processing space Jahnavi Jainwal, 0 new messages found","timestamp":"2025-06-17 10:30:31"}
+{"level":"info","message":"Processing space: Sanchith Reddy","timestamp":"2025-06-17 10:30:31"}
+{"level":"info","message":"Incremental fetch for space Sanchith Reddy: messages after 2025-05-26T11:13:07.920Z","timestamp":"2025-06-17 10:30:31"}
+{"level":"info","message":"Fetched 0 messages from space Sanchith Reddy (page 1)","timestamp":"2025-06-17 10:30:32"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:30:32"}
+{"level":"info","message":"Updated space spaces/u4sSH8AAAAE with new message time: 2025-05-26T11:13:07.919Z","timestamp":"2025-06-17 10:30:32"}
+{"level":"info","message":"Finished processing space Sanchith Reddy, 0 new messages found","timestamp":"2025-06-17 10:30:32"}
+{"level":"info","message":"Processing space: Krishan Agarwal","timestamp":"2025-06-17 10:30:32"}
+{"level":"info","message":"Incremental fetch for space Krishan Agarwal: messages after 2025-05-26T06:53:28.881Z","timestamp":"2025-06-17 10:30:32"}
+{"level":"info","message":"Fetched 0 messages from space Krishan Agarwal (page 1)","timestamp":"2025-06-17 10:30:32"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:30:32"}
+{"level":"info","message":"Updated space spaces/wfSab8AAAAE with new message time: 2025-05-26T06:53:28.880Z","timestamp":"2025-06-17 10:30:32"}
+{"level":"info","message":"Finished processing space Krishan Agarwal, 0 new messages found","timestamp":"2025-06-17 10:30:32"}
+{"level":"info","message":"Processing space: Kishore Rajendra","timestamp":"2025-06-17 10:30:32"}
+{"level":"info","message":"Incremental fetch for space Kishore Rajendra: messages after 2025-05-23T10:57:51.912Z","timestamp":"2025-06-17 10:30:32"}
+{"level":"info","message":"Fetched 0 messages from space Kishore Rajendra (page 1)","timestamp":"2025-06-17 10:30:33"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:30:33"}
+{"level":"info","message":"Updated space spaces/gsJ3b8AAAAE with new message time: 2025-05-23T10:57:51.911Z","timestamp":"2025-06-17 10:30:33"}
+{"level":"info","message":"Finished processing space Kishore Rajendra, 0 new messages found","timestamp":"2025-06-17 10:30:33"}
+{"level":"info","message":"Processing space: Gokul D M","timestamp":"2025-06-17 10:30:33"}
+{"level":"info","message":"Incremental fetch for space Gokul D M: messages after 2025-05-22T10:41:41.952Z","timestamp":"2025-06-17 10:30:33"}
+{"level":"info","message":"Fetched 0 messages from space Gokul D M (page 1)","timestamp":"2025-06-17 10:30:34"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:30:34"}
+{"level":"info","message":"Updated space spaces/tapfb8AAAAE with new message time: 2025-05-22T10:41:41.951Z","timestamp":"2025-06-17 10:30:34"}
+{"level":"info","message":"Finished processing space Gokul D M, 0 new messages found","timestamp":"2025-06-17 10:30:34"}
+{"level":"info","message":"Processing space: Siddhesh Patil","timestamp":"2025-06-17 10:30:34"}
+{"level":"info","message":"Incremental fetch for space Siddhesh Patil: messages after 2025-05-22T07:46:01.997Z","timestamp":"2025-06-17 10:30:34"}
+{"level":"info","message":"Fetched 0 messages from space Siddhesh Patil (page 1)","timestamp":"2025-06-17 10:30:34"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:30:34"}
+{"level":"info","message":"Updated space spaces/_Odnb8AAAAE with new message time: 2025-05-22T07:46:01.996Z","timestamp":"2025-06-17 10:30:34"}
+{"level":"info","message":"Finished processing space Siddhesh Patil, 0 new messages found","timestamp":"2025-06-17 10:30:34"}
+{"level":"info","message":"Processing space: Group Chat","timestamp":"2025-06-17 10:30:34"}
+{"level":"info","message":"Incremental fetch for space Group Chat: messages after 2025-05-09T05:44:44.641Z","timestamp":"2025-06-17 10:30:34"}
+{"level":"info","message":"Fetched 0 messages from space Group Chat (page 1)","timestamp":"2025-06-17 10:30:35"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:30:35"}
+{"level":"info","message":"Updated space spaces/AAQAErUzKLU with new message time: 2025-05-09T05:44:44.640Z","timestamp":"2025-06-17 10:30:35"}
+{"level":"info","message":"Finished processing space Group Chat, 0 new messages found","timestamp":"2025-06-17 10:30:35"}
+{"level":"info","message":"Processing space: Tom Antony","timestamp":"2025-06-17 10:30:35"}
+{"level":"info","message":"Incremental fetch for space Tom Antony: messages after 2025-05-08T11:44:45.120Z","timestamp":"2025-06-17 10:30:35"}
+{"level":"info","message":"Fetched 0 messages from space Tom Antony (page 1)","timestamp":"2025-06-17 10:30:36"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:30:36"}
+{"level":"info","message":"Updated space spaces/3nL3d8AAAAE with new message time: 2025-05-08T11:44:45.119Z","timestamp":"2025-06-17 10:30:36"}
+{"level":"info","message":"Finished processing space Tom Antony, 0 new messages found","timestamp":"2025-06-17 10:30:36"}
+{"level":"info","message":"Processing space: Jaffrina Joseph","timestamp":"2025-06-17 10:30:36"}
+{"level":"info","message":"Incremental fetch for space Jaffrina Joseph: messages after 2025-06-13T08:20:10.234Z","timestamp":"2025-06-17 10:30:36"}
+{"level":"info","message":"Fetched 0 messages from space Jaffrina Joseph (page 1)","timestamp":"2025-06-17 10:30:36"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:30:36"}
+{"level":"info","message":"Updated space spaces/6IEcN8AAAAE with new message time: 2025-06-13T08:20:10.233Z","timestamp":"2025-06-17 10:30:36"}
+{"level":"info","message":"Finished processing space Jaffrina Joseph, 0 new messages found","timestamp":"2025-06-17 10:30:36"}
+{"level":"info","message":"No new chat messages to store for aditya.r@turbostart.co","timestamp":"2025-06-17 10:30:36"}
+{"level":"info","message":"Chat data collection completed for aditya.r@turbostart.co: 0 messages from 23 spaces","timestamp":"2025-06-17 10:30:36"}
+{"level":"info","message":"Collecting Gmail data for aditya.r@turbostart.co","timestamp":"2025-06-17 10:30:36"}
+{"level":"info","message":"Incremental Gmail update for aditya.r@turbostart.co.","timestamp":"2025-06-17 10:30:36"}
+{"level":"info","message":"Fetching Gmail messages after 2025-06-17T09:58:56.886Z (timestamp: 1750154336)","timestamp":"2025-06-17 10:30:36"}
+{"level":"info","message":"No (more) Gmail messages found for query: 'after:1750154336' for aditya.r@turbostart.co.","timestamp":"2025-06-17 10:30:37"}
+{"level":"info","message":"No new Gmail messages to store for aditya.r@turbostart.co.","timestamp":"2025-06-17 10:30:37"}
+{"level":"info","message":"Gmail data collection completed for aditya.r@turbostart.co: 0 messages stored (incremental).","timestamp":"2025-06-17 10:30:37"}
+{"level":"info","message":"✅ Data collection cycle completed successfully","timestamp":"2025-06-17 10:30:37"}
+{"level":"info","message":"🤖 Starting LLM analysis for response prediction","timestamp":"2025-06-17 10:30:37"}
+{"level":"info","message":"✅ LLM analysis completed successfully","timestamp":"2025-06-17 10:33:04"}
+{"level":"info","message":"🔄 Data fetcher state reset in database","timestamp":"2025-06-17 10:33:04"}
+{"level":"info","message":"✅ On-demand data collection and analysis completed successfully","timestamp":"2025-06-17 10:33:04"}
+{"level":"info","message":"✅ DataFetcher initialized successfully","timestamp":"2025-06-17 10:44:20"}
+{"level":"info","message":"🎯 Starting on-demand data collection and analysis","timestamp":"2025-06-17 10:44:20"}
+{"level":"info","message":"🚀 Starting data collection cycle","timestamp":"2025-06-17 10:44:20"}
+{"level":"info","message":"Found 1 active users for data collection","timestamp":"2025-06-17 10:44:20"}
+{"level":"info","message":"Processing user: aditya.r@turbostart.co","timestamp":"2025-06-17 10:44:20"}
+{"level":"info","message":"Collecting Chat data for aditya.r@turbostart.co","timestamp":"2025-06-17 10:44:20"}
+{"level":"info","message":"Loaded 23 Chat spaces from JSON file for aditya.r@turbostart.co","timestamp":"2025-06-17 10:44:20"}
+{"level":"info","message":"Processing space: DSU Implementation","timestamp":"2025-06-17 10:44:20"}
+{"level":"info","message":"Incremental fetch for space DSU Implementation: messages after 2025-06-16T17:36:46.499Z","timestamp":"2025-06-17 10:44:20"}
+{"level":"info","message":"Fetched 0 messages from space DSU Implementation (page 1)","timestamp":"2025-06-17 10:44:21"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:44:21"}
+{"level":"info","message":"Updated space spaces/AAAA_c9OGqI with new message time: 2025-06-16T17:36:46.498Z","timestamp":"2025-06-17 10:44:21"}
+{"level":"info","message":"Finished processing space DSU Implementation, 0 new messages found","timestamp":"2025-06-17 10:44:21"}
+{"level":"info","message":"Processing space: Sajin Abishek","timestamp":"2025-06-17 10:44:21"}
+{"level":"info","message":"Incremental fetch for space Sajin Abishek: messages after 2025-06-11T07:41:00.684Z","timestamp":"2025-06-17 10:44:21"}
+{"level":"info","message":"Fetched 0 messages from space Sajin Abishek (page 1)","timestamp":"2025-06-17 10:44:21"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:44:21"}
+{"level":"info","message":"Updated space spaces/j-WbN8AAAAE with new message time: 2025-06-11T07:41:00.683Z","timestamp":"2025-06-17 10:44:21"}
+{"level":"info","message":"Finished processing space Sajin Abishek, 0 new messages found","timestamp":"2025-06-17 10:44:21"}
+{"level":"info","message":"Processing space: Jennifer Immanuale","timestamp":"2025-06-17 10:44:21"}
+{"level":"info","message":"Incremental fetch for space Jennifer Immanuale: messages after 2025-06-13T13:01:48.463Z","timestamp":"2025-06-17 10:44:21"}
+{"level":"info","message":"Fetched 0 messages from space Jennifer Immanuale (page 1)","timestamp":"2025-06-17 10:44:22"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:44:22"}
+{"level":"info","message":"Updated space spaces/0C9xt8AAAAE with new message time: 2025-06-13T13:01:48.462Z","timestamp":"2025-06-17 10:44:22"}
+{"level":"info","message":"Finished processing space Jennifer Immanuale, 0 new messages found","timestamp":"2025-06-17 10:44:22"}
+{"level":"info","message":"Processing space: Shruthi M G","timestamp":"2025-06-17 10:44:22"}
+{"level":"info","message":"Incremental fetch for space Shruthi M G: messages after 2025-06-16T04:52:24.824Z","timestamp":"2025-06-17 10:44:22"}
+{"level":"info","message":"Fetched 0 messages from space Shruthi M G (page 1)","timestamp":"2025-06-17 10:44:22"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:44:22"}
+{"level":"info","message":"Updated space spaces/nUSCd8AAAAE with new message time: 2025-06-16T04:52:24.823Z","timestamp":"2025-06-17 10:44:22"}
+{"level":"info","message":"Finished processing space Shruthi M G, 0 new messages found","timestamp":"2025-06-17 10:44:22"}
+{"level":"info","message":"Processing space: Sharanya","timestamp":"2025-06-17 10:44:22"}
+{"level":"info","message":"Incremental fetch for space Sharanya: messages after 2025-06-02T09:28:18.678Z","timestamp":"2025-06-17 10:44:22"}
+{"level":"info","message":"Fetched 0 messages from space Sharanya (page 1)","timestamp":"2025-06-17 10:44:23"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:44:23"}
+{"level":"info","message":"Updated space spaces/hJWSd8AAAAE with new message time: 2025-06-02T09:28:18.677Z","timestamp":"2025-06-17 10:44:23"}
+{"level":"info","message":"Finished processing space Sharanya, 0 new messages found","timestamp":"2025-06-17 10:44:23"}
+{"level":"info","message":"Processing space: Rubina Atwal","timestamp":"2025-06-17 10:44:23"}
+{"level":"info","message":"Incremental fetch for space Rubina Atwal: messages after 2025-06-16T05:04:20.982Z","timestamp":"2025-06-17 10:44:23"}
+{"level":"info","message":"Fetched 0 messages from space Rubina Atwal (page 1)","timestamp":"2025-06-17 10:44:24"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:44:24"}
+{"level":"info","message":"Updated space spaces/kHt0N8AAAAE with new message time: 2025-06-16T05:04:20.981Z","timestamp":"2025-06-17 10:44:24"}
+{"level":"info","message":"Finished processing space Rubina Atwal, 0 new messages found","timestamp":"2025-06-17 10:44:24"}
+{"level":"info","message":"Processing space: Shiva Raghavendra Nandigam","timestamp":"2025-06-17 10:44:24"}
+{"level":"info","message":"Incremental fetch for space Shiva Raghavendra Nandigam: messages after 2025-06-12T06:47:26.669Z","timestamp":"2025-06-17 10:44:24"}
+{"level":"info","message":"Fetched 0 messages from space Shiva Raghavendra Nandigam (page 1)","timestamp":"2025-06-17 10:44:24"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:44:24"}
+{"level":"info","message":"Updated space spaces/nsovn8AAAAE with new message time: 2025-06-12T06:47:26.668Z","timestamp":"2025-06-17 10:44:24"}
+{"level":"info","message":"Finished processing space Shiva Raghavendra Nandigam, 0 new messages found","timestamp":"2025-06-17 10:44:24"}
+{"level":"info","message":"Processing space: Climaty.ai","timestamp":"2025-06-17 10:44:24"}
+{"level":"info","message":"Incremental fetch for space Climaty.ai: messages after 2025-06-16T09:42:47.550Z","timestamp":"2025-06-17 10:44:24"}
+{"level":"info","message":"Fetched 0 messages from space Climaty.ai (page 1)","timestamp":"2025-06-17 10:44:25"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:44:25"}
+{"level":"info","message":"Updated space spaces/AAAA1zbyU00 with new message time: 2025-06-16T09:42:47.549Z","timestamp":"2025-06-17 10:44:25"}
+{"level":"info","message":"Finished processing space Climaty.ai, 0 new messages found","timestamp":"2025-06-17 10:44:25"}
+{"level":"info","message":"Processing space: Malini T L","timestamp":"2025-06-17 10:44:25"}
+{"level":"info","message":"Incremental fetch for space Malini T L: messages after 2025-06-06T07:23:01.293Z","timestamp":"2025-06-17 10:44:25"}
+{"level":"info","message":"Fetched 0 messages from space Malini T L (page 1)","timestamp":"2025-06-17 10:44:25"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:44:25"}
+{"level":"info","message":"Updated space spaces/xSd1H8AAAAE with new message time: 2025-06-06T07:23:01.292Z","timestamp":"2025-06-17 10:44:25"}
+{"level":"info","message":"Finished processing space Malini T L, 0 new messages found","timestamp":"2025-06-17 10:44:25"}
+{"level":"info","message":"Processing space: Govardhana Kemmathiruman","timestamp":"2025-06-17 10:44:25"}
+{"level":"info","message":"Incremental fetch for space Govardhana Kemmathiruman: messages after 2025-06-12T07:17:45.489Z","timestamp":"2025-06-17 10:44:25"}
+{"level":"info","message":"Fetched 0 messages from space Govardhana Kemmathiruman (page 1)","timestamp":"2025-06-17 10:44:26"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:44:26"}
+{"level":"info","message":"Updated space spaces/v59oD8AAAAE with new message time: 2025-06-12T07:17:45.488Z","timestamp":"2025-06-17 10:44:26"}
+{"level":"info","message":"Finished processing space Govardhana Kemmathiruman, 0 new messages found","timestamp":"2025-06-17 10:44:26"}
+{"level":"info","message":"Processing space: Garima Srivastava","timestamp":"2025-06-17 10:44:26"}
+{"level":"info","message":"Incremental fetch for space Garima Srivastava: messages after 2025-05-30T05:32:12.671Z","timestamp":"2025-06-17 10:44:26"}
+{"level":"info","message":"Fetched 0 messages from space Garima Srivastava (page 1)","timestamp":"2025-06-17 10:44:27"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:44:27"}
+{"level":"info","message":"Updated space spaces/7ZdKb8AAAAE with new message time: 2025-05-30T05:32:12.670Z","timestamp":"2025-06-17 10:44:27"}
+{"level":"info","message":"Finished processing space Garima Srivastava, 0 new messages found","timestamp":"2025-06-17 10:44:27"}
+{"level":"info","message":"Processing space: Gokul Sundar","timestamp":"2025-06-17 10:44:27"}
+{"level":"info","message":"Incremental fetch for space Gokul Sundar: messages after 2025-05-29T12:39:41.101Z","timestamp":"2025-06-17 10:44:27"}
+{"level":"info","message":"Fetched 0 messages from space Gokul Sundar (page 1)","timestamp":"2025-06-17 10:44:27"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:44:27"}
+{"level":"info","message":"Updated space spaces/7kDoH8AAAAE with new message time: 2025-05-29T12:39:41.100Z","timestamp":"2025-06-17 10:44:27"}
+{"level":"info","message":"Finished processing space Gokul Sundar, 0 new messages found","timestamp":"2025-06-17 10:44:27"}
+{"level":"info","message":"Processing space: Varunprasad S","timestamp":"2025-06-17 10:44:27"}
+{"level":"info","message":"Incremental fetch for space Varunprasad S: messages after 2025-06-16T09:20:01.045Z","timestamp":"2025-06-17 10:44:27"}
+{"level":"info","message":"Fetched 0 messages from space Varunprasad S (page 1)","timestamp":"2025-06-17 10:44:28"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:44:28"}
+{"level":"info","message":"Updated space spaces/8Z7Bn8AAAAE with new message time: 2025-06-16T09:20:01.044Z","timestamp":"2025-06-17 10:44:28"}
+{"level":"info","message":"Finished processing space Varunprasad S, 0 new messages found","timestamp":"2025-06-17 10:44:28"}
+{"level":"info","message":"Processing space: Jayanti Kumari","timestamp":"2025-06-17 10:44:28"}
+{"level":"info","message":"Incremental fetch for space Jayanti Kumari: messages after 2025-06-11T07:44:52.578Z","timestamp":"2025-06-17 10:44:28"}
+{"level":"info","message":"Fetched 0 messages from space Jayanti Kumari (page 1)","timestamp":"2025-06-17 10:44:28"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:44:28"}
+{"level":"info","message":"Updated space spaces/__TsN8AAAAE with new message time: 2025-06-11T07:44:52.577Z","timestamp":"2025-06-17 10:44:28"}
+{"level":"info","message":"Finished processing space Jayanti Kumari, 0 new messages found","timestamp":"2025-06-17 10:44:28"}
+{"level":"info","message":"Processing space: Jahnavi Jainwal","timestamp":"2025-06-17 10:44:28"}
+{"level":"info","message":"Incremental fetch for space Jahnavi Jainwal: messages after 2025-06-04T07:52:58.510Z","timestamp":"2025-06-17 10:44:28"}
+{"level":"info","message":"Fetched 0 messages from space Jahnavi Jainwal (page 1)","timestamp":"2025-06-17 10:44:29"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:44:29"}
+{"level":"info","message":"Updated space spaces/4TINH8AAAAE with new message time: 2025-06-04T07:52:58.509Z","timestamp":"2025-06-17 10:44:29"}
+{"level":"info","message":"Finished processing space Jahnavi Jainwal, 0 new messages found","timestamp":"2025-06-17 10:44:29"}
+{"level":"info","message":"Processing space: Sanchith Reddy","timestamp":"2025-06-17 10:44:29"}
+{"level":"info","message":"Incremental fetch for space Sanchith Reddy: messages after 2025-05-26T11:13:07.920Z","timestamp":"2025-06-17 10:44:29"}
+{"level":"info","message":"Fetched 0 messages from space Sanchith Reddy (page 1)","timestamp":"2025-06-17 10:44:30"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:44:30"}
+{"level":"info","message":"Updated space spaces/u4sSH8AAAAE with new message time: 2025-05-26T11:13:07.919Z","timestamp":"2025-06-17 10:44:30"}
+{"level":"info","message":"Finished processing space Sanchith Reddy, 0 new messages found","timestamp":"2025-06-17 10:44:30"}
+{"level":"info","message":"Processing space: Krishan Agarwal","timestamp":"2025-06-17 10:44:30"}
+{"level":"info","message":"Incremental fetch for space Krishan Agarwal: messages after 2025-05-26T06:53:28.881Z","timestamp":"2025-06-17 10:44:30"}
+{"level":"info","message":"Fetched 0 messages from space Krishan Agarwal (page 1)","timestamp":"2025-06-17 10:44:30"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:44:30"}
+{"level":"info","message":"Updated space spaces/wfSab8AAAAE with new message time: 2025-05-26T06:53:28.880Z","timestamp":"2025-06-17 10:44:30"}
+{"level":"info","message":"Finished processing space Krishan Agarwal, 0 new messages found","timestamp":"2025-06-17 10:44:30"}
+{"level":"info","message":"Processing space: Kishore Rajendra","timestamp":"2025-06-17 10:44:30"}
+{"level":"info","message":"Incremental fetch for space Kishore Rajendra: messages after 2025-05-23T10:57:51.912Z","timestamp":"2025-06-17 10:44:30"}
+{"level":"info","message":"Fetched 0 messages from space Kishore Rajendra (page 1)","timestamp":"2025-06-17 10:44:35"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:44:35"}
+{"level":"info","message":"Updated space spaces/gsJ3b8AAAAE with new message time: 2025-05-23T10:57:51.911Z","timestamp":"2025-06-17 10:44:35"}
+{"level":"info","message":"Finished processing space Kishore Rajendra, 0 new messages found","timestamp":"2025-06-17 10:44:35"}
+{"level":"info","message":"Processing space: Gokul D M","timestamp":"2025-06-17 10:44:35"}
+{"level":"info","message":"Incremental fetch for space Gokul D M: messages after 2025-05-22T10:41:41.952Z","timestamp":"2025-06-17 10:44:35"}
+{"level":"info","message":"Fetched 0 messages from space Gokul D M (page 1)","timestamp":"2025-06-17 10:44:36"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:44:36"}
+{"level":"info","message":"Updated space spaces/tapfb8AAAAE with new message time: 2025-05-22T10:41:41.951Z","timestamp":"2025-06-17 10:44:36"}
+{"level":"info","message":"Finished processing space Gokul D M, 0 new messages found","timestamp":"2025-06-17 10:44:36"}
+{"level":"info","message":"Processing space: Siddhesh Patil","timestamp":"2025-06-17 10:44:36"}
+{"level":"info","message":"Incremental fetch for space Siddhesh Patil: messages after 2025-05-22T07:46:01.997Z","timestamp":"2025-06-17 10:44:36"}
+{"level":"info","message":"Fetched 0 messages from space Siddhesh Patil (page 1)","timestamp":"2025-06-17 10:44:36"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:44:36"}
+{"level":"info","message":"Updated space spaces/_Odnb8AAAAE with new message time: 2025-05-22T07:46:01.996Z","timestamp":"2025-06-17 10:44:36"}
+{"level":"info","message":"Finished processing space Siddhesh Patil, 0 new messages found","timestamp":"2025-06-17 10:44:36"}
+{"level":"info","message":"Processing space: Group Chat","timestamp":"2025-06-17 10:44:36"}
+{"level":"info","message":"Incremental fetch for space Group Chat: messages after 2025-05-09T05:44:44.641Z","timestamp":"2025-06-17 10:44:36"}
+{"level":"info","message":"Fetched 0 messages from space Group Chat (page 1)","timestamp":"2025-06-17 10:44:37"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:44:37"}
+{"level":"info","message":"Updated space spaces/AAQAErUzKLU with new message time: 2025-05-09T05:44:44.640Z","timestamp":"2025-06-17 10:44:37"}
+{"level":"info","message":"Finished processing space Group Chat, 0 new messages found","timestamp":"2025-06-17 10:44:37"}
+{"level":"info","message":"Processing space: Tom Antony","timestamp":"2025-06-17 10:44:37"}
+{"level":"info","message":"Incremental fetch for space Tom Antony: messages after 2025-05-08T11:44:45.120Z","timestamp":"2025-06-17 10:44:37"}
+{"level":"info","message":"Fetched 0 messages from space Tom Antony (page 1)","timestamp":"2025-06-17 10:44:38"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:44:38"}
+{"level":"info","message":"Updated space spaces/3nL3d8AAAAE with new message time: 2025-05-08T11:44:45.119Z","timestamp":"2025-06-17 10:44:38"}
+{"level":"info","message":"Finished processing space Tom Antony, 0 new messages found","timestamp":"2025-06-17 10:44:38"}
+{"level":"info","message":"Processing space: Jaffrina Joseph","timestamp":"2025-06-17 10:44:38"}
+{"level":"info","message":"Incremental fetch for space Jaffrina Joseph: messages after 2025-06-13T08:20:10.234Z","timestamp":"2025-06-17 10:44:38"}
+{"level":"info","message":"Fetched 0 messages from space Jaffrina Joseph (page 1)","timestamp":"2025-06-17 10:44:38"}
+{"level":"info","message":"Updated spaces JSON file with latest message times","timestamp":"2025-06-17 10:44:38"}
+{"level":"info","message":"Updated space spaces/6IEcN8AAAAE with new message time: 2025-06-13T08:20:10.233Z","timestamp":"2025-06-17 10:44:38"}
+{"level":"info","message":"Finished processing space Jaffrina Joseph, 0 new messages found","timestamp":"2025-06-17 10:44:38"}
+{"level":"info","message":"No new chat messages to store for aditya.r@turbostart.co","timestamp":"2025-06-17 10:44:38"}
+{"level":"info","message":"Chat data collection completed for aditya.r@turbostart.co: 0 messages from 23 spaces","timestamp":"2025-06-17 10:44:38"}
+{"level":"info","message":"Collecting Gmail data for aditya.r@turbostart.co","timestamp":"2025-06-17 10:44:38"}
+{"level":"info","message":"Incremental Gmail update for aditya.r@turbostart.co.","timestamp":"2025-06-17 10:44:38"}
+{"level":"info","message":"Fetching Gmail messages after 2025-06-17T10:30:37.644Z (timestamp: 1750156237)","timestamp":"2025-06-17 10:44:38"}
+{"level":"info","message":"No (more) Gmail messages found for query: 'after:1750156237' for aditya.r@turbostart.co.","timestamp":"2025-06-17 10:44:39"}
+{"level":"info","message":"No new Gmail messages to store for aditya.r@turbostart.co.","timestamp":"2025-06-17 10:44:39"}
+{"level":"info","message":"Gmail data collection completed for aditya.r@turbostart.co: 0 messages stored (incremental).","timestamp":"2025-06-17 10:44:39"}
+{"level":"info","message":"✅ Data collection cycle completed successfully","timestamp":"2025-06-17 10:44:39"}
+{"level":"info","message":"🤖 Starting LLM analysis for response prediction","timestamp":"2025-06-17 10:44:39"}
+{"level":"info","message":"✅ LLM analysis completed successfully","timestamp":"2025-06-17 10:47:22"}
+{"level":"info","message":"🔄 Data fetcher state reset in database","timestamp":"2025-06-17 10:47:23"}
+{"level":"info","message":"✅ On-demand data collection and analysis completed successfully","timestamp":"2025-06-17 10:47:23"}

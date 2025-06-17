@@ -651,6 +651,7 @@ async function getDataFetcherState() {
     const state = await SystemState.findOne({ key: 'data_fetcher' });
     
     if (!state) {
+      console.log('No data fetcher state found in database, returning default state');
       return { isRunning: false, startTime: null };
     }
     
@@ -660,15 +661,27 @@ async function getDataFetcherState() {
     
     if (state.isRunning && state.startTime && 
         (now - new Date(state.startTime)) > maxRunTime) {
+      const staleDuration = Math.round((now - new Date(state.startTime)) / 1000);
+      console.log(`⚠️ Detected stale data fetcher state (running for ${staleDuration}s), resetting to false`);
+      
       // Reset stale state
       await setDataFetcherRunning(false);
-      return { isRunning: false, startTime: null };
+      return { 
+        isRunning: false, 
+        startTime: null,
+        wasStale: true,
+        staleDurationSeconds: staleDuration
+      };
     }
+    
+    const currentDuration = state.startTime ? Math.round((now - new Date(state.startTime)) / 1000) : 0;
+    console.log(`Data fetcher state: ${state.isRunning ? 'RUNNING' : 'IDLE'} (${currentDuration}s)`);
     
     return {
       isRunning: state.isRunning,
       startTime: state.startTime,
-      lastUpdated: state.lastUpdated
+      lastUpdated: state.lastUpdated,
+      currentDurationSeconds: currentDuration
     };
   } catch (error) {
     console.error('Error getting data fetcher state:', error);

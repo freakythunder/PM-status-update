@@ -150,15 +150,24 @@ app.get('/api/latest-responses', async (req, res) => {
       
       logger.info('✅ Data collection and analysis completed successfully');
       res.json(latestResults);
-      
-    } finally {
+        } finally {
       // Always reset running state in database
-      await setDataFetcherRunning(false);
+      try {
+        await setDataFetcherRunning(false);
+        logger.info('🔄 Data fetcher state reset in database (server finally block)');
+      } catch (dbError) {
+        logger.error('❌ Failed to reset data fetcher state in database (server finally block):', dbError);
+      }
     }
     
   } catch (error) {
-    // Reset running state on error
-    await setDataFetcherRunning(false);
+    // Reset running state on error (additional safety)
+    try {
+      await setDataFetcherRunning(false);
+      logger.info('🔄 Data fetcher state reset in database (server error handler)');
+    } catch (dbError) {
+      logger.error('❌ Failed to reset data fetcher state in database (server error handler):', dbError);
+    }
     
     logger.error('❌ Error during data collection and analysis:', error);
     res.status(500).json({ 
@@ -584,6 +593,42 @@ app.post('/api/rewrite-message', async (req, res) => {
       error: 'Failed to rewrite message',
       message: error.message
     });
+  }
+});
+
+// Debug endpoint to check data fetcher state
+app.get('/api/data-fetcher-state', async (req, res) => {
+  try {
+    const fetcherState = await getDataFetcherState();
+    const runningDuration = fetcherState.isRunning && fetcherState.startTime ? 
+      Math.round((Date.now() - new Date(fetcherState.startTime).getTime()) / 1000) : 0;
+    
+    res.json({
+      isRunning: fetcherState.isRunning,
+      startTime: fetcherState.startTime,
+      lastUpdated: fetcherState.lastUpdated,
+      runningDurationSeconds: runningDuration,
+      timestamp: new Date().toISOString()
+    });
+  } catch (error) {
+    logger.error('Error fetching data fetcher state:', error);
+    res.status(500).json({ error: 'Failed to fetch data fetcher state' });
+  }
+});
+
+// Debug endpoint to manually reset data fetcher state
+app.post('/api/reset-data-fetcher-state', async (req, res) => {
+  try {
+    await setDataFetcherRunning(false);
+    logger.info('🔄 Data fetcher state manually reset via API');
+    res.json({ 
+      success: true, 
+      message: 'Data fetcher state reset successfully',
+      timestamp: new Date().toISOString()
+    });
+  } catch (error) {
+    logger.error('Error resetting data fetcher state:', error);
+    res.status(500).json({ error: 'Failed to reset data fetcher state' });
   }
 });
 

@@ -70,3 +70,34 @@
 {"level":"info","message":"✅ Data collection and analysis completed successfully","timestamp":"2025-06-16T07:19:13.617Z"}
 {"level":"info","message":"🎯 API request received - starting data collection and analysis","timestamp":"2025-06-16T07:19:43.366Z"}
 {"level":"info","message":"SIGINT received, shutting down gracefully","timestamp":"2025-06-16T07:21:40.668Z"}
+{"level":"info","message":"🚀 PM Assistant OAuth Server running on http://localhost:3000","timestamp":"2025-06-17T04:20:27.642Z"}
+{"level":"info","message":"📊 Dashboard will be available on http://localhost:4000/dashboard","timestamp":"2025-06-17T04:20:27.644Z"}
+{"level":"info","message":"🔒 OAuth flow: http://localhost:3000/auth","timestamp":"2025-06-17T04:20:27.645Z"}
+{"level":"info","message":"📈 Stats: http://localhost:3000/stats","timestamp":"2025-06-17T04:20:27.645Z"}
+{"level":"info","message":"🎯 Data fetcher will run on-demand via /api/latest-responses","timestamp":"2025-06-17T04:20:27.645Z"}
+{"level":"info","message":"🔄 API request ignored - data collection already in progress (running for 62s)","timestamp":"2025-06-17T04:20:31.992Z"}
+{"level":"info","message":"SIGINT received, shutting down gracefully","timestamp":"2025-06-17T04:28:26.376Z"}
+{"level":"info","message":"🚀 PM Assistant OAuth Server running on http://localhost:3000","timestamp":"2025-06-17T04:28:33.074Z"}
+{"level":"info","message":"📊 Dashboard will be available on http://localhost:4000/dashboard","timestamp":"2025-06-17T04:28:33.074Z"}
+{"level":"info","message":"🔒 OAuth flow: http://localhost:3000/auth","timestamp":"2025-06-17T04:28:33.075Z"}
+{"level":"info","message":"📈 Stats: http://localhost:3000/stats","timestamp":"2025-06-17T04:28:33.075Z"}
+{"level":"info","message":"🎯 Data fetcher will run on-demand via /api/latest-responses","timestamp":"2025-06-17T04:28:33.075Z"}
+{"level":"info","message":"🎯 API request received - starting data collection and analysis","timestamp":"2025-06-17T04:28:39.783Z"}
+{"level":"info","message":"🔄 API request ignored - data collection already in progress (running for 9s)","timestamp":"2025-06-17T04:28:48.738Z"}
+{"level":"info","message":"🔄 API request ignored - data collection already in progress (running for 38s)","timestamp":"2025-06-17T04:29:17.693Z"}
+{"level":"info","message":"🔄 API request ignored - data collection already in progress (running for 100s)","timestamp":"2025-06-17T04:30:19.503Z"}
+{"level":"info","message":"✅ Data collection and analysis completed successfully","timestamp":"2025-06-17T04:32:07.100Z"}
+{"level":"info","message":"🔄 Data fetcher state reset in database (server finally block)","timestamp":"2025-06-17T04:32:07.187Z"}
+{"level":"info","message":"SIGINT received, shutting down gracefully","timestamp":"2025-06-17T04:32:21.565Z"}
+{"level":"info","message":"🚀 PM Assistant OAuth Server running on http://localhost:3000","timestamp":"2025-06-17T05:00:19.336Z"}
+{"level":"info","message":"📊 Dashboard will be available on http://localhost:4000/dashboard","timestamp":"2025-06-17T05:00:19.338Z"}
+{"level":"info","message":"🔒 OAuth flow: http://localhost:3000/auth","timestamp":"2025-06-17T05:00:19.338Z"}
+{"level":"info","message":"📈 Stats: http://localhost:3000/stats","timestamp":"2025-06-17T05:00:19.338Z"}
+{"level":"info","message":"🎯 Data fetcher will run on-demand via /api/latest-responses","timestamp":"2025-06-17T05:00:19.339Z"}
+{"level":"info","message":"🎯 API request received - starting data collection and analysis","timestamp":"2025-06-17T05:00:21.756Z"}
+{"level":"info","message":"✅ Data collection and analysis completed successfully","timestamp":"2025-06-17T05:03:04.650Z"}
+{"level":"info","message":"🔄 Data fetcher state reset in database (server finally block)","timestamp":"2025-06-17T05:03:04.729Z"}
+{"level":"info","message":"🎯 API request received - starting data collection and analysis","timestamp":"2025-06-17T05:14:20.352Z"}
+{"level":"info","message":"✅ Data collection and analysis completed successfully","timestamp":"2025-06-17T05:17:23.119Z"}
+{"level":"info","message":"🔄 Data fetcher state reset in database (server finally block)","timestamp":"2025-06-17T05:17:23.191Z"}
+{"level":"info","message":"SIGINT received, shutting down gracefully","timestamp":"2025-06-17T05:20:35.088Z"}

@@ -136,7 +136,6 @@ class DataFetcher {
       logger.error(`Failed to update space ${spaceId} in JSON: ${error.message}`);
     }
   }
-
   // Main data collection method
   async collectAllData() {
     if (this.isRunning) {
@@ -156,8 +155,7 @@ class DataFetcher {
 
       if (activeUsers.length === 0) {
         logger.info('No active users found, skipping data collection');
-        this.isRunning = false;
-        return;
+        return; // Don't reset here, let finally block handle it
       }
 
       // Process each user
@@ -168,7 +166,9 @@ class DataFetcher {
           logger.error(`Failed to collect data for user ${user.email}:`, error);
           // Continue with other users even if one fails
         }
-      }      this.stats.successfulRuns++;
+      }
+
+      this.stats.successfulRuns++;
       logger.info('✅ Data collection cycle completed successfully');
 
       // Trigger LLM analysis after successful data collection
@@ -185,8 +185,16 @@ class DataFetcher {
       this.stats.failedRuns++;
       this.stats.lastError = error.message;
       logger.error('❌ Data collection cycle failed:', error);
+      throw error; // Re-throw to trigger executeOnce error handling
     } finally {
       this.isRunning = false;
+      // Also reset database state to ensure consistency
+      try {
+        await setDataFetcherRunning(false);
+        logger.info('🔄 Data fetcher state reset in database');
+      } catch (dbError) {
+        logger.error('❌ Failed to reset data fetcher state in database:', dbError);
+      }
     }
   }
 
@@ -584,7 +592,6 @@ class DataFetcher {
       throw error;
     }
   }
-
   // Execute single data collection cycle (replaces cron-based execution)
   async executeOnce() {
     logger.info('🎯 Starting on-demand data collection and analysis');
@@ -597,8 +604,13 @@ class DataFetcher {
       logger.error('❌ On-demand data collection and analysis failed:', error);
       // Ensure isRunning is set to false on error
       this.isRunning = false;
-      // Also reset database state
-      await setDataFetcherRunning(false);
+      // Reset database state (collectAllData's finally block might not have run)
+      try {
+        await setDataFetcherRunning(false);
+        logger.info('🔄 Data fetcher state reset in database after error');
+      } catch (dbError) {
+        logger.error('❌ Failed to reset data fetcher state in database after error:', dbError);
+      }
       throw error;
     }
   }
