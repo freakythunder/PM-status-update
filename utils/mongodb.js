@@ -315,7 +315,7 @@ async function getLatestChatMessageTime(userId) {
   return latest?.message_time || null;
 }
 
-async function getChatMessagesBySpace(spaceId, limit = 50) {
+async function getChatMessagesBySpace(spaceId, limit = 100) {
   await connectToMongoDB();
   return await ChatMessage.find(
     {space_id: spaceId },

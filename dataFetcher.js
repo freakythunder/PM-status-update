@@ -26,18 +26,6 @@ const {
   createSyncLog,
   setDataFetcherRunning
 } = require('./utils/mongodb');
-
-// Load user name mapping
-let userNameMapping = {};
-try {
-  const mappingFilePath = path.join(__dirname, 'user_name_mapping_simple.json');
-  userNameMapping = JSON.parse(fs.readFileSync(mappingFilePath, 'utf8'));
-  logger.info(`Loaded user name mapping with ${Object.keys(userNameMapping).length} entries`);
-} catch (error) {
-  console.warn(`Failed to load user name mapping file: ${error.message}`);
-  // Continue with empty mapping
-}
-
 // Configure logger
 const logger = winston.createLogger({
   level: process.env.LOG_LEVEL || 'info', // Default to 'info'
@@ -82,6 +70,18 @@ const logger = winston.createLogger({
     })
   ]
 });
+// Load user name mapping
+let userNameMapping = {};
+try {
+  const mappingFilePath = path.join(__dirname, 'user_name_mapping_simple.json');
+  userNameMapping = JSON.parse(fs.readFileSync(mappingFilePath, 'utf8'));
+  logger.info(`Loaded user name mapping with ${Object.keys(userNameMapping).length} entries`);
+} catch (error) {
+  console.warn(`Failed to load user name mapping file: ${error.message}`);
+  // Continue with empty mapping
+}
+
+
 
 class DataFetcher {
   constructor() {

@@ -150,7 +150,7 @@ class LLMAnalyzer {
 
     try {
       // Fetch recent 10 messages from this space
-      const messages = await getChatMessagesBySpace(space.space_id, 4);
+      const messages = await getChatMessagesBySpace(space.space_id, 100);
 
       if (messages.length === 0) {
         logger.info(`No messages found in space ${space.space_id}, skipping`);
@@ -272,6 +272,8 @@ formatLocalTime(utcTime) {
 
 **Recent Messages (oldest to newest):**
 ${messagesJson}
+
+Here ignore the space and say response needed no if the latest message is older than a 3 days.
 
 **ONLY Check These Two Cases:**
 
